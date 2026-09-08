@@ -1,0 +1,82 @@
+[
+  {
+    "passage_key": "sg-m1-short-title",
+    "source_id": "sg-m1-companies-act-2026",
+    "locator": "Section 1 — Short title",
+    "original_text": "This Act is the Companies Act 1967.",
+    "chinese_text": "本法称为《1967年公司法》。",
+    "effective_at": null,
+    "prerequisites": ["须核对公司类型、外国公司要求、行业许可与适用版本"],
+    "non_inferences": ["本摘录仅确认法规名称，不得据此判断设立、准入或登记结果。"]
+  },
+  {
+    "passage_key": "sg-m2-section-55",
+    "source_id": "sg-m2-sale-goods-act-2026",
+    "locator": "Section 55(1) — Exclusion of implied terms",
+    "original_text": "Where a right, duty or liability would arise under a contract of sale of goods by implication of law, it may be negatived or varied by express agreement.",
+    "chinese_text": "在货物买卖合同中，依法默示产生的权利、义务或责任，可能由明示约定予以排除或变更。",
+    "effective_at": null,
+    "prerequisites": ["仅适用于新加坡法适用且属于货物买卖合同的情形；须结合该条完整文本与不公平合同条款法审查。"],
+    "non_inferences": ["不得据此推断任何具体免责条款当然有效或无效。"]
+  },
+  {
+    "passage_key": "sg-m3-act-scope",
+    "source_id": "sg-m3-import-export-act-2026",
+    "locator": "Singapore Customs official page — Act description",
+    "original_text": "The Regulation of Imports and Exports Act 1995 is an Act to provide for the regulation, registration and control of imports and exports.",
+    "chinese_text": "《1995年进出口管制法》旨在对进出口实施规制、登记与管制。",
+    "effective_at": null,
+    "prerequisites": ["仅作为主管机关页面对该法范围的说明；具体货物、许可、禁限与附属立法须另行核对。"],
+    "non_inferences": ["不得据此推断任一货物可否进出口或是否已取得许可。"]
+  },
+  {
+    "passage_key": "sg-m4-efma-scope",
+    "source_id": "sg-m4-foreign-manpower-act-2026",
+    "locator": "Ministry of Manpower — What is the EFMA",
+    "original_text": "The Employment of Foreign Manpower Act prescribes the responsibilities and obligations for employing foreign employees in Singapore.",
+    "chinese_text": "《外国人力雇佣法》规定在新加坡雇佣外国雇员的责任和义务。",
+    "effective_at": null,
+    "prerequisites": ["须核对雇员类别、准证类型、雇主身份及具体实施规则。"],
+    "non_inferences": ["不得据此判断准证获批、雇佣合法性或处罚结果。"]
+  },
+  {
+    "passage_key": "sg-m5-ip-legislation",
+    "source_id": "sg-m5-ip-legislation-2026",
+    "locator": "IPOS — IP legislation links",
+    "original_text": "Key IP legislation in Singapore, including acts, regulations, and treaties.",
+    "chinese_text": "新加坡知识产权局页面提供包括法案、规章和条约在内的关键知识产权立法入口。",
+    "effective_at": null,
+    "prerequisites": ["须进一步定位具体权利类型、法案条款及适用版本。"],
+    "non_inferences": ["不得据此判断知识产权权属、侵权、注册或保护结果。"]
+  },
+  {
+    "passage_key": "sg-m6-arbitration-agreement",
+    "source_id": "sg-m6-international-arbitration-act-2026",
+    "locator": "Section 2A(1) — Definition and form of arbitration agreement",
+    "original_text": "An arbitration agreement means an agreement by the parties to submit to arbitration all or certain disputes which have arisen or which may arise between them.",
+    "chinese_text": "仲裁协议是当事人约定将已经发生或可能发生的全部或部分争议提交仲裁的协议。",
+    "effective_at": null,
+    "prerequisites": ["须结合适用法、争议类型、协议形式及该法第2A条完整文本核对。"],
+    "non_inferences": ["不得据此判断某一具体仲裁条款有效、可执行或必然适用。"]
+  },
+  {
+    "passage_key": "my-m3-customs-act",
+    "source_id": "my-m3-customs-act-2026",
+    "locator": "Royal Malaysian Customs — Customs legislation list",
+    "original_text": "Customs Act 1967 | Amendment 2018",
+    "chinese_text": "马来西亚皇家关税局的海关立法目录列有《1967年海关法》及2018年修正资料。",
+    "effective_at": null,
+    "prerequisites": ["具体进出口、税则、禁限、许可证和附属规则须按货物与日期另行核对；官方法典文本优先。"],
+    "non_inferences": ["不得据此判断具体货物可否通关、税率、许可状态或处罚结果。"]
+  },
+  {
+    "passage_key": "sg-m5-trademark-application",
+    "source_id": "sg-m5-trademark-madrid-entry-2026",
+    "locator": "IPOS — Step 3: Forms & fees for new applications",
+    "original_text": "Form TM4 should be submitted for an application to register a trade mark in Singapore.",
+    "chinese_text": "在新加坡申请注册商标应提交 TM4 表格。",
+    "effective_at": null,
+    "prerequisites": ["仅适用于直接在新加坡提出的商标申请；国际注册、商品服务分类、资格及费用须按申请路径和最新规则另行核对。"],
+    "non_inferences": ["不得据此判断商标可注册、申请会获准或国际注册当然适用。"]
+  }
+]

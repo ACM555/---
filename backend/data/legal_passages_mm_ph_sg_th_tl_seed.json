@@ -1,0 +1,122 @@
+[
+  {
+    "passage_key": "mm-m3-export-import-law-title",
+    "source_id": "mm-m3-export-import-law-2026",
+    "locator": "Official English law text — title page",
+    "original_text": "THE EXPORT AND IMPORT LAW",
+    "chinese_text": "《进出口法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认缅甸商务部公开英文文本的法规名称；应核对缅文正式文本、现行状态、货物及许可证要求。"],
+    "non_inferences": ["不得据此判断具体货物可否进出口、是否需要许可或能否通关。"]
+  },
+  {
+    "passage_key": "ph-m1-rcc-name",
+    "source_id": "ph-m1-revised-corporation-code-2026",
+    "locator": "SEC Resources page — listed resource title",
+    "original_text": "Revised Corporation Code of the Philippines",
+    "chinese_text": "《菲律宾修订公司法典》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认菲律宾证券交易委员会资源页所列法规名称；须按公司类型、外资限制、行业监管和现行文本复核。"],
+    "non_inferences": ["不得据此判断设立、准入、登记或许可结果。"]
+  },
+  {
+    "passage_key": "ph-m3-cmta-ra10863",
+    "source_id": "ph-m3-cmta-2026",
+    "locator": "Bureau of Customs CMTA page — Background",
+    "original_text": "Republic Act (RA) No. 10863, otherwise known as the Customs Modernization and Tariff Act (CMTA), was signed into law on 30 May 2016.",
+    "chinese_text": "菲律宾第10863号共和国法，即《海关现代化和关税法》，于2016年5月30日签署成为法律。",
+    "effective_at": null,
+    "prerequisites": ["仅确认主管机关页面所述法案名称与签署日期；具体税则、许可、原产地与实施规则须逐项核对。"],
+    "non_inferences": ["不得据此判断税率、清关、放行或具体货物合规性。"]
+  },
+  {
+    "passage_key": "ph-m4-labor-code-name",
+    "source_id": "ph-m4-labor-code-2026",
+    "locator": "DOLE Preliminary Title — Article 1",
+    "original_text": "This decree shall be known as the \"Labor Code of the Philippines.\"",
+    "chinese_text": "本法令称为《菲律宾劳动法典》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认劳动法典名称；外籍雇佣、工作许可、移民规则及最新修订须另行核对。"],
+    "non_inferences": ["不得据此判断工作许可、签证、雇佣关系或劳动争议结果。"]
+  },
+  {
+    "passage_key": "ph-m5-ip-code-title",
+    "source_id": "ph-m5-ip-code-2026",
+    "locator": "IPOPHL IP Code PDF — Section 1 (Title)",
+    "original_text": "This Act shall be known as the \"Intellectual Property Code of the Philippines\".",
+    "chinese_text": "本法称为《菲律宾知识产权法典》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认法典名称；须区分商标、专利、著作权、技术转让等权利类型及适用版本。"],
+    "non_inferences": ["不得据此判断权属、可注册性、侵权或救济结果。"]
+  },
+  {
+    "passage_key": "th-m1-foreign-business-definition",
+    "source_id": "th-m1-foreign-business-act-2026",
+    "locator": "Foreign Business Act English translation — Definitions",
+    "original_text": "\"foreigner\" means a natural person not of Thai nationality;",
+    "chinese_text": "“外国人”是指不具有泰国国籍的自然人。",
+    "effective_at": null,
+    "prerequisites": ["仅为该法定义条款的节选；法人、持股和业务类别判断必须阅读完整定义及相关清单。"],
+    "non_inferences": ["不得据此判断公司是否属于外国人、能否经营或是否需要许可证。"]
+  },
+  {
+    "passage_key": "th-m3-customs-act-name",
+    "source_id": "th-m3-customs-act-2026",
+    "locator": "Section 1 — official Customs Department English translation",
+    "original_text": "This Act is called the \"Customs Act, B.E. 2560 (2017)\".",
+    "chinese_text": "本法称为《佛历2560年（2017年）海关法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认法规名称；货物归类、税则、原产地、许可证与现行附属规则须另行核对。"],
+    "non_inferences": ["不得据此判断税率、清关、放行或处罚结果。"]
+  },
+  {
+    "passage_key": "th-m4-labour-protection-scope",
+    "source_id": "th-m4-labour-protection-2026",
+    "locator": "Ministry of Labour — Labour Protection Act description",
+    "original_text": "Labour protection law is concerning the rights and duties of employers and employees.",
+    "chinese_text": "劳动保护法涉及雇主和雇员的权利与义务。",
+    "effective_at": null,
+    "prerequisites": ["仅为泰国劳动部页面对劳动保护法的概括；外籍雇佣和工作许可须适用相应移民及就业规则。"],
+    "non_inferences": ["不得据此判断工作许可、雇佣合规、工资或劳动争议结果。"]
+  },
+  {
+    "passage_key": "th-m5-trademark-act-title",
+    "source_id": "th-m5-trademark-act-2026",
+    "locator": "Department of Intellectual Property Acts directory — English title",
+    "original_text": "Trademark Act B.E. 2534 (1991)",
+    "chinese_text": "《佛历2534年（1991年）商标法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认知识产权局目录所列法规名称；须核对修正案、标识、类别、在先权利与具体程序。"],
+    "non_inferences": ["不得据此判断可注册性、侵权、异议或权利有效性。"]
+  },
+  {
+    "passage_key": "th-m6-arbitration-act-title",
+    "source_id": "th-m6-arbitration-act-2026",
+    "locator": "Thai Arbitration Institute official page — English document title",
+    "original_text": "Arbitration Act B.E.2545 (2002)",
+    "chinese_text": "《佛历2545年（2002年）仲裁法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认泰国仲裁院页面公开的法规名称；须核对仲裁协议、仲裁地、程序、修正案与执行地。"],
+    "non_inferences": ["不得据此判断具体仲裁条款效力、承认执行或货款回收结果。"]
+  },
+  {
+    "passage_key": "tl-m1-private-investment-law-listing",
+    "source_id": "tl-m1-private-investment-law-2026",
+    "locator": "Government of Timor-Leste Business and Investment page — 23 August 2017 listing",
+    "original_text": "Private Investment Law — Law No. 15/2017 of 23 August (only portuguese)",
+    "chinese_text": "《私人投资法》——2017年8月23日第15/2017号法律（仅葡萄牙文）。",
+    "effective_at": null,
+    "prerequisites": ["仅确认东帝汶政府页面所列法规名称、编号、日期和语种提示；应查阅公报葡萄牙文正式文本及行业许可。"],
+    "non_inferences": ["不得据此判断投资准入、优惠、登记或许可结果。"]
+  },
+  {
+    "passage_key": "tl-m3-customs-code-listing",
+    "source_id": "tl-m3-customs-code-2026",
+    "locator": "Government of Timor-Leste Business and Investment page — 5 April 2017 listing",
+    "original_text": "Customs Code — Decree-Law No. 14/2017 of April 5 (only in portuguese)",
+    "chinese_text": "《海关法典》——4月5日第14/2017号法令（仅葡萄牙文）。",
+    "effective_at": null,
+    "prerequisites": ["仅确认东帝汶政府页面所列法规名称、编号、日期和语种提示；须查阅公报正式文本及货物、税则、许可规则。"],
+    "non_inferences": ["不得据此判断税率、清关、放行或具体货物合规性。"]
+  }
+]

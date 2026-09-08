@@ -1,0 +1,17 @@
+node_modules
+dist
+.npm-cache
+.playwright-cli
+output
+backend/.venv
+backend/.env
+backend/.pytest_cache
+backend/server.log
+backend/**/__pycache__
+backend/data/runtime
+backend/data/trademark_images
+backend/data/*.sqlite3
+backend/data/*.sqlite3-*
+backend/tests/.runtime
+playwright-report
+test-results

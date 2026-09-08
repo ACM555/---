@@ -1,0 +1,112 @@
+[
+  {
+    "passage_key": "vn-m2-commercial-law-directory-entry",
+    "source_id": "vn-m2-commercial-law-index-2026",
+    "locator": "IP Viet Nam — Codes and Laws, Resolutions of the National Assembly, item 11",
+    "original_text": "36/2005/QH11 | 14/06/2005 | COMMERCIAL LAW",
+    "chinese_text": "越南知识产权局的法律文件目录列有第36/2005/QH11号《商法》。",
+    "effective_at": null,
+    "prerequisites": ["本摘录仅核验官方目录中的法规编号、日期和英文名称；须另行打开并核对具体条文、修订状态、交易类型及适用法。"],
+    "non_inferences": ["不得据此判断任何合同效力、违约责任、救济或交易合规结果。"]
+  },
+  {
+    "passage_key": "vn-m3-import-procedure-summary",
+    "source_id": "vn-m3-import-procedure-2026",
+    "locator": "Vietnam Trade Portal — Procedure Details / Procedure Name",
+    "original_text": "Procedure and Requirements on Customs documents for Imported goods;",
+    "chinese_text": "越南贸易门户将该项程序命名为“进口货物海关单证程序及要求”。",
+    "effective_at": null,
+    "prerequisites": ["仅适用于页面所指进口货物程序；须按货物、申报主体、口岸、时点及页面所列法律依据逐项核对。"],
+    "non_inferences": ["不得据此推断任何货物可通关、无需许可或必然获得放行。"]
+  },
+  {
+    "passage_key": "vn-m3-transit-procedure-summary",
+    "source_id": "vn-m3-transit-procedure-2026",
+    "locator": "Vietnam Trade Portal — Procedure Details / Procedure Name",
+    "original_text": "Customs procedures applied to transited goods",
+    "chinese_text": "越南贸易门户将该项程序命名为“适用于过境货物的海关程序”。",
+    "effective_at": null,
+    "prerequisites": ["仅适用于页面所述过境货物程序；须核对运输路径、口岸、许可证、监管要求及页面列明的法律依据。"],
+    "non_inferences": ["不得据此推断过境许可、运输路线或放行结果。"]
+  },
+  {
+    "passage_key": "vn-m5-trademark-application-examination",
+    "source_id": "vn-m5-trademark-procedure-2026",
+    "locator": "IP Viet Nam — TRADEMARKS / Time limit for processing trademark registration applications",
+    "original_text": "A trademark registration application shall have its formality examination within 01 month from the filing date.",
+    "chinese_text": "越南知识产权局页面称，商标注册申请自申请日起在一个月内进行形式审查。",
+    "effective_at": null,
+    "prerequisites": ["仅适用于该页面列示的商标注册程序；须以提交时有效的法规、完整页面说明、申请材料和主管机关通知为准。"],
+    "non_inferences": ["不得据此保证审查完成时间、申请受理、注册成功或权利有效性。"]
+  },
+  {
+    "passage_key": "vn-m5-pct-receiving-office",
+    "source_id": "vn-m5-patent-pct-entry-2026",
+    "locator": "IP Viet Nam — Patent registration through PCT, paragraph 1",
+    "original_text": "The agency competent to receive international patent applications in Vietnam is the NOIP.",
+    "chinese_text": "越南知识产权局页面称，在越南有权受理国际专利申请的机构为NOIP。",
+    "effective_at": null,
+    "prerequisites": ["仅针对页面所称国际专利申请受理机构；须核对申请来源、PCT程序阶段、期限、保密审查及当时有效规则。"],
+    "non_inferences": ["不得据此推断申请可提交、进入国家阶段、获得专利或享有优先权。"]
+  },
+  {
+    "passage_key": "id-m1-investment-law-metadata",
+    "source_id": "id-m1-investment-law-2026",
+    "locator": "BPK Regulation Database — Metadata / Title",
+    "original_text": "Undang-undang (UU) Nomor 25 Tahun 2007 tentang Penanaman Modal",
+    "chinese_text": "印尼审计署法规库将该法规列为第25/2007号《投资法》。",
+    "effective_at": "2008-04-26",
+    "prerequisites": ["本摘录仅核验法规名称；BPK页面显示该法曾被后续立法修改，须核对现行整合文本、行业、许可和投资主体。"],
+    "non_inferences": ["不得据此判断外资准入、持股比例、许可、优惠或登记结果。"]
+  },
+  {
+    "passage_key": "id-m2-regulation-database-role",
+    "source_id": "id-m2-contract-source-discovery-2026",
+    "locator": "BPK Regulation Database — About the database",
+    "original_text": "Database Peraturan BPK merupakan bagian dari pelaksanaan JDIH di lingkungan BPK.",
+    "chinese_text": "印尼审计署法规数据库说明其属于BPK环境内法律文件与信息网络（JDIH）的实施组成部分。",
+    "effective_at": null,
+    "prerequisites": ["本条仅确认法规数据库的官方检索角色；合同法具体条文、版本、适用主体和冲突法问题仍须另行定位核对。"],
+    "non_inferences": ["不得据此判断合同成立、效力、违约或救济。"]
+  },
+  {
+    "passage_key": "id-m3-trade-law-scope",
+    "source_id": "id-m3-trade-law-2014-2026",
+    "locator": "BPK Regulation Database — MATERI POKOK PERATURAN / Abstrak",
+    "original_text": "Undang-Undang tentang Perdagangan memuat materi pokok sesuai dengan lingkup pengaturan yang meliputi Perdagangan Dalam Negeri, Perdagangan Luar Negeri, Perdagangan Perbatasan.",
+    "chinese_text": "印尼审计署法规库摘要说明，《贸易法》的规范范围包括国内贸易、对外贸易和边境贸易等事项。",
+    "effective_at": "2014-03-11",
+    "prerequisites": ["本摘录仅说明官方摘要列出的范围；BPK页面显示该法已有修订，具体货物、许可、海关、贸易管制和现行条文须另行核对。"],
+    "non_inferences": ["不得据此判断某项进出口、许可证、关税或通关结果。"]
+  },
+  {
+    "passage_key": "id-m4-manpower-law-status",
+    "source_id": "id-m4-manpower-law-2026",
+    "locator": "Ministry of Manpower JDIH — Title and status",
+    "original_text": "Undang-undang Nomor 13 Tahun 2003 tentang Ketenagakerjaan",
+    "chinese_text": "印尼人力资源部法规库将该法规列为第13/2003号《劳动力法》。",
+    "effective_at": "2003-03-25",
+    "prerequisites": ["本摘录仅核验法规名称和页面所示生效日期；外籍雇佣还须结合移民、工作许可及后续修订分别核对。"],
+    "non_inferences": ["不得据此判断工作许可、签证、雇佣合规、解雇或赔偿结果。"]
+  },
+  {
+    "passage_key": "id-m5-trademark-law-metadata",
+    "source_id": "id-m5-trademark-law-2026",
+    "locator": "BPK Regulation Database — Metadata / Title",
+    "original_text": "Undang-undang (UU) Nomor 20 Tahun 2016 tentang Merek dan Indikasi Geografis",
+    "chinese_text": "印尼审计署法规库将该法规列为第20/2016号《商标和地理标志法》。",
+    "effective_at": "2016-11-25",
+    "prerequisites": ["本摘录仅核验法规名称；BPK页面显示该法有后续修订，须核对权利类型、类别、在先权利、申请路径及现行文本。"],
+    "non_inferences": ["不得据此判断商标可注册性、侵权、异议、无效或权利有效性。"]
+  },
+  {
+    "passage_key": "id-m6-arbitration-law-scope",
+    "source_id": "id-m6-arbitration-law-2026",
+    "locator": "BPK Regulation Database — MATERI POKOK PERATURAN / Abstrak",
+    "original_text": "Undang-undang ini mengatur penyelesaian sengketa atau beda pendapat antar para pihak dalam suatu hubungan hukum tertentu yang telah mengadakan perjanjian arbitrase.",
+    "chinese_text": "印尼审计署法规库摘要称，该法调整在已有仲裁协议的特定法律关系当事人之间解决争议或分歧的事项。",
+    "effective_at": "1999-08-12",
+    "prerequisites": ["仅适用于已有仲裁协议的特定法律关系；须核对协议、仲裁地、程序、裁决及执行地，并核验相关判决和现行文本。"],
+    "non_inferences": ["不得据此判断某一仲裁协议有效、裁决可执行或货款能够收回。"]
+  }
+]

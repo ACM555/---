@@ -1,0 +1,102 @@
+[
+  {
+    "passage_key": "la-m1-enterprise-title",
+    "source_id": "la-m1-enterprise-law-2026",
+    "locator": "Law on Enterprise (Amended) — official MOIC English text, title",
+    "original_text": "Law on Enterprise (Amended)",
+    "chinese_text": "《企业法（修订）》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认老挝工贸部公开文本的法规名称；企业类型、外资限制、行业许可及老挝文现行版本须另行核对。"],
+    "non_inferences": ["不得据此判断设立、准入、登记或许可结果。"]
+  },
+  {
+    "passage_key": "la-m2-construction-contract-contents",
+    "source_id": "la-m2-contract-law-directory-2026",
+    "locator": "Construction Law — Part IV, Article 52 — Contents of the Construction’s Entrepreneurial Contract",
+    "original_text": "The construction’s entrepreneurial contract has the main contents as follows:",
+    "chinese_text": "建设承包合同具有如下主要内容：",
+    "effective_at": null,
+    "prerequisites": ["该摘录仅适用于老挝官方法律门户所载建设承包合同；跨境交易合同的效力、违约及救济仍须核对适用法、完整条文和合同文本。"],
+    "non_inferences": ["不得据此判断任何非建设合同或具体合同的效力、违约责任或救济。"]
+  },
+  {
+    "passage_key": "la-m3-import-export-decision-purpose",
+    "source_id": "la-m3-foreign-trade-2026",
+    "locator": "Decision No. 677/BOL (24 July 2023), Article 1 — Purpose",
+    "original_text": "This decision is defined the principles, rules and measures to manage the foreign exchange for importing-exporting commodities and services",
+    "chinese_text": "本决定规定管理进出口商品和服务外汇的原则、规则和措施。",
+    "effective_at": null,
+    "prerequisites": ["该摘录仅涉及进出口货物和服务的外汇管理决定；货物准入、海关、税则、许可证和现行规则须逐项核对。"],
+    "non_inferences": ["不得据此判断货物可否进出口、税率、清关或放行结果。"]
+  },
+  {
+    "passage_key": "la-m4-labour-law-title",
+    "source_id": "la-m4-labour-law-directory-2026",
+    "locator": "MOIC Legal Services Portal — official listing title",
+    "original_text": "Amended Labour Law No.43/NA, dated 24 December 2013",
+    "chinese_text": "《修订劳动法》第43/NA号，2013年12月24日。",
+    "effective_at": null,
+    "prerequisites": ["仅确认官方法律服务门户所列劳动法的名称、编号和日期；外籍用工、工作许可、签证及现行修订须另行核对。"],
+    "non_inferences": ["不得据此判断工作许可、签证、雇佣关系或劳动合规结果。"]
+  },
+  {
+    "passage_key": "la-m5-ip-law-listing",
+    "source_id": "la-m5-ip-law-2026",
+    "locator": "Department of Intellectual Property — Laws and Regulations listing",
+    "original_text": "Law on Intellectual Property",
+    "chinese_text": "《知识产权法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认老挝知识产权局法规页所列法规名称；权利类型、申请路径、现行老挝文条文和修订须另行核对。"],
+    "non_inferences": ["不得据此判断可注册性、侵权、权属或救济结果。"]
+  },
+  {
+    "passage_key": "la-m6-economic-disputes-scope",
+    "source_id": "la-m6-dispute-law-directory-2026",
+    "locator": "Law on the Resolution of Economic Disputes, National Assembly Ref. 06/NA, Article 6 (new) — The Limitations of this Law",
+    "original_text": "This Law applies to economic dispute resolution that arises from production-business operations based on the voluntary agreement of the disputing parties.",
+    "chinese_text": "本法适用于基于争议当事人自愿协议、因生产经营活动产生的经济争议解决。",
+    "effective_at": null,
+    "prerequisites": ["仅适用于条文所述、基于自愿协议的生产经营经济争议；仲裁协议、争议类型、法院程序、承认执行和适用版本须另行核对。"],
+    "non_inferences": ["不得据此保证仲裁或调解可受理、裁决可执行或货款可追回。"]
+  },
+  {
+    "passage_key": "tl-m2-civil-code-approval",
+    "source_id": "tl-m2-civil-code-directory-2026",
+    "locator": "Lei do Parlamento 10/2011, Article 1 — Aprovação do Código Civil",
+    "original_text": "É aprovado o Código Civil publicado em anexo e que faz parte integrante do presente diploma.",
+    "chinese_text": "批准作为本法组成部分并随附公布的《民法典》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认东帝汶第10/2011号议会法批准《民法典》；合同条款、适用法、修订与具体交易事实须另行核对。"],
+    "non_inferences": ["不得据此判断合同效力、违约责任或救济。"]
+  },
+  {
+    "passage_key": "tl-m4-labour-law-object",
+    "source_id": "tl-m4-labour-law-directory-2026",
+    "locator": "Lei do Parlamento 4/2012, Article 1(1) — Objeto",
+    "original_text": "A presente lei estabelece o regime jurídico aplicável às relações individuais e às relações coletivas de trabalho.",
+    "chinese_text": "本法确立适用于个人劳动关系和集体劳动关系的法律制度。",
+    "effective_at": null,
+    "prerequisites": ["仅适用于该法规定的劳动关系范围；外籍员工还须核对移民、工作许可和其他特别规则。"],
+    "non_inferences": ["不得据此判断工作许可、签证、雇佣合规或劳动争议结果。"]
+  },
+  {
+    "passage_key": "tl-m5-civil-code-ip-special-law",
+    "source_id": "tl-m5-ip-law-directory-2026",
+    "locator": "Código Civil de Timor-Leste, Article 1223(1) — Propriedade intelectual",
+    "original_text": "Os direitos de autor e a propriedade industrial estão sujeitos a legislação especial.",
+    "chinese_text": "著作权和工业产权受特别立法管辖。",
+    "effective_at": null,
+    "prerequisites": ["该摘录仅说明《民法典》将著作权和工业产权交由特别立法规范；具体权利、注册、侵权和程序须定位相应特别法。"],
+    "non_inferences": ["不得据此判断任何标识可注册、权利有效、发生侵权或可获得救济。"]
+  },
+  {
+    "passage_key": "tl-m6-voluntary-arbitration-object",
+    "source_id": "tl-m6-arbitration-law-2026",
+    "locator": "Lei n.º 6/2021, annexed Regime Jurídico da Arbitragem Voluntária, Article 1 — Objeto",
+    "original_text": "O presente regime jurídico tem por objeto a regulação da arbitragem voluntária e da confirmação e execução de decisões arbitrais.",
+    "chinese_text": "本法律制度旨在规范自愿仲裁以及仲裁裁决的确认和执行。",
+    "effective_at": null,
+    "prerequisites": ["仅说明东帝汶自愿仲裁制度的调整对象；仲裁协议、仲裁地、准据法、承认执行及具体程序须另行核对。"],
+    "non_inferences": ["不得据此保证仲裁条款有效、裁决可承认执行或货款可追回。"]
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "passage_key": "kh-m2-civil-code-title",
+    "source_id": "kh-m2-civil-code-directory-2026",
+    "locator": "NCDD government legal library — document title",
+    "original_text": "Law of The Civil Code of Cambodia",
+    "chinese_text": "《柬埔寨民法典》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认柬埔寨政府资料库所列法律名称；应以高棉文正式文本核对合同类型、条文及修订状态。"],
+    "non_inferences": ["不得据此判断具体合同效力、违约责任或救济结果。"]
+  },
+  {
+    "passage_key": "my-m1-companies-act-short-title",
+    "source_id": "my-m1-companies-act-directory-2026",
+    "locator": "Companies Act 2016 (Act 777) reprint — section 1(1)",
+    "original_text": "This Act may be cited as the Companies Act 2016.",
+    "chinese_text": "本法可称为《2016年公司法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认公司法名称；公司设立、外国股东、行业许可和后续修订须按具体事实核对。"],
+    "non_inferences": ["不得据此判断设立、外资准入或登记结果。"]
+  },
+  {
+    "passage_key": "my-m2-contracts-act-short-title",
+    "source_id": "my-m2-contracts-act-directory-2026",
+    "locator": "Contracts Act 1950 (Act 136) reprint — section 1",
+    "original_text": "This Act may be cited as the Contracts Act 1950.",
+    "chinese_text": "本法可称为《1950年合同法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认合同法名称；合同类型、当事人、适用法及现行版本须逐案核对。"],
+    "non_inferences": ["不得据此判断合同效力、违约或救济。"]
+  },
+  {
+    "passage_key": "my-m4-employment-act-title",
+    "source_id": "my-m4-employment-act-2026",
+    "locator": "JTKSM official Employment Act 1955 page — document title",
+    "original_text": "Employment Act 1955",
+    "chinese_text": "《1955年雇佣法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认马来西亚劳工局页面所列法规名称；外籍雇佣、工作许可、移民规则和修订须另行核对。"],
+    "non_inferences": ["不得据此判断工作许可、签证或雇佣合规。"]
+  },
+  {
+    "passage_key": "my-m6-arbitration-act-short-title",
+    "source_id": "my-m6-arbitration-act-directory-2026",
+    "locator": "Arbitration Act 2005 (Act 646) reprint — section 1",
+    "original_text": "This Act may be cited as the Arbitration Act 2005.",
+    "chinese_text": "本法可称为《2005年仲裁法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认仲裁法名称；仲裁协议、仲裁地、适用程序和执行地须按具体争议核对。"],
+    "non_inferences": ["不得据此保证仲裁、承认执行或货款回收结果。"]
+  },
+  {
+    "passage_key": "ph-m2-civil-code-article-1159",
+    "source_id": "ph-m2-civil-code-directory-2026",
+    "locator": "Civil Code (RA 386) — Article 1159",
+    "original_text": "Obligations arising from contracts have the force of law between the contracting parties and should be complied with in good faith.",
+    "chinese_text": "合同产生的义务在缔约方之间具有法律效力，并应善意履行。",
+    "effective_at": null,
+    "prerequisites": ["适用前须核对合同是否有效、当事人、具体约定及其他适用法律。"],
+    "non_inferences": ["不得据此直接认定合同有效、构成违约或可获得特定救济。"]
+  },
+  {
+    "passage_key": "ph-m6-adr-act-title",
+    "source_id": "ph-m6-adr-law-directory-2026",
+    "locator": "Alternative Dispute Resolution Act 2004 (RA 9285) — section 1",
+    "original_text": "This Act shall be known as the \"Alternative Dispute Resolution Act of 2004.\"",
+    "chinese_text": "本法称为《2004年替代性争议解决法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认 RA 9285 的法律名称；须核对争议是否适于 ADR、协议、程序和执行地。"],
+    "non_inferences": ["不得据此保证仲裁、调解、执行或货款回收结果。"]
+  },
+  {
+    "passage_key": "sg-m5-trade-marks-act-short-title",
+    "source_id": "sg-m5-ip-legislation-2026",
+    "locator": "Trade Marks Act 1998 — section 1",
+    "original_text": "This Act is the Trade Marks Act 1998.",
+    "chinese_text": "本法为《1998年商标法》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认新加坡商标法名称；申请、在先权利、类别、异议及侵权判断须审查完整条文和事实。"],
+    "non_inferences": ["不得据此判断商标可注册性、侵权或救济结果。"]
+  },
+  {
+    "passage_key": "th-m2-civil-commercial-code-title",
+    "source_id": "th-m2-civil-commercial-code-2026",
+    "locator": "Department of Internal Trade legal information system — listed code title",
+    "original_text": "Civil and Commercial Code",
+    "chinese_text": "《民商法典》。",
+    "effective_at": null,
+    "prerequisites": ["仅确认泰国内贸厅法律信息系统所列法典名称；合同条款、泰文正式文本、修订和适用法须另行核对。"],
+    "non_inferences": ["不得据此判断合同效力、违约或救济。"]
+  },
+  {
+    "passage_key": "int-m5-pct-article-1",
+    "source_id": "int-m5-pct-guide-2026",
+    "locator": "Patent Cooperation Treaty — Article 1(1), Establishment of a Union",
+    "original_text": "The States party to this Treaty constitute a Union for cooperation in the filing, searching, and examination, of applications for the protection of inventions.",
+    "chinese_text": "本条约的缔约国组成联盟，就发明保护申请的提交、检索和审查开展合作。",
+    "effective_at": null,
+    "prerequisites": ["仅为 PCT 第1条第1款的节选；必须核对申请人资格、目标国、国家阶段和届时有效规则。"],
+    "non_inferences": ["PCT 不替代任一国家国内专利法；不得据此判断国家阶段授权或权利有效性。"]
+  }
+]

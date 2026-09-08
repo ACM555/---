@@ -1,0 +1,14 @@
+__pycache__/
+**/__pycache__/
+venv/
+.env
+uploads/*
+reports/*
+*.pyc
+.pytest_cache/
+.playwright-cli/
+output/
+
+# Keep runtime directories in Git, but do not commit generated content.
+!uploads/.gitkeep
+!reports/.gitkeep

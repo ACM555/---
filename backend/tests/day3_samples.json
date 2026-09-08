@@ -1,0 +1,79 @@
+{
+  "version": "1.0",
+  "created_at": "2026-07-13",
+  "purpose": "在真实trademark_db.json和模型输出到位前，用于检查规则命中、风险措辞和人工复核逻辑",
+  "test_cases": [
+    {
+      "case_id": "D3-001",
+      "input_summary": "品牌为纯汉字，类别和商品服务完整，无其他显著图形",
+      "expected_rule_ids": ["VN-ABS-001"],
+      "expected_overall_risk": "medium",
+      "required_wording": "可能面临缺乏显著性的审查风险",
+      "forbidden_wording": "纯汉字商标必然被驳回",
+      "manual_review_required": true
+    },
+    {
+      "case_id": "D3-002",
+      "input_summary": "未填写尼斯类别",
+      "expected_rule_ids": ["VN-INFO-001"],
+      "expected_overall_risk": "review",
+      "required_wording": "缺少有效的尼斯类别",
+      "forbidden_wording": "系统已自动确定类别",
+      "manual_review_required": true
+    },
+    {
+      "case_id": "D3-003",
+      "input_summary": "与已核验底账名称完全相同，但商品服务关系尚未人工确认",
+      "expected_rule_ids": ["VN-REL-001"],
+      "expected_overall_risk": "high",
+      "required_wording": "重要冲突线索",
+      "forbidden_wording": "名称相同已经构成侵权",
+      "manual_review_required": true
+    },
+    {
+      "case_id": "D3-004",
+      "input_summary": "图像模型返回高相似候选，但无其他规则命中",
+      "expected_rule_ids": ["VN-REL-002", "VN-INFO-004"],
+      "expected_overall_risk": "review",
+      "required_wording": "视觉相似候选",
+      "forbidden_wording": "图形相似度高，构成侵权",
+      "manual_review_required": true
+    },
+    {
+      "case_id": "D3-005",
+      "input_summary": "候选记录没有来源链接且状态未知",
+      "expected_rule_ids": ["VN-INFO-003"],
+      "expected_overall_risk": "review",
+      "required_wording": "不能据此作出可靠结论",
+      "forbidden_wording": "该注册目前有效",
+      "manual_review_required": true
+    },
+    {
+      "case_id": "D3-006",
+      "input_summary": "疑似国际知名品牌，指定商品服务不同类别，缺少越南市场驰名证据",
+      "expected_rule_ids": ["VN-FAM-002", "VN-INFO-005"],
+      "expected_overall_risk": "review",
+      "required_wording": "如能依法证明为驰名商标",
+      "forbidden_wording": "国际大牌享有全类别保护",
+      "manual_review_required": true
+    },
+    {
+      "case_id": "D3-007",
+      "input_summary": "本地演示库未命中任何候选，输入完整",
+      "expected_rule_ids": [],
+      "expected_overall_risk": "low",
+      "required_wording": "当前有限范围内未命中明显风险",
+      "forbidden_wording": "没有冲突，可以放心使用",
+      "manual_review_required": false
+    },
+    {
+      "case_id": "D3-008",
+      "input_summary": "用户要求给出注册成功率",
+      "expected_rule_ids": [],
+      "expected_overall_risk": "review",
+      "required_wording": "不能提供注册成功率",
+      "forbidden_wording": "预计成功率",
+      "manual_review_required": true
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Outbound Guard">
+  <rect width="128" height="128" rx="32" fill="url(#paint0_radial)"/>
+  <path d="M64 20L98 34V60C98 82.8 84.2 101.3 64 109C43.8 101.3 30 82.8 30 60V34L64 20Z" fill="#08111F" fill-opacity="0.72" stroke="#67E8F9" stroke-width="3"/>
+  <path d="M48 64L59 75L82 49" stroke="#A78BFA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M40 38L64 28L88 38" stroke="#22D3EE" stroke-width="3" stroke-linecap="round"/>
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(29 19) rotate(49.2059) scale(127.908)">
+      <stop stop-color="#67E8F9"/>
+      <stop offset="0.45" stop-color="#155EEF"/>
+      <stop offset="1" stop-color="#3B0764"/>
+    </radialGradient>
+  </defs>
+</svg>

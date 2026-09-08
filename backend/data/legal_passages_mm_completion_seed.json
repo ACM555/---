@@ -1,0 +1,52 @@
+[
+  {
+    "passage_key": "mm-m1-companies-law-section-1",
+    "source_id": "mm-m1-companies-law-2026",
+    "locator": "Part I, Division 1, section 1(a) — Citation",
+    "original_text": "This Law shall be called the Myanmar Companies Law.",
+    "chinese_text": "本法称为《缅甸公司法》。",
+    "effective_at": null,
+    "prerequisites": ["该英文资料由缅甸政府文件库发布但标明为非正式译文；应以缅文正式文本和现行版本核对。"],
+    "non_inferences": ["不得据此判断外资准入、公司登记、许可或个案权利义务。"]
+  },
+  {
+    "passage_key": "mm-m2-sales-goods-act-government-report",
+    "source_id": "mm-m2-sale-goods-act-2026",
+    "locator": "Appendix 2, Myanmar, online consumer protection legal-framework table, p. 102",
+    "original_text": "Sales of Goods Act — Ministry of Commerce",
+    "chinese_text": "《货物买卖法》——商务部。",
+    "effective_at": null,
+    "prerequisites": ["该摘录仅来自缅甸政府托管报告的法规名称及主管机关表格，不是《货物买卖法》法条正文；合同类型、现行条文和适用法均须另行核对。"],
+    "non_inferences": ["不得据此判断合同成立、效力、违约、赔偿或救济。"]
+  },
+  {
+    "passage_key": "mm-m4-labour-organization-law-section-1",
+    "source_id": "mm-m4-labour-law-directory-2026",
+    "locator": "Chapter I, section 1(a) — Title",
+    "original_text": "This Law shall be called the Labour Organization Law.",
+    "chinese_text": "本法称为《劳动组织法》。",
+    "effective_at": null,
+    "prerequisites": ["该摘录仅确认劳动组织法名称；外籍雇佣、工作许可、签证和移民规则必须按另行适用的现行法律核对。"],
+    "non_inferences": ["不得据此判断工作许可、签证、雇佣合规或劳动争议结果。"]
+  },
+  {
+    "passage_key": "mm-m5-trademark-law-effective-date",
+    "source_id": "mm-m5-ip-law-directory-2026",
+    "locator": "Government news, paragraph 3 — Notification No. 82/2023",
+    "original_text": "Myanmar’s Trademark Law 2023 will take effect from 1 April.",
+    "chinese_text": "缅甸《商标法》将自4月1日起生效。",
+    "effective_at": "2023-04-01",
+    "prerequisites": ["本摘录为政府资讯对第82/2023号通知的转述；须再核对2019年法律的缅文正式文本、实施细则、权利类型和适用范围。"],
+    "non_inferences": ["不得据此判断商标可注册性、权属、侵权、异议或救济结果。"]
+  },
+  {
+    "passage_key": "mm-m6-arbitration-law-government-statement",
+    "source_id": "mm-m6-arbitration-law-2026",
+    "locator": "Government news, Union Chief Justice statement — Arbitration Law enacted in 2016",
+    "original_text": "According to the Arbitration Law enacted in 2016, both foreign and local companies can resolve their disputes by arbitration.",
+    "chinese_text": "根据2016年制定的仲裁法，外国和本国公司均可通过仲裁解决其争议。",
+    "effective_at": null,
+    "prerequisites": ["该摘录是缅甸政府发布的司法资讯，不是仲裁法正文；须核对现行仲裁法、仲裁协议、仲裁地、程序、裁决及执行地。"],
+    "non_inferences": ["不得保证仲裁条款有效、裁决获得承认执行或货款回收。"]
+  }
+]

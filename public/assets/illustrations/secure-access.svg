@@ -1,0 +1,25 @@
+<svg width="720" height="520" viewBox="0 0 720 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI legal secure access illustration">
+  <rect width="720" height="520" rx="36" fill="#07111F"/>
+  <circle cx="102" cy="84" r="170" fill="#155EEF" fill-opacity="0.28"/>
+  <circle cx="624" cy="428" r="210" fill="#7C3AED" fill-opacity="0.25"/>
+  <path d="M0 82H720M0 186H720M0 290H720M0 394H720M108 0V520M252 0V520M396 0V520M540 0V520" stroke="#94A3B8" stroke-opacity="0.08"/>
+  <rect x="154" y="86" width="412" height="292" rx="28" fill="#0F1B2D" stroke="#38BDF8" stroke-opacity="0.28"/>
+  <rect x="192" y="126" width="226" height="18" rx="9" fill="#E2E8F0" fill-opacity="0.9"/>
+  <rect x="192" y="164" width="336" height="14" rx="7" fill="#64748B" fill-opacity="0.45"/>
+  <rect x="192" y="196" width="268" height="14" rx="7" fill="#64748B" fill-opacity="0.35"/>
+  <rect x="192" y="246" width="110" height="92" rx="18" fill="#111C32" stroke="#67E8F9" stroke-opacity="0.4"/>
+  <rect x="324" y="246" width="110" height="92" rx="18" fill="#111C32" stroke="#A78BFA" stroke-opacity="0.4"/>
+  <rect x="456" y="246" width="72" height="92" rx="18" fill="#111C32" stroke="#F472B6" stroke-opacity="0.32"/>
+  <path d="M247 285L262 300L289 267" stroke="#67E8F9" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M377 266V319M350 292H404" stroke="#A78BFA" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="492" cy="276" r="9" fill="#F472B6"/>
+  <circle cx="492" cy="306" r="9" fill="#F472B6" fill-opacity="0.55"/>
+  <rect x="262" y="384" width="196" height="54" rx="27" fill="url(#paint0_linear)"/>
+  <path d="M324 411H396" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="paint0_linear" x1="262" y1="411" x2="458" y2="411" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+</svg>

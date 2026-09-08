@@ -1,0 +1,413 @@
+{
+  "schema_version": "1.1.0",
+  "ruleset_id": "VN_TRADEMARK_V1_2026_07",
+  "title": "越南商标注册前风险初筛规则库",
+  "jurisdiction": "VN",
+  "verified_at": "2026-07-12",
+  "legal_version_note": "依据截至2026-07-12有效的越南知识产权法律体系整理，包括Law 131/2025/QH15及2026年配套实施规范。仅用于注册前初筛，不构成法律意见。",
+  "risk_levels": {
+    "critical": "命中法定禁止因素或重大权利冲突线索，应暂停直接申请或使用并立即人工复核",
+    "high": "存在较高驳回或冲突风险，应在申请前由越南专业代理人复核",
+    "medium": "存在显著性、描述性或其他可修改风险，建议补充资料或调整标志",
+    "review": "资料不足或判断依赖专业证据，系统不得作确定结论",
+    "low": "当前有限范围内未命中明显风险，不代表保证注册或不侵权"
+  },
+  "category_definitions": {
+    "absolute_refusal": "标志自身可能不满足保护条件或属于法定不得保护的标志",
+    "relative_conflict": "可能与在先商标、商号、地理标志或其他在先权利冲突",
+    "well_known_mark_risk": "可能涉及驰名商标声誉利用、显著性减损或跨类保护",
+    "insufficient_information": "输入、权利状态或证据不足，必须转人工复核"
+  },
+  "database_contract": {
+    "input_record_name": "trademark_db.json",
+    "required_fields": [
+      "record_id",
+      "mark_name",
+      "mark_name_normalized",
+      "owner_name",
+      "nice_classes",
+      "goods_services",
+      "country_or_region",
+      "application_or_registration_no",
+      "application_date",
+      "priority_date",
+      "current_status",
+      "source_url",
+      "last_verified_at"
+    ],
+    "optional_fields": [
+      "mark_image_path",
+      "vienna_codes",
+      "status_note",
+      "risk_note"
+    ],
+    "mapping_notes": [
+      "数据库字段缺失时不得补猜，转入VN-INFO-001、VN-INFO-002或VN-INFO-003",
+      "名称标准化只用于候选检索，不得改变原始商标名称",
+      "类别编号只用于缩小检索范围，商品服务是否类似必须单独判断",
+      "聚合数据库状态必须回到来源链接核验后才可标记source_verified为true"
+    ]
+  },
+  "language_policy": {
+    "allowed_risk_terms": ["发现候选线索", "可能冲突", "存在较高风险", "现有资料不足", "建议人工复核"],
+    "restricted_legal_terms": ["构成侵权", "必然驳回", "保证注册", "绝对安全", "官方已认定"],
+    "restriction": "restricted_legal_terms仅可出现在否定句或禁止事项说明中，不得作为本系统对用户的结论"
+  },
+  "global_output_constraints": [
+    "规则命中只代表风险线索，不等于官方驳回决定或侵权认定",
+    "不得输出注册成功率或安全概率",
+    "不得把图像相似度直接表述为法律上的混淆或侵权",
+    "不得把中国案例直接作为越南法律依据",
+    "资料不足、来源过期或结论依赖市场证据时，必须标记人工复核",
+    "未命中本地演示数据库不得表述为可注册、无冲突或不侵权"
+  ],
+  "rules": [
+    {
+      "rule_id": "VN-ABS-001",
+      "rule_name": "纯汉字或非常用文字显著性风险",
+      "category": "absolute_refusal",
+      "category_label": "绝对驳回风险",
+      "required_inputs": ["brand_text", "logo_features"],
+      "trigger": {
+        "all": [
+          {"field": "brand_text", "operator": "not_empty"},
+          {"field": "brand_text_script", "operator": "in", "value": ["han_only", "non_latin_uncommon_only"]}
+        ],
+        "risk_escalation": "若无拉丁文字、原创图形、特殊图形化表达或其他显著元素，风险由medium提高为high"
+      },
+      "legal_basis_ids": ["VN-IPLAW-A72", "VN-IPLAW-A74-2A", "VN-CIRCULAR-A68", "VN-CIRCULAR-A76"],
+      "risk_level": "medium",
+      "system_message": "该标志主要或仅由中文等越南普通消费者通常难以识别、阅读或记忆的非拉丁文字构成，可能面临缺乏显著性的审查风险。中文文字并非当然禁止，仍需结合整体设计、其他显著元素及使用证据判断。",
+      "system_advice": [
+        "考虑加入具有显著性的拉丁文字、越南语读音或原创图形",
+        "准备外文读音、越南语转写及含义说明",
+        "由越南商标代理人结合整体标志复核"
+      ],
+      "prohibited_conclusions": ["纯汉字商标必然被驳回", "越南只接受拉丁字母", "纯汉字商标驳回率超过70%"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-ABS-002",
+      "rule_name": "简单图形、几何图形、数字或普通字母",
+      "category": "absolute_refusal",
+      "category_label": "绝对驳回风险",
+      "required_inputs": ["brand_text", "logo_features"],
+      "trigger": {
+        "any": [
+          {"field": "logo_features.simple_geometry_only", "operator": "equals", "value": true},
+          {"field": "brand_text_features.single_common_letter_or_number", "operator": "equals", "value": true}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74-2A", "VN-CIRCULAR-A76"],
+      "risk_level": "medium",
+      "system_message": "标志可能仅由简单图形、几何图形、数字或普通字母构成，存在缺乏显著性的风险。",
+      "system_advice": ["增加能够识别商业来源的独创组合或显著元素", "不要仅凭图形原创性推算注册结果"],
+      "prohibited_conclusions": ["原创几何图形一定可以注册", "图形越简单越容易通过"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-ABS-003",
+      "rule_name": "商品或服务通用名称",
+      "category": "absolute_refusal",
+      "category_label": "绝对驳回风险",
+      "required_inputs": ["brand_text", "goods_services"],
+      "trigger": {
+        "all": [
+          {"field": "brand_text", "operator": "matches_generic_term_for", "reference_field": "goods_services"}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74-2B", "VN-CIRCULAR-A76"],
+      "risk_level": "high",
+      "system_message": "该标志可能是相关商品或服务的通用名称或惯用标志，存在较高的缺乏显著性风险。",
+      "system_advice": ["增加具有来源识别作用的独创文字或图形", "核验该词在越南相关消费者中的通常含义"],
+      "prohibited_conclusions": ["通用名称只要没有相同注册就能注册"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-ABS-004",
+      "rule_name": "描述性标志",
+      "category": "absolute_refusal",
+      "category_label": "绝对驳回风险",
+      "required_inputs": ["brand_text", "goods_services"],
+      "trigger": {
+        "any": [
+          {"field": "brand_text_features.describes_quality", "operator": "equals", "value": true},
+          {"field": "brand_text_features.describes_characteristic", "operator": "equals", "value": true},
+          {"field": "brand_text_features.describes_purpose_or_value", "operator": "equals", "value": true},
+          {"field": "brand_text_features.describes_time_place_method_quantity", "operator": "equals", "value": true}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74-2C", "VN-CIRCULAR-A76"],
+      "risk_level": "medium",
+      "system_message": "该标志可能直接描述商品或服务的质量、性质、用途、数量、价值、生产方式或其他特征，存在描述性驳回风险。",
+      "system_advice": ["减少直接描述性表达并增加独创识别元素", "如主张使用取得显著性，应准备申请日前的使用和认知证据"],
+      "prohibited_conclusions": ["描述性词语一定不能注册", "使用时间较长就自动取得显著性"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-ABS-005",
+      "rule_name": "国旗、国徽、国歌及受保护公共标志",
+      "category": "absolute_refusal",
+      "category_label": "绝对驳回风险",
+      "required_inputs": ["brand_text", "logo_features", "sound_features"],
+      "trigger": {
+        "any": [
+          {"field": "logo_features.contains_protected_state_symbol", "operator": "equals", "value": true},
+          {"field": "sound_features.matches_national_or_international_anthem", "operator": "equals", "value": true}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A73", "VN-CIRCULAR-A75"],
+      "risk_level": "critical",
+      "system_message": "该标志疑似包含与国旗、国徽、国歌或其他受保护公共标志相同或容易混淆的元素，属于重大法律风险。",
+      "system_advice": ["暂停直接提交", "核验具体标志、近似程度及是否存在法定许可或例外"],
+      "prohibited_conclusions": ["只要稍作变形即可使用", "系统已正式认定属于禁用标志"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-ABS-006",
+      "rule_name": "机关组织、领导人、民族英雄或知名人物标识",
+      "category": "absolute_refusal",
+      "category_label": "绝对驳回风险",
+      "required_inputs": ["brand_text", "logo_features"],
+      "trigger": {
+        "any": [
+          {"field": "entity_match.type", "operator": "in", "value": ["state_agency", "political_social_organization", "international_organization", "leader", "national_hero", "famous_person"]}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A73"],
+      "risk_level": "critical",
+      "system_message": "该标志疑似使用受限制的机关、组织、领导人、民族英雄或知名人物名称、徽记或形象，需要核验授权及法定限制。",
+      "system_advice": ["暂停直接提交", "核验身份匹配、近似程度和授权文件"],
+      "prohibited_conclusions": ["公众人物形象可以自由注册", "有商业授权就必然符合商标法"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-ABS-007",
+      "rule_name": "误导、混淆或欺骗性标志",
+      "category": "absolute_refusal",
+      "category_label": "绝对驳回风险",
+      "required_inputs": ["brand_text", "goods_services", "origin_claims"],
+      "trigger": {
+        "any": [
+          {"field": "assessment.misleads_origin", "operator": "equals", "value": true},
+          {"field": "assessment.misleads_quality_nature_purpose_value", "operator": "equals", "value": true}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A73"],
+      "risk_level": "high",
+      "system_message": "该标志可能使消费者对商品或服务的来源、性质、用途、质量或价值产生误解。",
+      "system_advice": ["核验标志含义与商品实际情况", "删除或修改可能造成错误印象的元素"],
+      "prohibited_conclusions": ["系统仅凭名称即可最终认定欺骗消费者"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-REL-001",
+      "rule_name": "名称与已核验底账完全相同",
+      "category": "relative_conflict",
+      "category_label": "相对冲突风险",
+      "required_inputs": ["brand_text", "nice_classes", "goods_services", "trademark_database"],
+      "trigger": {
+        "all": [
+          {"field": "database_match.name_normalized", "operator": "exact_match", "reference_field": "brand_text_normalized"},
+          {"field": "database_match.source_verified", "operator": "equals", "value": true}
+        ],
+        "risk_escalation": "若数据库记录状态有效且具体商品服务相同或类似，风险提高为critical"
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74-2E", "VN-IPLAW-A90", "VN-CIRCULAR-A78"],
+      "risk_level": "high",
+      "system_message": "已核验底账中发现名称完全相同的在先商标记录。这是重要冲突线索，仍需核验申请日、优先权日、当前法律状态以及具体商品服务是否相同或类似。",
+      "system_advice": ["打开来源链接核验最新状态", "比较具体商品服务而不是只比较尼斯类别", "由越南商标代理人判断混淆可能性"],
+      "prohibited_conclusions": ["名称完全相同就一定侵权", "不同类别就绝对安全", "底账命中等于官方驳回"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-REL-002",
+      "rule_name": "在先相似商标候选",
+      "category": "relative_conflict",
+      "category_label": "相对冲突风险",
+      "required_inputs": ["brand_text", "logo_features", "goods_services", "trademark_database"],
+      "trigger": {
+        "any": [
+          {"field": "database_match.text_similarity_candidate", "operator": "equals", "value": true},
+          {"field": "database_match.visual_similarity_candidate", "operator": "equals", "value": true},
+          {"field": "database_match.pronunciation_or_meaning_similarity_candidate", "operator": "equals", "value": true}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74-2E", "VN-IPLAW-A74-2G", "VN-CIRCULAR-A78"],
+      "risk_level": "review",
+      "system_message": "发现一个或多个在先相似候选。该结果只能表述为“相似候选”或“可能冲突线索”。算法相似度仅用于筛选，不能代替对标志整体、显著部分、读音、含义及商品服务关系的法律判断。",
+      "system_advice": ["逐项核验候选权利状态、在先日期和来源", "比较具体商品服务及标志整体", "由专业人员进行混淆可能性判断"],
+      "prohibited_conclusions": ["相似度超过某个百分比即构成混淆", "图像模型命中即构成侵权"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-REL-003",
+      "rule_name": "商号、地理标志或其他在先权利冲突",
+      "category": "relative_conflict",
+      "category_label": "相对冲突风险",
+      "required_inputs": ["brand_text", "logo_features", "goods_services", "prior_rights_database"],
+      "trigger": {
+        "any": [
+          {"field": "prior_right_match.type", "operator": "in", "value": ["trade_name", "geographical_indication", "industrial_design", "plant_variety_name", "copyright_character_or_image"]}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74-2K-P"],
+      "risk_level": "review",
+      "system_message": "发现可能涉及商号、地理标志、工业设计、植物品种名称或受著作权保护角色形象的在先权利线索。",
+      "system_advice": ["确认权利类型、保护范围、在先日期和当前状态", "不要只在商标数据库中核验"],
+      "prohibited_conclusions": ["没有相同商标就不存在其他权利风险"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-FAM-001",
+      "rule_name": "疑似驰名标识同类或类似商品服务冲突",
+      "category": "well_known_mark_risk",
+      "category_label": "驰名标识攀附风险",
+      "required_inputs": ["brand_text", "logo_features", "goods_services", "well_known_mark_evidence"],
+      "trigger": {
+        "all": [
+          {"field": "candidate_match.high_reputation_signal", "operator": "equals", "value": true},
+          {"field": "goods_services_relationship", "operator": "in", "value": ["identical", "similar", "closely_related"]}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74-2I", "VN-IPLAW-A75", "VN-CIRCULAR-A88"],
+      "risk_level": "review",
+      "system_message": "该标志可能与高知名度标识发生冲突，但驰名状态必须依据越南法律要求和具体证据判断，系统不得仅凭品牌知名度自动认定。",
+      "system_advice": ["核验越南市场中的知晓程度、使用、销售、保护和认定证据", "核验标志及具体商品服务关系"],
+      "prohibited_conclusions": ["国际大牌自动属于越南驰名商标", "驰名商标必须预先进入官方名单"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-FAM-002",
+      "rule_name": "疑似驰名标识跨类声誉利用或显著性减损",
+      "category": "well_known_mark_risk",
+      "category_label": "驰名标识攀附风险",
+      "required_inputs": ["brand_text", "logo_features", "goods_services", "well_known_mark_evidence"],
+      "trigger": {
+        "all": [
+          {"field": "candidate_match.high_reputation_signal", "operator": "equals", "value": true},
+          {"field": "goods_services_relationship", "operator": "equals", "value": "dissimilar"}
+        ],
+        "requires_evidence_of": ["可能损害驰名商标显著性", "可能利用驰名商标声誉", "可能使消费者误认为存在商业联系"]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74-2I", "VN-IPLAW-A75", "VN-CIRCULAR-A88"],
+      "risk_level": "review",
+      "system_message": "不同类别并不当然安全。若在先标识能够依法证明为驰名商标，且当前标志可能利用其声誉、削弱显著性或造成商业联系误认，仍可能产生跨类风险。",
+      "system_advice": ["转越南商标专业人员审查驰名证据和跨类保护条件", "核验在越南是否存在相关类别的有效注册"],
+      "prohibited_conclusions": ["驰名商标享有自动全类别保护", "国际大牌拥有全类别特权注册", "不同类别一定不冲突"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-INFO-001",
+      "rule_name": "尼斯类别不明",
+      "category": "insufficient_information",
+      "category_label": "信息不足，需人工复核",
+      "required_inputs": ["nice_classes", "goods_services"],
+      "trigger": {
+        "any": [
+          {"field": "nice_classes", "operator": "empty"},
+          {"field": "nice_classes", "operator": "invalid_range", "value": [1, 45]}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A100", "WIPO-NICE-2026"],
+      "risk_level": "review",
+      "system_message": "缺少有效的尼斯类别，暂时无法进行完整的在先权利和商品服务冲突筛查。",
+      "system_advice": ["补充拟申请类别", "同时填写具体商品或服务，不能只填写类别编号"],
+      "prohibited_conclusions": ["系统自行猜测类别并作为正式申请建议", "同一类别必然类似"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-INFO-002",
+      "rule_name": "具体商品或服务描述不足",
+      "category": "insufficient_information",
+      "category_label": "信息不足，需人工复核",
+      "required_inputs": ["goods_services"],
+      "trigger": {
+        "any": [
+          {"field": "goods_services", "operator": "empty"},
+          {"field": "goods_services", "operator": "too_broad_or_vague"}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74", "VN-IPLAW-A100", "VN-CIRCULAR-A78"],
+      "risk_level": "review",
+      "system_message": "商品或服务描述为空或过于宽泛，系统无法可靠判断描述性、通用性及与在先权利的关系。",
+      "system_advice": ["填写实际提供或计划提供的具体商品服务", "正式申报前核对IP Vietnam当期接受的分类和用语"],
+      "prohibited_conclusions": ["仅凭尼斯类别作出可注册结论"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-INFO-003",
+      "rule_name": "底账记录来源、状态或核验日期不足",
+      "category": "insufficient_information",
+      "category_label": "信息不足，需人工复核",
+      "required_inputs": ["trademark_database"],
+      "trigger": {
+        "any": [
+          {"field": "database_match.source_url", "operator": "empty"},
+          {"field": "database_match.current_status", "operator": "in", "value": ["unknown", "pending_verification", "stale"]},
+          {"field": "database_match.last_verified_at", "operator": "older_than_days", "value": 30}
+        ]
+      },
+      "legal_basis_ids": ["WIPO-GBD-TERMS", "EUIPO-TMVIEW-NOTICE"],
+      "risk_level": "review",
+      "system_message": "候选记录的来源、当前状态或核验时间不足，不能据此作出可靠结论。",
+      "system_advice": ["返回IP Vietnam官方记录或公报核验", "更新来源链接、状态和核验日期"],
+      "prohibited_conclusions": ["聚合数据库结果等于官方法律状态", "记录未出现等于不存在在先权利"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-INFO-004",
+      "rule_name": "复杂图形相似仅形成检索候选",
+      "category": "insufficient_information",
+      "category_label": "信息不足，需人工复核",
+      "required_inputs": ["logo_file", "visual_match_candidates"],
+      "trigger": {
+        "all": [
+          {"field": "visual_match_candidates", "operator": "not_empty"}
+        ]
+      },
+      "legal_basis_ids": ["VN-CIRCULAR-A78", "WIPO-VIENNA-2026"],
+      "risk_level": "review",
+      "system_message": "图像分析发现视觉相似候选。该结果只能作为风险提示和人工检索入口，不代表法律上的混淆、攀附或侵权，也不得据此自动提高为critical。",
+      "system_advice": ["保留原图、候选图、模型版本和相似度供人工复核", "比较标志整体、显著部分、含义、指定商品服务和在先权利状态", "由专业人员复核候选记录"],
+      "prohibited_conclusions": ["视觉相似度达到某一数值即构成侵权", "Vienna分类相同就属于近似商标"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    },
+    {
+      "rule_id": "VN-INFO-005",
+      "rule_name": "结论依赖市场证据或主观状态",
+      "category": "insufficient_information",
+      "category_label": "信息不足，需人工复核",
+      "required_inputs": ["evidence_summary"],
+      "trigger": {
+        "any": [
+          {"field": "assessment_issue", "operator": "in", "value": ["well_known_status", "bad_faith", "acquired_distinctiveness", "prior_widespread_use", "consumer_recognition"]}
+        ]
+      },
+      "legal_basis_ids": ["VN-IPLAW-A74", "VN-IPLAW-A75", "VN-CIRCULAR-A88"],
+      "risk_level": "review",
+      "system_message": "该问题取决于使用历史、消费者认知、市场声誉、主观恶意或其他证据，现有输入不足以形成可靠结论。",
+      "system_advice": ["收集申请日前的使用、销售、广告、注册、争议及消费者认知证据", "转越南专业人员审查"],
+      "prohibited_conclusions": ["AI可以自动认定驰名商标", "既往驳回记录自动证明恶意或侵权", "长期使用自动取得显著性"],
+      "manual_review_required": true,
+      "verification_status": "verified"
+    }
+  ]
+}
+

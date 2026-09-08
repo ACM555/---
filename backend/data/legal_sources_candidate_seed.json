@@ -1,0 +1,452 @@
+[
+  {"source_id":"la-m1-enterprise-law-2026","country_code":"LA","legal_module":"M1","evidence_level":"B","title":"老挝工贸部：Law on Enterprise (amended)","source_type":"主管机关公开法规文本","source_url":"https://law.moic.gov.la/wp-content/uploads/2019/04/4.Law-on-Enterprise-amended.pdf","source_language":"English translation","verified_at":"2026-09-05","supported_fact":"老挝工贸部法律站点公开《企业法（修订）》文本入口。","prerequisites":["须核对老挝文现行文本、企业类型、外资和行业许可"],"non_inferences":["不得判断准入、登记或许可结果"],"review_triggers":["外资、受监管行业或公司控制权安排"],"primary_publisher":"Ministry of Industry and Commerce of Lao PDR","cross_checks":[{"publisher":"Ministry of Industry and Commerce of Lao PDR","source_type":"企业经营许可门户","source_url":"https://www.bned.moic.gov.la/en","source_language":"English / Lao","checked_at":"2026-09-05","version_note":"用于交叉核验企业登记和许可资料入口"}]},
+  {"source_id":"la-m2-contract-law-directory-2026","country_code":"LA","legal_module":"M2","evidence_level":"B","title":"老挝工贸部法律服务门户：Construction Law（建设承包合同）","source_type":"主管机关公开法规文本","source_url":"https://lsp.moic.gov.la/index.php?id=128&page=2&r=site%2Fdisplaylegal&sort=-name","source_language":"English translation","verified_at":"2026-09-05","supported_fact":"老挝工贸部法律服务门户公开《建设法》关于建设承包合同内容的条文。","prerequisites":["仅用于建设承包合同；须定位其他合同类型的现行法及完整条文"],"non_inferences":["不得据此判断合同效力、违约或救济"],"review_triggers":["非建设合同、适用法或版本不明"],"primary_publisher":"Ministry of Industry and Commerce of Lao PDR","cross_checks":[{"publisher":"Lao PDR Trade Portal / Ministry of Industry and Commerce","source_type":"贸易法律资料库","source_url":"https://www.laotradeportal.gov.la/en-gb/legal-document/index","source_language":"English / Lao","checked_at":"2026-09-05","version_note":"用于交叉核验主管机关法律资料发布渠道"}]},
+  {"source_id":"la-m3-foreign-trade-2026","country_code":"LA","legal_module":"M3","evidence_level":"B","title":"老挝贸易门户：进出口货物和服务外汇管理决定（677/BOL）","source_type":"主管机关公开决定文本","source_url":"https://www.laotradeportal.gov.la/en-gb/site/display/2705","source_language":"English / Lao","verified_at":"2026-09-05","supported_fact":"老挝贸易门户公开第677/BOL号进出口货物和服务外汇管理决定及其条文。","prerequisites":["须核对货物、税则、原产地、许可、外汇和运输路径"],"non_inferences":["不得保证许可、清关或放行"],"review_triggers":["限制货物、原产地、外汇或跨境运输"],"primary_publisher":"Department of Foreign Trade, Ministry of Industry and Commerce of Lao PDR","cross_checks":[{"publisher":"Bank of the Lao PDR","source_type":"决定发布机关","source_url":"https://www.bol.gov.la/","source_language":"Lao / English","checked_at":"2026-09-05","version_note":"用于交叉核验第677/BOL号决定的发布机关；以正式文本为准"}]},
+  {"source_id":"la-m4-labour-law-directory-2026","country_code":"LA","legal_module":"M4","evidence_level":"B","title":"老挝工贸部法律服务门户：Amended Labour Law No.43/NA","source_type":"主管机关法规资料页","source_url":"https://lsp.moic.gov.la/index.php?id=61&r=site%2Fdisplaylegal","source_language":"English / Lao","verified_at":"2026-09-05","supported_fact":"老挝工贸部法律服务门户列出第43/NA号修订劳动法及其条目范围。","prerequisites":["须核对劳动、外籍用工和移民的现行原文及修订"],"non_inferences":["不得判断工作许可、签证或雇佣合规"],"review_triggers":["外籍员工、派驻或劳动与移民规则交叉"],"primary_publisher":"Ministry of Industry and Commerce of Lao PDR","cross_checks":[{"publisher":"Lao PDR Trade Portal / Ministry of Industry and Commerce","source_type":"外籍劳工配额办事页面","source_url":"https://www.bned.moic.gov.la/en/formalities/643","source_language":"English / Lao","checked_at":"2026-09-05","version_note":"列明第43/NA号劳动法的相关章节；不能替代完整劳动法文本"}]},
+  {"source_id":"la-m5-ip-law-2026","country_code":"LA","legal_module":"M5","evidence_level":"B","title":"老挝知识产权局：Law on Intellectual Property","source_type":"知识产权主管机关法规页面","source_url":"https://dip.gov.la/en/online-resources-and-services/law-regulation/","source_language":"Lao","verified_at":"2026-09-05","supported_fact":"老挝知识产权局列有《知识产权法》及相关决定入口。","prerequisites":["须核对权利类型、申请路径和老挝文现行条文"],"non_inferences":["不得判断可注册性、侵权或权利有效性"],"review_triggers":["商标、专利、技术秘密或国际程序问题"],"primary_publisher":"Department of Intellectual Property of Lao PDR","cross_checks":[{"publisher":"Department of Intellectual Property of Lao PDR","source_type":"官方知识产权资源页","source_url":"https://dip.gov.la/en/online-resources-and-services/","source_language":"English / Lao","checked_at":"2026-09-05","version_note":"用于交叉核验法律和官方公报入口"}]},
+  {"source_id":"la-m6-dispute-law-directory-2026","country_code":"LA","legal_module":"M6","evidence_level":"B","title":"老挝国民议会：Law on the Resolution of Economic Disputes（06/NA）","source_type":"国民议会法律文本（WTO官方文件库转载）","source_url":"https://www.wto.org/english/thewto_e/acc_e/lao_e/wtacclao22_leg_2.pdf","source_language":"English translation; authentic in Lao only","verified_at":"2026-09-05","supported_fact":"WTO官方文件库收录老挝国民议会第06/NA号《经济争议解决法》英文译文并标明老挝文为正式文本。","prerequisites":["须核对老挝文正式文本、仲裁协议、民诉、执行和适用版本"],"non_inferences":["不得保证仲裁、执行或货款回收"],"review_triggers":["跨境执行、送达、资产保全或法律冲突"],"primary_publisher":"National Assembly of the Lao PDR (text deposited in WTO official document repository)","cross_checks":[{"publisher":"Lao PDR Trade Portal / Ministry of Industry and Commerce","source_type":"实施法草案公告","source_url":"https://laotradeportal.gov.la/en-gb/site/display/425","source_language":"English / Lao","checked_at":"2026-09-05","version_note":"由经济争议解决中心、司法部和工贸部相关部门发布；用于交叉核验法律实施线索"}]},
+  {
+    "source_id": "my-m1-companies-act-directory-2026", "country_code": "MY", "legal_module": "M1", "evidence_level": "B", "title": "马来西亚公司委员会：Companies Act 2016（Act 777）", "source_type": "公司登记主管机关法规文本", "source_url": "https://www.ssm.com.my/pages/legal_framework/document/act%20777%20reprint.pdf", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "马来西亚公司委员会公开《Companies Act 2016》（Act 777）重印文本。", "prerequisites": ["须核对 Companies Act 2016 的后续修订、公司类型和行业许可"], "non_inferences": ["不得判断设立、外资准入或登记结果"], "review_triggers": ["外国股东、受监管行业或修订状态不明"], "primary_publisher": "Companies Commission of Malaysia",
+    "cross_checks": [{"publisher": "Companies Commission of Malaysia", "source_type": "公司法立法目录", "source_url": "https://www.ssm.com.my/Pages/Legal_Framework/Companies-Act-2016.aspx", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验公司法重印文本及后续规则目录"}]
+  },
+  {
+    "source_id": "my-m2-contracts-act-directory-2026", "country_code": "MY", "legal_module": "M2", "evidence_level": "B", "title": "马来西亚总检察署：Contracts Act 1950（Act 136）", "source_type": "总检察署法律重印文本", "source_url": "https://lom.agc.gov.my/ilims/upload/portal/akta/outputaktap/Act%20136.pdf", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "马来西亚《Contracts Act 1950》（Act 136）重印文本载有合同提议、承诺及合同规则。", "prerequisites": ["须核对 Act 136 的现行版本、合同类型与适用法"], "non_inferences": ["不得判断合同效力、违约或救济"], "review_triggers": ["跨境合同、适用法或版本不明"], "primary_publisher": "Attorney General's Chambers of Malaysia",
+    "cross_checks": [{"publisher": "Securities Commission Malaysia / Invest Malaysia", "source_type": "法规重印文本镜像", "source_url": "https://www.investmalaysia.gov.my/media/o0ajehya/contracts-act-1950.pdf", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验 Act 136 的法规名称、重印信息和章节编排"}]
+  },
+  {
+    "source_id": "my-m3-customs-act-2026", "country_code": "MY", "legal_module": "M3", "evidence_level": "B", "title": "马来西亚皇家关税局：Customs Act 1967", "source_type": "海关主管机关法规页面", "source_url": "https://www.customs.gov.my/en/procedure/customs/customs", "source_language": "Malay / English", "verified_at": "2026-09-05", "supported_fact": "马来西亚皇家关税局列出 Customs Act 1967、法规和修订资料，并明确以总检察署官方文本为准。", "prerequisites": ["须核对商品、税则、原产地、许可和最新修订"], "non_inferences": ["不得保证清关、税率或放行"], "review_triggers": ["受限货物、归类、原产地或运输问题"], "primary_publisher": "Royal Malaysian Customs Department",
+    "cross_checks": [{"publisher": "Royal Malaysian Customs Department", "source_type": "海关法英文文本", "source_url": "https://www.customs.gov.my/en/pg/Customs%20Act/CUSTOMS%20ACT%201967-1.pdf", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉定位海关法文本；以 LOM 现行版本为准"}]
+  },
+  {
+    "source_id": "my-m4-employment-act-2026", "country_code": "MY", "legal_module": "M4", "evidence_level": "B", "title": "马来西亚劳工局：Employment Act 1955", "source_type": "劳动主管机关法规页面", "source_url": "https://jtksm.mohr.gov.my/en/borang/employment-act-1955", "source_language": "Malay", "verified_at": "2026-09-05", "supported_fact": "马来西亚劳工局提供《Employment Act 1955》资料入口。", "prerequisites": ["须区分劳动法、外籍雇佣与移民规则，并核对修订"], "non_inferences": ["不得判断工作许可、签证或雇佣合规"], "review_triggers": ["外籍员工、派驻或州别适用问题"], "primary_publisher": "Department of Labour of Peninsular Malaysia",
+    "cross_checks": [{"publisher": "Department of Labour of Peninsular Malaysia", "source_type": "劳动法修订说明", "source_url": "https://jtksm.mohr.gov.my/en/frequently-asked-questions/employment-act-1955-amendment-2022", "source_language": "Malay", "checked_at": "2026-09-05", "version_note": "用于交叉核验 Employment Act 1955 修订说明"}]
+  },
+  {
+    "source_id": "my-m5-trademarks-act-2026", "country_code": "MY", "legal_module": "M5", "evidence_level": "B", "title": "马来西亚知识产权局：Trademarks Act 2019", "source_type": "知识产权主管机关法规页面", "source_url": "https://www.myipo.gov.my/trademark-act/", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "马来西亚知识产权局列出 Trademarks Act 2019、实施规则和业务资料。", "prerequisites": ["须核对标识、类别、在先权利和申请/国际注册路径"], "non_inferences": ["不得判断可注册性、侵权或异议结果"], "review_triggers": ["相似标识、马德里指定或修订状态"], "primary_publisher": "Intellectual Property Corporation of Malaysia",
+    "cross_checks": [{"publisher": "Intellectual Property Corporation of Malaysia", "source_type": "商标法文本", "source_url": "https://www.myipo.gov.my/wp-content/uploads/2019/12/ACT-815-TRADEMARKS-ACT-201.pdf", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验 Act 815 文本；当前版本待审校"}]
+  },
+  {
+    "source_id": "my-m6-arbitration-act-directory-2026", "country_code": "MY", "legal_module": "M6", "evidence_level": "B", "title": "马来西亚总检察署：Arbitration Act 2005（Act 646）", "source_type": "总检察署法律重印文本", "source_url": "https://lom.agc.gov.my/ilims/upload/portal/akta/outputaktap/Act%20646.pdf", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "马来西亚《Arbitration Act 2005》（Act 646）重印文本载有仲裁协议和仲裁程序规定。", "prerequisites": ["须核对 Act 646 的现行版本、仲裁协议、仲裁地和执行地"], "non_inferences": ["不得保证仲裁、承认执行或货款回收"], "review_triggers": ["跨境执行、保全、送达或公共政策问题"], "primary_publisher": "Attorney General's Chambers of Malaysia",
+    "cross_checks": [{"publisher": "Asian International Arbitration Centre", "source_type": "仲裁法主管机构资料页", "source_url": "https://www.aiac.world/", "source_language": "English", "checked_at": "2026-09-05", "version_note": "仅用于交叉核验马来西亚仲裁机构和程序资料；法律文本以总检察署版本为准"}]
+  },
+  {
+    "source_id": "sg-m1-companies-act-2026", "country_code": "SG", "legal_module": "M1", "evidence_level": "B", "title": "Singapore Statutes Online：Companies Act 1967", "source_type": "官方法规数据库", "source_url": "https://sso.agc.gov.sg/Act/CoA1967?WholeDoc=1", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "新加坡总检察署法规库提供《Companies Act 1967》现行版本与立法沿革入口。", "prerequisites": ["须核对公司类型、外国公司要求、行业许可与适用版本"], "non_inferences": ["不得判断设立、准入或登记结果"], "review_triggers": ["外国公司、受监管行业或控制权安排"], "primary_publisher": "Attorney-General's Chambers of Singapore",
+    "cross_checks": [{"publisher": "Attorney-General's Chambers of Singapore", "source_type": "法规数据库替代入口", "source_url": "https://sso.agc.gov.sg/Act/50", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验 Companies Act 的当前版本与沿革"}]
+  },
+  {
+    "source_id": "sg-m2-sale-goods-act-2026", "country_code": "SG", "legal_module": "M2", "evidence_level": "B", "title": "Singapore Statutes Online：Sale of Goods Act 1979", "source_type": "官方法规数据库", "source_url": "https://sso.agc.gov.sg/Act/SGA1979?ProvIds=pr55-.", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "新加坡总检察署法规库提供《Sale of Goods Act 1979》当前版本入口。", "prerequisites": ["须核对合同类型、适用主体、条款与适用法"], "non_inferences": ["不得据此判断合同效力、违约或损害赔偿"], "review_triggers": ["跨境合同、格式条款或冲突法问题"], "primary_publisher": "Attorney-General's Chambers of Singapore",
+    "cross_checks": [{"publisher": "Attorney-General's Chambers of Singapore", "source_type": "相关合同法规", "source_url": "https://sso.agc.gov.sg/Act/396", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉定位合同免责条款相关法律；具体适用待审校"}]
+  },
+  {
+    "source_id": "sg-m3-import-export-act-2026", "country_code": "SG", "legal_module": "M3", "evidence_level": "B", "title": "Singapore Customs：Regulation of Imports and Exports Act", "source_type": "海关主管机关法规页面", "source_url": "https://www.customs.gov.sg/know-customs/acts-legislation/regulation-of-imports-and-exports-act/", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "新加坡海关提供进出口管制法及部分附属立法官方入口。", "prerequisites": ["须明确货物、许可、税则、原产地、贸易管制与运输方式"], "non_inferences": ["不得保证许可、清关、税率或放行"], "review_triggers": ["受控物项、转运、制裁或商品监管"], "primary_publisher": "Singapore Customs",
+    "cross_checks": [{"publisher": "Singapore Customs", "source_type": "海关法律总目录", "source_url": "https://www.customs.gov.sg/know-customs/acts-legislation/", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验 Customs Act、RIEA 和相关法规入口"}]
+  },
+  {
+    "source_id": "sg-m4-foreign-manpower-act-2026", "country_code": "SG", "legal_module": "M4", "evidence_level": "B", "title": "新加坡人力部：Employment of Foreign Manpower Act", "source_type": "劳动主管机关法规页面", "source_url": "https://www.mom.gov.sg/legislation/employment-of-foreign-manpower-act", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "新加坡人力部提供外籍人力雇佣法及工作准证关联法规入口。", "prerequisites": ["须核对岗位、员工身份、准证类别及届时规则"], "non_inferences": ["不得判断签证、工作准证或雇佣批准结果"], "review_triggers": ["外籍员工、派驻、配额或行业要求"], "primary_publisher": "Ministry of Manpower Singapore",
+    "cross_checks": [{"publisher": "Ministry of Manpower Singapore", "source_type": "工作准证法规目录", "source_url": "https://www.mom.gov.sg/legislation/work-passes", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验工作准证与外籍人力法规入口"}]
+  },
+  {
+    "source_id": "sg-m6-international-arbitration-act-2026", "country_code": "SG", "legal_module": "M6", "evidence_level": "B", "title": "Singapore Statutes Online：International Arbitration Act 1994", "source_type": "官方法规数据库", "source_url": "https://sso.agc.gov.sg/Act/IAA1994?WholeDoc=1", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "新加坡总检察署法规库提供国际仲裁法现行版本及立法沿革入口。", "prerequisites": ["须核对仲裁协议、仲裁地、裁决与资产所在地"], "non_inferences": ["不得保证仲裁、承认执行或货款回收"], "review_triggers": ["跨境执行、送达、保全或公共政策问题"], "primary_publisher": "Attorney-General's Chambers of Singapore",
+    "cross_checks": [{"publisher": "Attorney-General's Chambers of Singapore", "source_type": "法规数据库当前版本入口", "source_url": "https://sso.agc.gov.sg/act/iaa1994", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验国际仲裁法当前版本"}]
+  },
+  {
+    "source_id": "th-m1-foreign-business-act-2026", "country_code": "TH", "legal_module": "M1", "evidence_level": "B", "title": "泰国投资促进委员会：Foreign Business Act B.E. 2542", "source_type": "主管机关公开法规译文", "source_url": "https://www.boi.go.th/upload/Foreign%20Business%20Act_5dd766122ff27.pdf?newpage=true", "source_language": "English translation", "verified_at": "2026-09-05", "supported_fact": "泰国投资促进委员会公开外商经营法英文译文入口。", "prerequisites": ["须核对泰文正式文本、行业与持股/经营安排"], "non_inferences": ["不得判断外资准入、许可或豁免结果"], "review_triggers": ["受限制业务、行业许可或股权控制"], "primary_publisher": "Thailand Board of Investment",
+    "cross_checks": [{"publisher": "Department of Internal Trade / Ministry of Commerce of Thailand", "source_type": "贸易法律信息系统", "source_url": "https://law.dit.go.th/LegalOtherUI.aspx", "source_language": "Thai", "checked_at": "2026-09-05", "version_note": "用于交叉定位 Foreign Business Act 的主管机关法律资料"}]
+  },
+  {
+    "source_id": "th-m2-civil-commercial-code-2026", "country_code": "TH", "legal_module": "M2", "evidence_level": "B", "title": "泰国内贸厅：Civil and Commercial Code 法律信息系统", "source_type": "商务主管机关法律信息系统", "source_url": "https://law.dit.go.th/CodeofLawUI.aspx", "source_language": "Thai", "verified_at": "2026-09-05", "supported_fact": "泰国内贸厅法律信息系统列有民商法典。", "prerequisites": ["须定位现行泰文条款、合同类型与适用法"], "non_inferences": ["不得据此判断合同效力、违约或救济"], "review_triggers": ["合同文本、争议条款或法律适用不完整"], "primary_publisher": "Department of Internal Trade / Ministry of Commerce of Thailand",
+    "cross_checks": [{"publisher": "Department of Internal Trade / Ministry of Commerce of Thailand", "source_type": "商务主管机关法律目录", "source_url": "https://law.dit.go.th/LegalOtherUI.aspx", "source_language": "Thai", "checked_at": "2026-09-05", "version_note": "用于交叉核验民商事相关法律目录"}]
+  },
+  {
+    "source_id": "th-m3-customs-act-2026", "country_code": "TH", "legal_module": "M3", "evidence_level": "B", "title": "泰国海关：Customs Act B.E. 2560 (2017)", "source_type": "海关主管机关法规目录", "source_url": "https://www.customs.go.th/list_strc_download.php?ini_content=general_interest_160426_05_160810_01&ini_menu=menu_interest_and_law_160421_04&lang=en&left_menu=menu_interest_and_law_160421_04&order_by=co_priority&show_search=1&sort_type=1&xleft_menu=menu_interest_and_law_160421_04_160810_01", "source_language": "Thai / English", "verified_at": "2026-09-05", "supported_fact": "泰国海关法律目录列有 2017 年海关法及英文版本。", "prerequisites": ["须核对商品、税则、原产地、许可及实施规则"], "non_inferences": ["不得保证清关、税率或放行"], "review_triggers": ["受限货物、归类、原产地或运输责任"], "primary_publisher": "Thai Customs Department",
+    "cross_checks": [{"publisher": "Thai Customs Department", "source_type": "海关法官方公告", "source_url": "https://www.customs.go.th/cont_strc_simple_with_date.php?current_id=14223132414c505f48464a4f464b48", "source_language": "Thai / English", "checked_at": "2026-09-05", "version_note": "用于交叉核验官方公布的语言版本"}]
+  },
+  {
+    "source_id": "th-m4-labour-protection-2026", "country_code": "TH", "legal_module": "M4", "evidence_level": "B", "title": "泰国劳动部：Labour Protection Act B.E. 2541", "source_type": "劳动主管机关法规页面", "source_url": "https://www.mol.go.th/en/labour-law", "source_language": "English", "verified_at": "2026-09-05", "supported_fact": "泰国劳动部公开劳动保护法和外籍雇佣相关法律入口。", "prerequisites": ["须区分劳动保护、外籍就业和移民规则，并核对修订"], "non_inferences": ["不得判断工作许可、签证或雇佣合规"], "review_triggers": ["外籍员工、派驻或行业限制"], "primary_publisher": "Ministry of Labour of Thailand",
+    "cross_checks": [{"publisher": "Ministry of Labour of Thailand", "source_type": "劳动法英文文本", "source_url": "https://www.mol.go.th/wp-content/uploads/sites/2/1998/01/Labour_Protection_Act_BE2541.pdf", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验劳动保护法文本；现行修订待审校"}]
+  },
+  {
+    "source_id": "th-m5-trademark-act-2026", "country_code": "TH", "legal_module": "M5", "evidence_level": "B", "title": "泰国知识产权局：Trademark Act B.E. 2534", "source_type": "知识产权主管机关法规译文", "source_url": "https://www.ipthailand.go.th/images/781/___.___1_1.pdf", "source_language": "English translation", "verified_at": "2026-09-05", "supported_fact": "泰国知识产权局公开商标法英文译文入口。", "prerequisites": ["须核对泰文正式文本、类别、在先权利与修订"], "non_inferences": ["不得判断可注册性、侵权或异议结果"], "review_triggers": ["相似标识、国际注册或权利冲突"], "primary_publisher": "Department of Intellectual Property of Thailand",
+    "cross_checks": [{"publisher": "Department of Internal Trade / Ministry of Commerce of Thailand", "source_type": "商务法律目录", "source_url": "https://law.dit.go.th/LegalOtherUI.aspx", "source_language": "Thai", "checked_at": "2026-09-05", "version_note": "用于交叉定位商标与商业法律资料"}]
+  },
+  {
+    "source_id": "th-m6-arbitration-act-2026", "country_code": "TH", "legal_module": "M6", "evidence_level": "B", "title": "泰国司法法院仲裁院：Arbitration Act B.E. 2545 (2002)", "source_type": "司法机关法规页面", "source_url": "https://tai.coj.go.th/en/content/page/index/id/18869", "source_language": "Thai / English", "verified_at": "2026-09-05", "supported_fact": "泰国司法法院仲裁院公开仲裁法及英文文本入口。", "prerequisites": ["须核对仲裁协议、仲裁地、裁决性质和执行地"], "non_inferences": ["不得保证仲裁、承认执行或货款回收"], "review_triggers": ["跨境执行、保全、送达或公共政策问题"], "primary_publisher": "Thai Arbitration Institute / Office of the Judiciary",
+    "cross_checks": [{"publisher": "Thai Arbitration Institute / Office of the Judiciary", "source_type": "仲裁机构法律目录", "source_url": "https://tai.coj.go.th/en/home", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验仲裁法与规则入口"}]
+  },
+  {
+    "source_id": "id-m1-investment-law-2026", "country_code": "ID", "legal_module": "M1", "evidence_level": "B", "title": "印尼审计署法规库：UU No. 25 Tahun 2007 tentang Penanaman Modal", "source_type": "国家法规数据库", "source_url": "https://peraturan.bpk.go.id/Details/39903/uu-no-25-tahun-2007", "source_language": "Indonesian", "verified_at": "2026-09-05", "supported_fact": "印尼官方法规库记录投资法及其状态、修订关联。", "prerequisites": ["须核对当前修订、行业、经营许可和投资主体"], "non_inferences": ["不得据此判断外资准入、负面清单或许可结果"], "review_triggers": ["受监管行业、股权安排或许可问题"], "primary_publisher": "Badan Pemeriksa Keuangan Republik Indonesia",
+    "cross_checks": [{"publisher": "Badan Pemeriksa Keuangan Republik Indonesia", "source_type": "法规修订条目", "source_url": "https://peraturan.bpk.go.id/Details/234926/p", "source_language": "Indonesian", "checked_at": "2026-09-05", "version_note": "用于交叉核验 Cipta Kerja 后的法规状态；具体适用待审校"}]
+  },
+  {
+    "source_id": "id-m4-manpower-law-2026", "country_code": "ID", "legal_module": "M4", "evidence_level": "B", "title": "印尼人力资源部法规库：UU No. 13 Tahun 2003 tentang Ketenagakerjaan", "source_type": "主管机关法规条目", "source_url": "https://jdih.kemnaker.go.id/peraturan/detail/27/undang-undang-nomor-13-tahun-2003", "source_language": "Indonesian", "verified_at": "2026-09-05", "supported_fact": "印尼人力资源部法规库记录劳动法文本、状态及相关资料。", "prerequisites": ["须核对劳动关系、外籍员工、行业和现行修订"], "non_inferences": ["不得判断雇佣、工作许可或解雇合规"], "review_triggers": ["外籍员工、派驻或劳动法修订"], "primary_publisher": "Ministry of Manpower of the Republic of Indonesia",
+    "cross_checks": [{"publisher": "Ministry of Manpower of the Republic of Indonesia", "source_type": "主管机关法规检索目录", "source_url": "https://jdih.kemnaker.go.id/peraturan?keyword=&nomor=&sort=hierarki&status=&tahun=&terjemahan=", "source_language": "Indonesian", "checked_at": "2026-09-05", "version_note": "用于交叉核验劳动法规状态和实施规则"}]
+  },
+  {
+    "source_id": "id-m5-trademark-law-2026", "country_code": "ID", "legal_module": "M5", "evidence_level": "B", "title": "印尼审计署法规库：UU No. 20 Tahun 2016 tentang Merek dan Indikasi Geografis", "source_type": "国家法规数据库", "source_url": "https://peraturan.bpk.go.id/Details/37595/uu-no-", "source_language": "Indonesian", "verified_at": "2026-09-05", "supported_fact": "印尼官方法规库记录商标与地理标志法及相关状态信息。", "prerequisites": ["须核对标识、类别、在先权利和后续修订"], "non_inferences": ["不得判断注册、侵权或异议结果"], "review_triggers": ["相似标识、国际注册或修订状态"], "primary_publisher": "Badan Pemeriksa Keuangan Republik Indonesia",
+    "cross_checks": [{"publisher": "Badan Pemeriksa Keuangan Republik Indonesia", "source_type": "法规原文下载", "source_url": "https://peraturan.bpk.go.id/Home/Download/26689/UU%20Nomor%2020%20Tahun%202016.pdf", "source_language": "Indonesian", "checked_at": "2026-09-05", "version_note": "用于交叉核验法规原文；仍需核对现行修订"}]
+  },
+  {
+    "source_id": "id-m6-arbitration-law-2026", "country_code": "ID", "legal_module": "M6", "evidence_level": "B", "title": "印尼审计署法规库：UU No. 30 Tahun 1999 tentang Arbitrase dan Alternatif Penyelesaian Sengketa", "source_type": "国家法规数据库", "source_url": "https://peraturan.bpk.go.id/Details/45348/uu-no-30-tahun-1999", "source_language": "Indonesian", "verified_at": "2026-09-05", "supported_fact": "印尼官方法规库记录仲裁及替代性争议解决法。", "prerequisites": ["须核对仲裁协议、仲裁地、资产地和现行司法解释"], "non_inferences": ["不得保证仲裁、承认执行或货款回收结果"], "review_triggers": ["跨境执行、送达、保全或公共政策问题"], "primary_publisher": "Badan Pemeriksa Keuangan Republik Indonesia",
+    "cross_checks": [{"publisher": "Badan Pemeriksa Keuangan Republik Indonesia", "source_type": "争议解决法规主题检索", "source_url": "https://peraturan.bpk.go.id/Search?p=3&page=33&tema=15", "source_language": "Indonesian", "checked_at": "2026-09-05", "version_note": "用于交叉定位争议解决相关法规和后续资料"}]
+  },
+  {
+    "source_id": "kh-m1-commercial-enterprises-2026", "country_code": "KH", "legal_module": "M1", "evidence_level": "B",
+    "title": "柬埔寨商务部：Law on Commercial Enterprises", "source_type": "主管机关公开法规文本", "source_url": "https://www.businessregistration.moc.gov.kh/wp-content/uploads/2017/08/Law-Commercial-Enterprises-En1.pdf", "source_language": "English (unofficial translation)", "verified_at": "2026-09-05",
+    "supported_fact": "柬埔寨商务部企业登记网站公开《商业企业法》英文译文入口。", "prerequisites": ["须核对高棉文现行文本、公司类型和登记事项"], "non_inferences": ["不得据此判断外资准入、持股比例或登记结果"], "review_triggers": ["外资、受监管行业或公司控制权安排"], "primary_publisher": "Ministry of Commerce of Cambodia",
+    "cross_checks": [{"publisher": "Department of Intellectual Property / Ministry of Commerce of Cambodia", "source_type": "主管机关法律目录", "source_url": "https://www.cambodiaip.gov.kh/en/law/", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉定位 Commercial Enterprises 法律条目；须以正式文本核验"}]
+  },
+  {
+    "source_id": "kh-m2-civil-code-directory-2026", "country_code": "KH", "legal_module": "M2", "evidence_level": "B",
+    "title": "柬埔寨国家地方发展委员会资料库：Law of the Civil Code of Cambodia", "source_type": "政府法律资料库法规文本", "source_url": "https://library.ncdd.gov.kh/detail/680?lang=en", "source_language": "English", "verified_at": "2026-09-05",
+    "supported_fact": "柬埔寨政府资料库公开《Law of the Civil Code of Cambodia》并标注为皇家政府发布的法律资料。", "prerequisites": ["须核对高棉文正式文本、合同类型及修订状态"], "non_inferences": ["不得据此判断合同效力、违约或救济"], "review_triggers": ["合同类型、适用法或修订状态不明"], "primary_publisher": "National Committee for Sub-National Democratic Development Secretariat / Royal Government of Cambodia",
+    "cross_checks": [{"publisher": "Ministry of Justice of Cambodia", "source_type": "数字法律图书馆", "source_url": "https://digitallibrary.moj.gov.kh/", "source_language": "Khmer", "checked_at": "2026-09-05", "version_note": "用于交叉定位官方现行法与高棉文原文"}]
+  },
+  {
+    "source_id": "kh-m3-customs-law-2026", "country_code": "KH", "legal_module": "M3", "evidence_level": "B",
+    "title": "柬埔寨海关总署：Laws & Regulations", "source_type": "海关主管机关法规目录", "source_url": "https://customs.gov.kh/en/laws-and-regulations", "source_language": "English / Khmer", "verified_at": "2026-09-05",
+    "supported_fact": "柬埔寨海关总署提供海关法律法规检索入口。", "prerequisites": ["须明确商品、税则、原产地、运输和许可事项"], "non_inferences": ["不得保证清关、税率或监管结论"], "review_triggers": ["限制货物、税则归类或进出口许可不明确"], "primary_publisher": "General Department of Customs and Excise of Cambodia",
+    "cross_checks": [{"publisher": "General Department of Customs and Excise of Cambodia", "source_type": "海关程序页面", "source_url": "https://www.customs.gov.kh/customs-procedures/430-%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%93%E1%9E%B6%E1%9F%86%E1%9E%85%E1%9F%81%E1%9E%89-2", "source_language": "Khmer", "checked_at": "2026-09-05", "version_note": "用于交叉定位出口程序所列法律与实施文件"}]
+  },
+  {
+    "source_id": "kh-m4-labour-law-2026", "country_code": "KH", "legal_module": "M4", "evidence_level": "B",
+    "title": "柬埔寨劳动与职业培训部：Labour Law", "source_type": "主管机关法规页面", "source_url": "https://www.mlvt.gov.kh/index.php/en/official-docs/royal-code/107-%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%84%E1%9E%85%E1%9F%92%E1%9E%94%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%96%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%9C%E1%9E%B7%E1%9E%9F%E1%9F%90%E1%9E%99%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%84%E1%9E%B6%E1%9E%9A-%E1%9E%9F%E1%9E%93%E1%9F%92%E1%9E%8F%E1%9E%B7%E1%9E%9F%E1%9E%BB%E1%9E%81%E1%9E%9F%E1%9E%84%E1%9F%92%E1%9E%82%E1%9E%98-%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%94%E1%9E%8E%E1%9F%92%E1%9E%8A%E1%9E%BB%E1%9F%87%E1%9E%94%E1%9E%8E%E1%9F%92%E1%9E%8A%E1%9E%B6%E1%9E%9B%E1%9F%8B%E1%9E%9C%E1%9E%B7%E1%9E%87%E1%9F%92%E1%9E%87%E1%9E%B6%E1%9E%87%E1%9E%B8%E1%9E%9C%E1%9F%88/3729.html", "source_language": "Khmer / English", "verified_at": "2026-09-05",
+    "supported_fact": "劳动主管机关公开劳动法资料入口。", "prerequisites": ["须核对劳动关系、外籍员工许可和现行修订"], "non_inferences": ["不得判断雇佣、签证或解雇合规"], "review_triggers": ["外籍员工、派驻或劳动与移民规则交叉"], "primary_publisher": "Ministry of Labour and Vocational Training of Cambodia",
+    "cross_checks": [{"publisher": "Ministry of Labour and Vocational Training of Cambodia", "source_type": "官方法规目录", "source_url": "https://mlvt.gov.kh/index.php/en/official-docs/royal-code.html", "source_language": "Khmer / English", "checked_at": "2026-09-05", "version_note": "用于交叉核验劳动法及修订资料入口"}]
+  },
+  {
+    "source_id": "kh-m5-marks-law-2026", "country_code": "KH", "legal_module": "M5", "evidence_level": "B",
+    "title": "柬埔寨商务部知识产权局：Law concerning Marks, Trade Names and Acts of Unfair Competition", "source_type": "主管机关法律目录", "source_url": "https://www.cambodiaip.gov.kh/en/law/", "source_language": "English / Khmer", "verified_at": "2026-09-05",
+    "supported_fact": "主管机关法律目录列有商标、商号及不正当竞争法。", "prerequisites": ["须核对标识、类别、在先权利及现行实施规则"], "non_inferences": ["不得判断可注册性、侵权或异议结果"], "review_triggers": ["相似标识、跨境许可或国际注册"], "primary_publisher": "Department of Intellectual Property / Ministry of Commerce of Cambodia",
+    "cross_checks": [{"publisher": "Department of Intellectual Property / Ministry of Commerce of Cambodia", "source_type": "商标业务页面", "source_url": "https://dip.cambodiaip.gov.kh/TemplateTwo.aspx?childMasterMenuId=35&lang=en&menuid=35&parentId=34", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验官方商标信息及法律名称"}]
+  },
+  {
+    "source_id": "kh-m6-commercial-arbitration-2026", "country_code": "KH", "legal_module": "M6", "evidence_level": "B",
+    "title": "柬埔寨商务部知识产权局：Commercial Arbitration Law 法律目录", "source_type": "主管机关法律目录", "source_url": "https://www.cambodiaip.gov.kh/en/law/", "source_language": "English index", "verified_at": "2026-09-05",
+    "supported_fact": "主管机关法律目录列有《Commercial Arbitration Law of the Kingdom of Cambodia》。", "prerequisites": ["须取得现行文本并核对仲裁协议、仲裁地和执行地"], "non_inferences": ["不得保证仲裁、承认执行或货款回收结果"], "review_triggers": ["跨境执行、资产保全或送达问题"], "primary_publisher": "Department of Intellectual Property / Ministry of Commerce of Cambodia",
+    "cross_checks": [{"publisher": "Ministry of Justice of Cambodia", "source_type": "数字法律图书馆", "source_url": "https://digitallibrary.moj.gov.kh/", "source_language": "Khmer", "checked_at": "2026-09-05", "version_note": "用于交叉定位官方原文；具体条文待审校"}]
+  },
+  {
+    "source_id": "bn-m1-companies-act-2026",
+    "country_code": "BN",
+    "legal_module": "M1",
+    "evidence_level": "B",
+    "title": "文莱总检察署：Companies Act Chapter 39",
+    "source_type": "总检察署法规文本",
+    "source_url": "https://www.agc.gov.bn/AGC%20Site%20Pages/cap39.aspx",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "文莱总检察署公开 Companies Act Chapter 39 及其修订脉络。",
+    "prerequisites": ["须核对公司类型、外国公司经营资格和最新修订", "须确认业务是否另受行业许可限制"],
+    "non_inferences": ["不得据此判断外资准入或股权比例", "不得替代公司登记机关确认"],
+    "review_triggers": ["涉及外国公司、受监管行业或控制权安排", "法规修订或登记程序不明确"],
+    "primary_publisher": "Attorney General's Chambers of Brunei Darussalam",
+    "cross_checks": [
+      {"publisher": "Attorney General's Chambers of Brunei Darussalam", "source_type": "附属立法目录", "source_url": "https://www.agc.gov.bn/AGC%20Site%20Pages/COMPANIES%20ACT%20-%20SL.aspx", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验公司法附属立法与登记规则"}
+    ]
+  },
+  {
+    "source_id": "bn-m2-contracts-act-2026",
+    "country_code": "BN",
+    "legal_module": "M2",
+    "evidence_level": "B",
+    "title": "文莱总检察署：Contracts Act Chapter 106",
+    "source_type": "总检察署法规文本",
+    "source_url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/C/CAP%20106%20Contracts%20Act.pdf",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "文莱总检察署公开 Contracts Act Chapter 106 的法规文本入口。",
+    "prerequisites": ["须确认交易类型、合同条款和适用的附属法", "须核对现行修订版本"],
+    "non_inferences": ["不得仅据此判断合同效力或违约责任", "不得输出违约金或救济结论"],
+    "review_triggers": ["跨境交易、消费者合同或争议条款", "版本或强制性规定未核实"],
+    "primary_publisher": "Attorney General's Chambers of Brunei Darussalam",
+    "cross_checks": [
+      {"publisher": "Attorney General's Chambers of Brunei Darussalam", "source_type": "法规修订目录", "source_url": "https://www.agc.gov.bn/AGC%20Site%20Pages/CONTRACTS%20ACT.aspx", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验 Contracts Act 的修订目录"}
+    ]
+  },
+  {
+    "source_id": "bn-m3-customs-act-2026",
+    "country_code": "BN",
+    "legal_module": "M3",
+    "evidence_level": "B",
+    "title": "文莱总检察署：Customs Act Chapter 36",
+    "source_type": "总检察署法规文本",
+    "source_url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/Chp.36.pdf",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "文莱总检察署公开 Customs Act Chapter 36 的海关及进出口法律文本入口。",
+    "prerequisites": ["须明确商品、税则、运输方式和监管要求", "须核对现行附属立法和主管机关程序"],
+    "non_inferences": ["不得保证清关、税率或许可证结果", "不得以通用法条替代商品监管核验"],
+    "review_triggers": ["限制货物、原产地、许可或税则归类不明确", "涉及跨境运输责任"],
+    "primary_publisher": "Attorney General's Chambers of Brunei Darussalam",
+    "cross_checks": [
+      {"publisher": "Attorney General's Chambers of Brunei Darussalam", "source_type": "法律索引", "source_url": "https://www.agc.gov.bn/AGC%20Site%20Pages/INDEX%20TO%20THE%20LAWS%20OF%20BRUNEI.aspx", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验章节、通知和修订引用"}
+    ]
+  },
+  {
+    "source_id": "bn-m4-employment-act-2026",
+    "country_code": "BN",
+    "legal_module": "M4",
+    "evidence_level": "B",
+    "title": "文莱总检察署：Employment Act Chapter 278",
+    "source_type": "总检察署法规文本",
+    "source_url": "https://www.agc.gov.bn/AGC%20Site%20Pages/EMPLOYMENT%20ACT.aspx",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "文莱总检察署公开 Employment Act Chapter 278 及其目录入口。",
+    "prerequisites": ["须确认劳动关系、岗位、工资和工作安排", "工作许可与移民事项须另行核对"],
+    "non_inferences": ["不得把劳动法等同于工作许可规则", "不得判断雇佣合规或解雇结果"],
+    "review_triggers": ["外籍员工、派驻、最低工资或行业安全事项", "劳动与签证信息不完整"],
+    "primary_publisher": "Attorney General's Chambers of Brunei Darussalam",
+    "cross_checks": [
+      {"publisher": "Attorney General's Chambers of Brunei Darussalam", "source_type": "政府公报修订资料", "source_url": "https://www.agc.gov.bn/AGC%20Images/LAWS/Gazette_PDF/2024/EN/S%2037_2024%20%5BE%5D.pdf", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验 Employment Act 的修订编入信息"}
+    ]
+  },
+  {
+    "source_id": "bn-m5-trade-marks-act-2026",
+    "country_code": "BN",
+    "legal_module": "M5",
+    "evidence_level": "B",
+    "title": "文莱总检察署：Trade Marks Act Chapter 98",
+    "source_type": "总检察署法规文本",
+    "source_url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap098.pdf",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "文莱总检察署公开 Trade Marks Act Chapter 98 的法规文本入口。",
+    "prerequisites": ["须确认标识、商品服务、在先权利和现行规则", "须核对注册簿与程序要求"],
+    "non_inferences": ["不得判断可注册性、侵权或异议结果", "不得把旧文本当作已核定现行版本"],
+    "review_triggers": ["存在相似标识、国际注册或边境措施", "修订和实施规则未核实"],
+    "primary_publisher": "Attorney General's Chambers of Brunei Darussalam",
+    "cross_checks": [
+      {"publisher": "Attorney General's Chambers of Brunei Darussalam", "source_type": "附属立法目录", "source_url": "https://www.agc.gov.bn/AGC%20Site%20Pages/TRADE%20MARKS%20ACT%20-%20SL.aspx", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验商标规则和国际注册规则入口"}
+    ]
+  },
+  {
+    "source_id": "bn-m6-international-arbitration-act-2026",
+    "country_code": "BN",
+    "legal_module": "M6",
+    "evidence_level": "B",
+    "title": "文莱总检察署：International Arbitration Act Chapter 279",
+    "source_type": "总检察署法规文本",
+    "source_url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/I/CHAPTER%20279.pdf",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "文莱总检察署公开 International Arbitration Act Chapter 279 的法规文本入口。",
+    "prerequisites": ["须确认仲裁协议、仲裁地、裁决性质和资产所在地", "须区分国际仲裁与法院判决"],
+    "non_inferences": ["不得保证裁决承认、执行或回款", "不得把仲裁裁决规则套用于外国法院判决"],
+    "review_triggers": ["存在跨境执行、送达、翻译或公共政策问题", "仲裁协议与裁决事实不完整"],
+    "primary_publisher": "Attorney General's Chambers of Brunei Darussalam",
+    "cross_checks": [
+      {"publisher": "Attorney General's Chambers of Brunei Darussalam", "source_type": "政府公报修订资料", "source_url": "https://www.agc.gov.bn/AGC%20Images/LAWS/Gazette_PDF/2024/EN/S%2050_2024%20%5BE%5D.pdf", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验 International Arbitration Act 编入的修订版本"}
+    ]
+  },
+  {
+    "source_id": "vn-m2-commercial-law-index-2026",
+    "country_code": "VN",
+    "legal_module": "M2",
+    "evidence_level": "B",
+    "title": "IP Vietnam 法律文件页：Commercial Law 36/2005/QH11",
+    "source_type": "主管机关法规索引",
+    "source_url": "https://ipvietnam.gov.vn/web/english/legal-documents",
+    "source_language": "English index; Vietnamese original pending",
+    "verified_at": "2026-09-05",
+    "supported_fact": "官方页面列有越南《商业法》36/2005/QH11 的法律文件入口。",
+    "prerequisites": ["须取得越文现行文本并核对修订状态", "须确认交易与主体属于适用范围"],
+    "non_inferences": ["不得据此给出违约金比例或合同效力结论", "不得替代具体条款审查"],
+    "review_triggers": ["合同类型、争议条款或修订状态不明", "涉及跨国适用法选择"],
+    "primary_publisher": "Intellectual Property Office of Vietnam",
+    "cross_checks": [
+      {"publisher": "Vietnam Trade Portal / Ministry of Industry and Trade", "source_type": "政府贸易法规库", "source_url": "https://vntr.moit.gov.vn/legal-documents", "source_language": "English", "checked_at": "2026-09-05", "version_note": "仅用于交叉定位越南商事贸易法规入口"}
+    ]
+  },
+  {
+    "source_id": "vn-m3-import-procedure-2026",
+    "country_code": "VN",
+    "legal_module": "M3",
+    "evidence_level": "B",
+    "title": "Vietnam Trade Portal：进口货物海关单证程序",
+    "source_type": "主管机关程序页面",
+    "source_url": "https://vntr.moit.gov.vn/procedures/detail/3",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "官方程序页提供进口货物海关单证和相关法律依据的定位入口。",
+    "prerequisites": ["须明确商品、HS 编码、进口商和运输方式", "须逐项核对受监管产品及现行实施文件"],
+    "non_inferences": ["不得输出统一清关清单", "不得保证放行或许可结果"],
+    "review_triggers": ["商品受行业监管", "原产地、许可证或配额信息不完整"],
+    "primary_publisher": "Vietnam Trade Portal / Ministry of Industry and Trade",
+    "cross_checks": [
+      {"publisher": "Ministry of Industry and Trade of Vietnam", "source_type": "政府法规页面", "source_url": "https://moit.gov.vn/van-ban-phap-luat/van-ban-phap-quy/-quy-dinh-ve-xuat-xu-hang-hoa.html", "source_language": "Vietnamese", "checked_at": "2026-09-05", "version_note": "用于交叉核验原产地规则入口"}
+    ]
+  },
+  {
+    "source_id": "vn-m3-transit-procedure-2026",
+    "country_code": "VN",
+    "legal_module": "M3",
+    "evidence_level": "B",
+    "title": "Vietnam Trade Portal：过境货物海关程序",
+    "source_type": "主管机关程序页面",
+    "source_url": "https://vntr.moit.gov.vn/procedures/detail/5",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "官方程序页提供过境货物文件和主管机关信息的定位入口。",
+    "prerequisites": ["须明确货物、路线、许可证和运输单据", "须核对适用的现行法规"],
+    "non_inferences": ["不得推断一般许可条件或时限", "不得代替海关确认"],
+    "review_triggers": ["涉及限制货物或特殊监管", "路线或许可要求未核实"],
+    "primary_publisher": "Vietnam Trade Portal / Ministry of Industry and Trade",
+    "cross_checks": [
+      {"publisher": "Vietnam Trade Portal / Ministry of Industry and Trade", "source_type": "政府法规库", "source_url": "https://vntr.moit.gov.vn/legal-documents/543", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉定位海关实施法规"}
+    ]
+  },
+  {
+    "source_id": "vn-m5-trademark-procedure-2026",
+    "country_code": "VN",
+    "legal_module": "M5",
+    "evidence_level": "B",
+    "title": "IP Vietnam：商标程序与申请材料入口",
+    "source_type": "知识产权主管机关页面",
+    "source_url": "https://www.ipvietnam.gov.vn/web/english/trademarks",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "IP Vietnam 提供商标程序、申请材料和国际注册路径的官方入口。",
+    "prerequisites": ["须确认申请人、类别、在先权利和现行表格", "须回查适用条款与官方原文"],
+    "non_inferences": ["不得判定商标可注册性", "不得承诺申请期限或结果"],
+    "review_triggers": ["存在近似权利、非拉丁文字或优先权主张", "表格或程序版本变化"],
+    "primary_publisher": "Intellectual Property Office of Vietnam",
+    "cross_checks": [
+      {"publisher": "Intellectual Property Office of Vietnam", "source_type": "主管机关法律文件页", "source_url": "https://ipvietnam.gov.vn/web/english/legal-documents", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉定位知识产权法律文件"}
+    ]
+  },
+  {
+    "source_id": "vn-m5-patent-pct-entry-2026",
+    "country_code": "VN",
+    "legal_module": "M5",
+    "evidence_level": "B",
+    "title": "IP Vietnam：专利与 PCT 办理入口",
+    "source_type": "知识产权主管机关页面",
+    "source_url": "https://ipvietnam.gov.vn/en_US/web/english/patents",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "IP Vietnam 提供专利程序和 PCT 相关办理信息的官方入口。",
+    "prerequisites": ["须明确技术方案、优先权、申请路径和目标法域", "须核对现行专利法及程序要求"],
+    "non_inferences": ["不得判断专利性", "不得推断 PCT 国家阶段结果"],
+    "review_triggers": ["涉及公开、优先权或多国指定", "技术方案与权利类型不明"],
+    "primary_publisher": "Intellectual Property Office of Vietnam",
+    "cross_checks": [
+      {"publisher": "World Intellectual Property Organization", "source_type": "国际组织程序指南", "source_url": "https://www.wipo.int/en/web/pct-system/guide/index.html", "source_language": "English", "checked_at": "2026-09-05", "version_note": "仅交叉核验 PCT 国际程序；不替代越南国内法"}
+    ]
+  },
+  {
+    "source_id": "id-m3-trade-law-2014-2026",
+    "country_code": "ID",
+    "legal_module": "M3",
+    "evidence_level": "B",
+    "title": "印尼 BPK 法规库：2014 年第 7 号贸易法",
+    "source_type": "国家法规数据库",
+    "source_url": "https://peraturan.bpk.go.id/Details/38584/uu-no-7-tahun-2014",
+    "source_language": "Indonesian",
+    "verified_at": "2026-09-05",
+    "supported_fact": "BPK 法规库列有印尼《贸易法》及其法规状态信息。",
+    "prerequisites": ["须明确商品、HS 编码、进口商、许可和原产地", "须核对该法的修订及主管部门实施规则"],
+    "non_inferences": ["不得输出市场准入或清关结论", "不得以法规索引替代商品监管核验"],
+    "review_triggers": ["受监管商品或禁限进口", "法规状态或实施规则不明确"],
+    "primary_publisher": "Audit Board of the Republic of Indonesia (BPK)",
+    "cross_checks": [
+      {"publisher": "Ministry of Trade of the Republic of Indonesia", "source_type": "主管机关法规库", "source_url": "https://jdih.kemendag.go.id/", "source_language": "Indonesian", "checked_at": "2026-09-05", "version_note": "用于交叉核验贸易主管机关实施规则"}
+    ]
+  },
+  {
+    "source_id": "id-m2-contract-source-discovery-2026",
+    "country_code": "ID",
+    "legal_module": "M2",
+    "evidence_level": "B",
+    "title": "印尼合同规则法源待定位：国家法规库与贸易部 JDIH",
+    "source_type": "官方法规检索入口",
+    "source_url": "https://peraturan.bpk.go.id/",
+    "source_language": "Indonesian",
+    "verified_at": "2026-09-05",
+    "supported_fact": "印尼 BPK 法规数据库提供法规检索，贸易部 JDIH 提供贸易主管机关法规入口。",
+    "prerequisites": ["必须先定位具体合同法源、条款和适用范围", "必须核对合同类型与行业监管"],
+    "non_inferences": ["不得说明合同效力或违约责任", "不得说明适用法或争议解决路径"],
+    "review_triggers": ["尚未取得具体法条", "涉及分销、工程或跨境争议"],
+    "primary_publisher": "Audit Board of the Republic of Indonesia (BPK)",
+    "cross_checks": [
+      {"publisher": "Ministry of Trade of the Republic of Indonesia", "source_type": "主管机关法规库", "source_url": "https://jdih.kemendag.go.id/", "source_language": "Indonesian", "checked_at": "2026-09-05", "version_note": "仅用于定位贸易合同相关实施规则"}
+    ]
+  },
+  {
+    "source_id": "sg-m5-ip-legislation-2026",
+    "country_code": "SG",
+    "legal_module": "M5",
+    "evidence_level": "B",
+    "title": "Singapore Statutes Online：Trade Marks Act 1998",
+    "source_type": "官方法规数据库",
+    "source_url": "https://sso.agc.gov.sg/Act/TMA1998?WholeDoc=1",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "新加坡总检察署法规库公开《Trade Marks Act 1998》现行版本和条文结构。",
+    "prerequisites": ["须明确权利类型、申请人和具体商业事实", "须在 SSO 核对现行法条与修订"],
+    "non_inferences": ["不得判断注册、侵权或技术秘密保护结果", "不得以 IPOS 索引代替具体条款"],
+    "review_triggers": ["涉及跨境许可、技术秘密或侵权救济", "法律修订或权利类型不明确"],
+    "primary_publisher": "Attorney-General's Chambers of Singapore",
+    "cross_checks": [
+      {"publisher": "Intellectual Property Office of Singapore", "source_type": "知识产权立法说明页", "source_url": "https://www.ipos.gov.sg/global-ip-hub/statistics-and-legislation-developments/ip-legislation/", "source_language": "English", "checked_at": "2026-09-05", "version_note": "用于交叉核验知识产权主管机构的立法说明与规则入口"}
+    ]
+  },
+  {
+    "source_id": "sg-m5-trademark-madrid-entry-2026",
+    "country_code": "SG",
+    "legal_module": "M5",
+    "evidence_level": "B",
+    "title": "IPOS：新加坡商标申请与国际注册路径",
+    "source_type": "知识产权主管机关页面",
+    "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/how-to-register/",
+    "source_language": "English",
+    "verified_at": "2026-09-05",
+    "supported_fact": "IPOS 提供本地商标申请与马德里体系路径的官方说明入口。",
+    "prerequisites": ["须核对指定国、基础申请、类别和具体程序", "须回查 Trade Marks Act 与现行规则"],
+    "non_inferences": ["不得将马德里体系表述为替代新加坡国内法", "不得承诺审查时限或结果"],
+    "review_triggers": ["涉及国际注册、优先权或异议", "申请基础或指定国不明确"],
+    "primary_publisher": "Intellectual Property Office of Singapore",
+    "cross_checks": [
+      {"publisher": "World Intellectual Property Organization", "source_type": "国际组织程序指南", "source_url": "https://www.wipo.int/edocs/pubdocs/en/wipo-pub-455-2022-en-guide-to-the-international-registration-of-marks-under-the-madrid-protocol.pdf", "source_language": "English", "checked_at": "2026-09-05", "version_note": "仅交叉核验马德里体系程序；不替代新加坡国内法"}
+    ]
+  },
+  {
+    "source_id": "int-m5-pct-guide-2026",
+    "country_code": "INT",
+    "legal_module": "M5",
+    "evidence_level": "B",
+    "title": "WIPO：Patent Cooperation Treaty（PCT）Article 1",
+    "source_type": "国际组织条约原文",
+    "source_url": "https://www.wipo.int/en/web/pct-system/texts/articles/a1",
+    "source_language": "Multilingual",
+    "verified_at": "2026-09-05",
+    "supported_fact": "WIPO 公开《专利合作条约》（PCT）第1条及现行条约文本入口。",
+    "prerequisites": ["须明确目标国、国家阶段和程序时点", "须核对该国国内法与当期 PCT 版本"],
+    "non_inferences": ["PCT 不替代任一国家国内专利法", "不得判断国家阶段结果"],
+    "review_triggers": ["目标法域、优先权或程序期限不明确", "涉及受限技术或多国权利冲突"],
+    "primary_publisher": "World Intellectual Property Organization",
+    "cross_checks": [
+      {"publisher": "World Intellectual Property Organization", "source_type": "PCT 条约及规则文本目录", "source_url": "https://www.wipo.int/en/web/treaties/registration/pct/index", "source_language": "Multilingual", "checked_at": "2026-09-05", "version_note": "用于交叉核验 PCT 条约、规则和生效版本入口"}
+    ]
+  },
+  {"source_id":"mm-m1-companies-law-2026","country_code":"MM","legal_module":"M1","evidence_level":"B","title":"缅甸政府：Myanmar Companies Law（2017）英文译文","source_type":"政府公开法规译文","source_url":"https://myanmar.gov.mm/documents/20143/9097200/Company%2BLaw%2B%28English%29.pdf/9baeb624-d190-7186-feb0-3198acc6dff1?t=1539334908628","source_language":"English unofficial translation","verified_at":"2026-09-05","supported_fact":"缅甸政府文件库公开《Myanmar Companies Law》（2017）英文译文，正文第1条载有法律名称及生效机制。","prerequisites":["英文文本标注为非正式译文；须核对缅文正式文本、公司类型、外资和许可规则"],"non_inferences":["不得判断投资准入、登记或许可结果"],"review_triggers":["外资、受监管行业或公司控制权安排"],"primary_publisher":"Directorate of Investment and Company Administration / Government of Myanmar","cross_checks":[{"publisher":"Government of Myanmar","source_type":"政府法规文件目录","source_url":"https://www.myanmar.gov.mm/en/web/guest/law-justice/document?_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_idasset508_cur=9&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_idasset508_delta=10&p_p_id=com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_idasset508&p_p_lifecycle=0&p_p_mode=view&p_p_state=normal&p_r_p_resetCur=false","source_language":"Myanmar / English","checked_at":"2026-09-05","version_note":"目录显示该文件由 DICA 发布、日期为2017年12月6日并标注为英文非正式译文"}]},
+  {"source_id":"mm-m2-sale-goods-act-2026","country_code":"MM","legal_module":"M2","evidence_level":"B","title":"缅甸政府公开报告：Sales of Goods Act 法律与主管机关条目","source_type":"政府公开法律框架报告","source_url":"https://myanmar.gov.mm/documents/20143/24755509/Assessment%2Bof%2Bthe%2BLegal%2Band%2BRegulatory%2BFrameworks%2Bon%2BElectronic%2BCommerce%2Bin%2BCLMV-Eng.pdf/bc18410a-256c-7e5d-641b-b11f6f6368e7?t=1599031413071","source_language":"English","verified_at":"2026-09-05","supported_fact":"缅甸政府托管的法律框架报告附录将 Sales of Goods Act 列为缅甸法律，并对应 Ministry of Commerce；该报告不是法条正文。","prerequisites":["该条目仅确认政府托管报告中的法规名称和主管机关；须取得适用法条原文并核对合同类型、更新与适用法"],"non_inferences":["不得判断合同效力、违约或救济"],"review_triggers":["跨境交易、合同条款或版本不明"],"primary_publisher":"Government of Myanmar (hosted legal framework report)","cross_checks":[{"publisher":"Government of Myanmar / Ministry of Legal Affairs","source_type":"译制法律书籍发布公告","source_url":"https://myanmar.gov.mm/web/guest/news-media/news/latest-news/-/asset_publisher/idasset354/content/mola-publishes-translated-legal-books-from-no-1-to-no-10","source_language":"English","checked_at":"2026-09-05","version_note":"政府公告称第1册译制法律书籍包括 Sale of Goods Act；不替代法条正式文本"}]},
+  {"source_id":"mm-m3-export-import-law-2026","country_code":"MM","legal_module":"M3","evidence_level":"B","title":"缅甸商务部：The Export and Import Law","source_type":"商务主管机关法规文本","source_url":"https://commerce.gov.mm/sites/default/files/documents/2014/12/The%20Export%20and%20Import%20Law%20_English_last.pdf","source_language":"English translation","verified_at":"2026-09-05","supported_fact":"缅甸商务部公开进出口法英文文本入口。","prerequisites":["须核对货物、许可、海关、制裁和当前法规状态"],"non_inferences":["不得保证进出口许可、清关或放行"],"review_triggers":["受限货物、原产地、制裁或运输问题"],"primary_publisher":"Ministry of Commerce of Myanmar","cross_checks":[{"publisher":"Ministry of Commerce of Myanmar","source_type":"进出口程序页面","source_url":"https://commerce.gov.mm/en/node/141","source_language":"English","checked_at":"2026-09-05","version_note":"用于交叉核验进出口登记与程序说明"}]},
+  {"source_id":"mm-m4-labour-law-directory-2026","country_code":"MM","legal_module":"M4","evidence_level":"B","title":"缅甸政府：Labour Organization Law（2011）英文文本","source_type":"政府公开法规译文","source_url":"https://myanmar.gov.mm/documents/20143/0/2.Labour-Organization-Law-2011.pdf/cffe39b4-80d1-6434-7641-43770d55d977?t=1676883154074","source_language":"English translation","verified_at":"2026-09-05","supported_fact":"缅甸政府公开《Labour Organization Law》（2011）英文文本；序言说明其目的包括保护劳动者权利及促进雇主与劳动者关系。","prerequisites":["该资料仅涉及劳动组织法；外籍雇佣、工作许可、签证和移民规则必须按另行适用的现行法律核对"],"non_inferences":["不得判断工作许可、签证或雇佣合规"],"review_triggers":["外籍员工、派驻或劳动与移民规则交叉"],"primary_publisher":"Government of Myanmar","cross_checks":[{"publisher":"Ministry of Labour of Myanmar","source_type":"劳动组织法规实施公告","source_url":"https://myanmar.gov.mm/my/news-media/announcements/-/asset_publisher/idasset291/content/statement-on-the-organizing-and-implementing-of-labour-organizations-and-employer-organizations","source_language":"English","checked_at":"2026-09-05","version_note":"劳动部2023年公告说明 Labour Organization Law (2011) 已制定；不替代外籍雇佣与移民法源"}]},
+  {"source_id":"mm-m5-ip-law-directory-2026","country_code":"MM","legal_module":"M5","evidence_level":"B","title":"缅甸政府：Trademark Law 2019 生效公告","source_type":"政府公开主管机关资讯","source_url":"https://myanmar.gov.mm/news-media/news/latest-news/-/asset_publisher/idasset354/content/intellectual-property-department-to-open-branches-in-yangon-mandalay","source_language":"English","verified_at":"2026-09-05","supported_fact":"缅甸政府资讯载明第82/2023号通知规定 Trademark Law 自2023年4月1日生效，并说明该法于2019年以联邦议会第3号法律制定。","prerequisites":["须进一步取得商标法正式文本、实施细则、权利类型和主管机关程序；以缅文正式文本及现行版本为准"],"non_inferences":["不得判断可注册性、侵权或权利有效性"],"review_triggers":["商标、专利、技术秘密或国际程序"],"primary_publisher":"Government of Myanmar / Ministry of Information","cross_checks":[{"publisher":"Government of Myanmar / Ministry of Defence","source_type":"中央知识产权委员会官方资讯","source_url":"https://myanmar.gov.mm/news-media/news/latest-news/-/asset_publisher/idasset354/content/chairman-of-central-committee-on-intellectual-property-rights-deputy-prime-minister-and-union-minister-general-mya-tun-oo-attends-and-delivers-a-speec","source_language":"English","checked_at":"2026-09-05","version_note":"2023年官方资讯同样说明 Trademark Law 于2023年4月1日生效；两页均为政府资讯，非完整法条文本"}]},
+  {"source_id":"mm-m6-arbitration-law-2026","country_code":"MM","legal_module":"M6","evidence_level":"B","title":"缅甸政府：2016 Arbitration Law 官方司法资讯","source_type":"政府公开司法资讯","source_url":"https://myanmar.gov.mm/news-media/media/-/asset_publisher/idasset290/content/union-chief-justice-u-htun-htun-oo-attends-the-11th-international-legal-forum-of-the-asia-pacific-region","source_language":"English","verified_at":"2026-09-05","supported_fact":"缅甸政府发布的首席大法官资讯说明，2016年仲裁法下外国和本国公司可通过仲裁解决争议，且国内及外国仲裁裁决在有管辖权法院执行；这只是政府资讯中的表述，仍须核对现行法条。","prerequisites":["须取得现行仲裁法正式文本并核对仲裁协议、仲裁地、裁决与资产所在地"],"non_inferences":["不得保证仲裁、承认执行或货款回收"],"review_triggers":["跨境执行、保全、送达或公共政策问题"],"primary_publisher":"Government of Myanmar / Supreme Court of the Union","cross_checks":[{"publisher":"Government of Myanmar / Ministry of Legal Affairs","source_type":"法律发展官方资讯","source_url":"https://www.myanmar.gov.mm/news-media/news/latest-news/-/asset_publisher/idasset354/content/mola-union-minister-attends-ala-governing-council-meeting?_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_idasset354_redirect=https%3A%2F%2Fwww.myanmar.gov.mm%2Fweb%2Fguest%2Fnews-media%2Fnews%2Flatest-news%3Fp_p_id%3Dcom_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_idasset354%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_idasset354_cur%3D2090%26_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_idasset354_delta%3D10%26p_r_p_resetCur%3Dfalse%26_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_idasset354_assetEntryId%3D109235220","source_language":"English","checked_at":"2026-09-05","version_note":"官方资讯同样说明2016年国内和国际仲裁法；不替代现行法条文本"}]}
+,
+  {"source_id":"ph-m1-revised-corporation-code-2026","country_code":"PH","legal_module":"M1","evidence_level":"B","title":"菲律宾证券交易委员会：Revised Corporation Code","source_type":"主管机关法规资源页","source_url":"https://www.sec.gov.ph/revised-corporation-code-2/revised-corporation-code/","source_language":"English","verified_at":"2026-09-05","supported_fact":"菲律宾证券交易委员会提供《修订公司法典》及其资源入口。","prerequisites":["须核对公司类型、外资限制、行业监管和登记要求"],"non_inferences":["不得判断准入、登记或许可结果"],"review_triggers":["外资、受监管行业或控制权安排"],"primary_publisher":"Securities and Exchange Commission Philippines","cross_checks":[{"publisher":"Securities and Exchange Commission Philippines","source_type":"公司与投资法律目录","source_url":"https://www.sec.gov.ph/laws-rules-decisions-and-resolutions/legislation/","source_language":"English","checked_at":"2026-09-05","version_note":"用于交叉核验公司及外国投资相关法律入口"}]},
+  {"source_id":"ph-m2-civil-code-directory-2026","country_code":"PH","legal_module":"M2","evidence_level":"B","title":"菲律宾最高法院电子图书馆：Civil Code（RA 386）","source_type":"司法机关法规文本","source_url":"https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/53360","source_language":"English","verified_at":"2026-09-05","supported_fact":"菲律宾最高法院电子图书馆公开第386号共和国法《Civil Code》全文及合同义务条文。","prerequisites":["须核对具体合同、适用主体、后续法律与适用法"],"non_inferences":["不得判断合同效力、违约或救济"],"review_triggers":["合同类型、适用法或条文版本不明"],"primary_publisher":"Supreme Court of the Philippines","cross_checks":[{"publisher":"Official Gazette of the Republic of the Philippines","source_type":"官方法律发布目录","source_url":"https://www.officialgazette.gov.ph/section/laws/","source_language":"English / Filipino","checked_at":"2026-09-05","version_note":"用于交叉核验正式法律发布渠道"}]},
+  {"source_id":"ph-m3-cmta-2026","country_code":"PH","legal_module":"M3","evidence_level":"B","title":"菲律宾海关局：Customs Modernization and Tariff Act","source_type":"海关主管机关法规页面","source_url":"https://customs.gov.ph/cmta-3/","source_language":"English","verified_at":"2026-09-05","supported_fact":"菲律宾海关局公开 RA 10863（CMTA）及实施规则资料入口。","prerequisites":["须核对货物、税则、许可、原产地和实施规则"],"non_inferences":["不得保证清关、税率或放行"],"review_triggers":["受限货物、归类、原产地或运输问题"],"primary_publisher":"Bureau of Customs Philippines","cross_checks":[{"publisher":"Bureau of Customs Philippines","source_type":"CMTA文本","source_url":"https://customs.gov.ph/wp-content/uploads/2023/01/CMTA-RA-10863-2.pdf","source_language":"English","checked_at":"2026-09-05","version_note":"用于交叉核验 RA 10863 文本"}]},
+  {"source_id":"ph-m4-labor-code-2026","country_code":"PH","legal_module":"M4","evidence_level":"B","title":"菲律宾劳工就业部：Labor Code of the Philippines","source_type":"劳动主管机关法规页面","source_url":"https://dole.gov.ph/labor-code-of-the-philippines-2/","source_language":"English","verified_at":"2026-09-05","supported_fact":"菲律宾劳工就业部提供劳动法典 2022 编排版本及内容入口。","prerequisites":["须核对外籍雇佣、工作许可、移民和现行修订"],"non_inferences":["不得判断工作许可、签证或雇佣合规"],"review_triggers":["外籍员工、派驻或劳动与移民规则交叉"],"primary_publisher":"Department of Labor and Employment Philippines","cross_checks":[{"publisher":"Department of Labor and Employment Philippines","source_type":"劳动法典说明","source_url":"https://dole.gov.ph/labor-code-note/","source_language":"English","checked_at":"2026-09-05","version_note":"用于交叉核验劳动法典版本和修订说明"}]},
+  {"source_id":"ph-m5-ip-code-2026","country_code":"PH","legal_module":"M5","evidence_level":"B","title":"菲律宾知识产权局：Intellectual Property Code & IRR","source_type":"知识产权主管机关法规页面","source_url":"https://www.ipophil.gov.ph/intellectual-property-code-implementing-rules-and-regulations/","source_language":"English","verified_at":"2026-09-05","supported_fact":"菲律宾知识产权局列出 RA 8293 及知识产权实施规则。","prerequisites":["须核对权利类型、申请路径、在先权利和现行实施规则"],"non_inferences":["不得判断可注册性、侵权或权利有效性"],"review_triggers":["商标、专利、技术转让或国际程序"],"primary_publisher":"Intellectual Property Office of the Philippines","cross_checks":[{"publisher":"Intellectual Property Office of the Philippines","source_type":"IP Code 文本","source_url":"https://ilaw.ipophil.gov.ph/pluginfile.php/146/mod_resource/content/2/Philippine%20IP%20Code.pdf","source_language":"English","checked_at":"2026-09-05","version_note":"用于交叉核验 IP Code 文本及修订信息"}]},
+  {"source_id":"ph-m6-adr-law-directory-2026","country_code":"PH","legal_module":"M6","evidence_level":"B","title":"菲律宾最高法院电子图书馆：Alternative Dispute Resolution Act 2004（RA 9285）","source_type":"司法机关法规文本","source_url":"https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/7233","source_language":"English","verified_at":"2026-09-05","supported_fact":"菲律宾最高法院电子图书馆公开第9285号共和国法《Alternative Dispute Resolution Act of 2004》全文。","prerequisites":["须核对争议类型、ADR协议、程序规则及执行地"],"non_inferences":["不得保证仲裁、执行或货款回收"],"review_triggers":["跨境执行、送达、资产保全或公共政策问题"],"primary_publisher":"Supreme Court of the Philippines","cross_checks":[{"publisher":"Office for Alternative Dispute Resolution, Department of Justice Philippines","source_type":"ADR 法律资源页","source_url":"https://oadr.doj.gov.ph/resources-2/","source_language":"English","checked_at":"2026-09-05","version_note":"用于交叉核验 RA 9285 和 ADR 主管机构资源"}]}
+,
+  {"source_id":"tl-m1-private-investment-law-2026","country_code":"TL","legal_module":"M1","evidence_level":"B","title":"东帝汶政府：Private Investment Law","source_type":"政府投资法规页面","source_url":"https://timor-leste.gov.tl/?cat=29","source_language":"Portuguese / Tetum","verified_at":"2026-09-05","supported_fact":"东帝汶政府企业投资页面列有 2017 年私人投资法。","prerequisites":["须核对正式公报文本、投资主体、行业和许可"],"non_inferences":["不得判断准入、优惠或许可结果"],"review_triggers":["外资、受监管行业或投资激励"],"primary_publisher":"Government of Timor-Leste","cross_checks":[{"publisher":"TradeInvest Timor-Leste","source_type":"投资法律资料","source_url":"https://tradeinvest.tl/files/Factsheets/PIL_%26_Gov_Decree.pdf","source_language":"English","checked_at":"2026-09-05","version_note":"用于交叉定位投资法资料；以官方公报文本为准"}]},
+  {"source_id":"tl-m2-civil-code-directory-2026","country_code":"TL","legal_module":"M2","evidence_level":"B","title":"东帝汶共和国公报：Civil Code（第10/2011号议会法）","source_type":"官方公报法律文本","source_url":"https://www.mj.gov.tl/jornal/?q=node%2F803","source_language":"Portuguese","verified_at":"2026-09-05","supported_fact":"东帝汶共和国公报公开第10/2011号议会法及其批准的《民法典》全文。","prerequisites":["须定位合同相关现行条文、适用法及修订版本"],"non_inferences":["不得判断合同效力、违约或救济"],"review_triggers":["合同类型、适用法或版本不明"],"primary_publisher":"Jornal da República / Ministry of Justice of Timor-Leste","cross_checks":[{"publisher":"Jornal da República / Ministry of Justice of Timor-Leste","source_type":"Civil Code 官方PDF","source_url":"https://www.mj.gov.tl/jornal/files/Codigo_Civil.pdf","source_language":"Portuguese","checked_at":"2026-09-05","version_note":"用于交叉核验《民法典》文本；以公报公布及后续修订为准"}]},
+  {"source_id":"tl-m3-customs-code-2026","country_code":"TL","legal_module":"M3","evidence_level":"B","title":"东帝汶政府：Código Aduaneiro（海关法典）","source_type":"政府企业投资法规页面","source_url":"https://timor-leste.gov.tl/?cat=29","source_language":"Portuguese / Tetum","verified_at":"2026-09-05","supported_fact":"东帝汶政府企业投资页面列有 2017 年海关法典。","prerequisites":["须核对商品、税则、许可、原产地及后续修订"],"non_inferences":["不得保证清关、税率或放行"],"review_triggers":["受限货物、归类、原产地或运输问题"],"primary_publisher":"Government of Timor-Leste","cross_checks":[{"publisher":"Jornal da República / Ministry of Justice of Timor-Leste","source_type":"政府法令公报目录","source_url":"https://www.mj.gov.tl/jornal/?q=node%2F13","source_language":"Portuguese / Tetum","checked_at":"2026-09-05","version_note":"用于交叉核验政府法令公布与修订"}]},
+  {"source_id":"tl-m4-labour-law-directory-2026","country_code":"TL","legal_module":"M4","evidence_level":"B","title":"东帝汶共和国公报：Lei do Trabalho（第4/2012号议会法）","source_type":"官方公报法律文本","source_url":"https://www.mj.gov.tl/jornal/?q=node%2F789","source_language":"Portuguese","verified_at":"2026-09-05","supported_fact":"东帝汶共和国公报公开第4/2012号《劳动法》全文。","prerequisites":["须区分劳动法、外籍雇佣与移民规则，并核对现行修订"],"non_inferences":["不得判断工作许可、签证或雇佣合规"],"review_triggers":["外籍员工、派驻或劳动与移民规则交叉"],"primary_publisher":"Jornal da República / Ministry of Justice of Timor-Leste","cross_checks":[{"publisher":"Jornal da República / Ministry of Justice of Timor-Leste","source_type":"议会法律目录","source_url":"https://www.mj.gov.tl/jornal/?q=node%2F12","source_language":"Portuguese / Tetum","checked_at":"2026-09-05","version_note":"法律目录列出第4/2012号《劳动法》及公布日期"}]},
+  {"source_id":"tl-m5-ip-law-directory-2026","country_code":"TL","legal_module":"M5","evidence_level":"B","title":"东帝汶共和国公报：Civil Code 第1223条（知识产权）","source_type":"官方公报法律文本","source_url":"https://www.mj.gov.tl/jornal/?q=node%2F803","source_language":"Portuguese","verified_at":"2026-09-05","supported_fact":"东帝汶《民法典》第1223条规定著作权和工业产权受特别立法管辖。","prerequisites":["须定位各项知识产权特别法、主管机关、现行原文和程序"],"non_inferences":["不得判断可注册性、侵权或权利有效性"],"review_triggers":["商标、专利、技术秘密或国际程序"],"primary_publisher":"Jornal da República / Ministry of Justice of Timor-Leste","cross_checks":[{"publisher":"Jornal da República / Ministry of Justice of Timor-Leste","source_type":"Civil Code 官方PDF","source_url":"https://www.mj.gov.tl/jornal/files/Codigo_Civil.pdf","source_language":"Portuguese","checked_at":"2026-09-05","version_note":"用于交叉核验第1223条；具体知识产权特别法仍待逐项审校"}]},
+  {"source_id":"tl-m6-arbitration-law-2026","country_code":"TL","legal_module":"M6","evidence_level":"B","title":"东帝汶共和国公报：自愿仲裁法律制度（第6/2021号法）","source_type":"官方公报法律文本","source_url":"https://www.mj.gov.tl/jornal/public/docs/2021/serie_1/SERIE_I_NO_14_B.pdf","source_language":"Portuguese","verified_at":"2026-09-05","supported_fact":"东帝汶共和国公报公布第6/2021号法，批准《自愿仲裁法律制度》并修订民事诉讼法。","prerequisites":["须核对仲裁协议、仲裁地、程序法、承认执行和适用版本"],"non_inferences":["不得保证仲裁、执行或货款回收"],"review_triggers":["跨境执行、送达、资产保全或公共政策问题"],"primary_publisher":"Jornal da República / Ministry of Justice of Timor-Leste","cross_checks":[{"publisher":"Jornal da República / Ministry of Justice of Timor-Leste","source_type":"公报政府法令目录","source_url":"https://mj.gov.tl/jornal/?q=node%2F13","source_language":"Portuguese / Tetum","checked_at":"2026-09-05","version_note":"用于交叉核验共和国公报的官方发布渠道"}]}
+]

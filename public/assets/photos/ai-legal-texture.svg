@@ -1,0 +1,29 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI legal technology texture">
+  <rect width="1440" height="900" fill="#050A14"/>
+  <g opacity="0.32">
+    <circle cx="150" cy="170" r="260" fill="#155EEF"/>
+    <circle cx="1190" cy="220" r="280" fill="#7C3AED"/>
+    <circle cx="860" cy="760" r="260" fill="#0891B2"/>
+  </g>
+  <g stroke="#94A3B8" stroke-opacity="0.08">
+    <path d="M0 100H1440M0 220H1440M0 340H1440M0 460H1440M0 580H1440M0 700H1440M0 820H1440"/>
+    <path d="M120 0V900M280 0V900M440 0V900M600 0V900M760 0V900M920 0V900M1080 0V900M1240 0V900"/>
+  </g>
+  <g opacity="0.45">
+    <path d="M225 504C331 368 430 446 522 322C618 194 735 204 850 318C961 429 1098 355 1218 218" stroke="#67E8F9" stroke-width="2"/>
+    <path d="M205 642C364 520 478 638 624 470C741 337 903 420 1030 360C1122 316 1186 241 1260 178" stroke="#A78BFA" stroke-width="2"/>
+  </g>
+  <g fill="#E0F2FE">
+    <circle cx="225" cy="504" r="4"/>
+    <circle cx="522" cy="322" r="4"/>
+    <circle cx="850" cy="318" r="4"/>
+    <circle cx="1218" cy="218" r="4"/>
+    <circle cx="624" cy="470" r="4"/>
+    <circle cx="1030" cy="360" r="4"/>
+  </g>
+  <rect x="835" y="122" width="350" height="210" rx="28" fill="#0F172A" fill-opacity="0.72" stroke="#38BDF8" stroke-opacity="0.18"/>
+  <rect x="890" y="174" width="170" height="14" rx="7" fill="#CBD5E1" fill-opacity="0.72"/>
+  <rect x="890" y="210" width="236" height="10" rx="5" fill="#64748B"/>
+  <rect x="890" y="238" width="194" height="10" rx="5" fill="#475569"/>
+  <rect x="890" y="276" width="92" height="20" rx="10" fill="#22D3EE" fill-opacity="0.28"/>
+</svg>
