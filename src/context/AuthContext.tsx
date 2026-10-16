@@ -1,6 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { deploymentStorageKey } from '@/utils/deploymentPath'
 import {
   getMe,
+  guestLogin as guestLoginRequest,
   login as loginRequest,
   logout as logoutRequest,
   register as registerRequest,
@@ -16,12 +18,13 @@ interface AuthContextValue {
   isAuthenticated: boolean
   isAdmin: boolean
   login: (payload: LoginPayload) => Promise<AuthUser>
+  loginAsGuest: () => Promise<AuthUser>
   register: (payload: RegisterPayload) => Promise<AuthUser>
   logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
-const TOKEN_KEY = 'outbound_guard_token'
+const TOKEN_KEY = deploymentStorageKey('outbound_guard_token')
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState(() => window.localStorage.getItem(TOKEN_KEY) ?? '')
@@ -74,6 +77,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [persistSession],
   )
 
+  const loginAsGuest = useCallback(async () => {
+    const result = await guestLoginRequest()
+    persistSession(result.token, result.user)
+    return result.user
+  }, [persistSession])
+
   const register = useCallback(
     async (payload: RegisterPayload) => {
       const result = await registerRequest(payload)
@@ -100,10 +109,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       isAuthenticated: Boolean(user && token),
       isAdmin: user?.role === 'superadmin',
       login,
+      loginAsGuest,
       register,
       logout,
     }),
-    [loading, login, logout, register, token, user],
+    [loading, login, loginAsGuest, logout, register, token, user],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

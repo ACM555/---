@@ -15,7 +15,8 @@ const riskMeta = {
 } as const
 
 function ReportActionPanel({ result }: ReportActionPanelProps) {
-  const meta = riskMeta[result.riskLevel]
+  const pending = result.assessmentStatus === 'pending_verification'
+  const meta = pending ? { label: '待核验', color: '#d48806', icon: <WarningOutlined /> } : riskMeta[result.riskLevel]
   const triggeredRules = result.hitRules.filter((rule) => rule.applicable)
   const topActions = result.advice.recommendations.slice(0, 3)
 
@@ -31,12 +32,12 @@ function ReportActionPanel({ result }: ReportActionPanelProps) {
           <Space direction="vertical" size={16} style={{ display: 'flex' }}>
             <Statistic
               prefix={<span style={{ color: meta.color }}>{meta.icon}</span>}
-              title="综合风险分"
-              value={result.riskScore}
-              suffix="/100"
+              title={pending ? '核验状态' : '综合风险分'}
+              value={pending ? '待核验' : result.riskScore}
+              suffix={pending ? undefined : '/100'}
               valueStyle={{ color: meta.color, fontWeight: 700 }}
             />
-            <Progress percent={result.riskScore} strokeColor={meta.color} />
+            {!pending && <Progress percent={result.riskScore} strokeColor={meta.color} />}
             <Space wrap>
               <Tag color={meta.color}>{meta.label}</Tag>
               {result.manualReviewRequired && <Tag color="orange">建议人工复核</Tag>}

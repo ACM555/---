@@ -82,7 +82,7 @@ function getModuleMetric(moduleKey: string, result?: AuditResult | null) {
   }
 
   if (moduleKey === 'M1') {
-    return { label: '综合风险', value: result.riskScore }
+    return result.assessmentStatus === 'pending_verification' ? null : { label: '综合风险', value: result.riskScore }
   }
   if (moduleKey === 'M2') {
     const relativeCount = result.hitRules.filter((rule) => rule.ruleType === 'relative' && rule.applicable).length

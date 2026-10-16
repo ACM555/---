@@ -4,7 +4,7 @@ import hashlib
 import json
 import secrets
 import sqlite3
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -12,7 +12,7 @@ from app.core.config import settings
 
 
 def _now() -> str:
-    return datetime.now(UTC).isoformat()
+    return datetime.now(timezone.utc).isoformat()
 
 
 def _connect() -> sqlite3.Connection:
@@ -47,6 +47,10 @@ def init_database() -> None:
         task_columns = {row["name"] for row in connection.execute("PRAGMA table_info(audit_tasks)")}
         if "user_id" not in task_columns:
             connection.execute("ALTER TABLE audit_tasks ADD COLUMN user_id TEXT")
+        for column in ("completed_at", "archived_at", "last_viewed_at"):
+            if column not in task_columns:
+                connection.execute(f"ALTER TABLE audit_tasks ADD COLUMN {column} TEXT")
+        connection.execute("UPDATE audit_tasks SET completed_at = COALESCE(completed_at, updated_at), archived_at = COALESCE(archived_at, updated_at) WHERE status = 'done'")
         connection.execute(
             """
             CREATE TABLE IF NOT EXISTS users (
@@ -291,6 +295,39 @@ def create_session(user_id: str) -> str:
     return token
 
 
+def create_guest_session() -> tuple[str, dict[str, str]]:
+    """Create an isolated, authenticated, non-admin reviewer session."""
+    guest_suffix = secrets.token_hex(6)
+    guest_username = f"judge_guest_{guest_suffix}"
+    timestamp = _now()
+    with _connect() as connection:
+        guest_user_id = secrets.token_hex(16)
+        connection.execute(
+            """
+            INSERT INTO users (
+                user_id, username, password_hash, role, company, created_at
+            ) VALUES (?, ?, ?, 'user', '评委游客体验', ?)
+            """,
+            (
+                guest_user_id,
+                guest_username,
+                _hash_password(secrets.token_urlsafe(32)),
+                timestamp,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM users WHERE user_id = ?", (guest_user_id,)
+        ).fetchone()
+
+        token = secrets.token_urlsafe(32)
+        connection.execute(
+            "INSERT INTO user_sessions (token, user_id, created_at) VALUES (?, ?, ?)",
+            (token, row["user_id"], timestamp),
+        )
+
+    return token, _public_user(row)
+
+
 def get_user_by_token(token: str) -> dict[str, str] | None:
     with _connect() as connection:
         row = connection.execute(
@@ -331,12 +368,17 @@ def update_task(
     progress: int | None = None,
     result: dict[str, Any] | None = None,
     error_message: str | None = None,
+    touch_updated: bool = True,
 ) -> None:
-    fields: list[str] = ["updated_at = ?"]
-    values: list[Any] = [_now()]
+    timestamp = _now()
+    fields: list[str] = ["updated_at = ?"] if touch_updated else []
+    values: list[Any] = [timestamp] if touch_updated else []
     if status is not None:
         fields.append("status = ?")
         values.append(status)
+        if status == "done":
+            fields.extend(["completed_at = COALESCE(completed_at, ?)", "archived_at = COALESCE(archived_at, ?)"])
+            values.extend([timestamp, timestamp])
     if current_step is not None:
         fields.append("current_step = ?")
         values.append(current_step)
@@ -350,6 +392,8 @@ def update_task(
         fields.append("error_message = ?")
         values.append(error_message)
     values.append(task_id)
+    if not fields:
+        return
     with _connect() as connection:
         connection.execute(
             f"UPDATE audit_tasks SET {', '.join(fields)} WHERE task_id = ?",
@@ -369,11 +413,19 @@ def get_task(task_id: str) -> dict[str, Any] | None:
     task["userId"] = task.pop("user_id", "")
     task["createdAt"] = task.pop("created_at")
     task["updatedAt"] = task.pop("updated_at")
+    task["completedAt"] = task.pop("completed_at", None)
+    task["archivedAt"] = task.pop("archived_at", None)
+    task["lastViewedAt"] = task.pop("last_viewed_at", None)
     task["currentStep"] = task.pop("current_step")
     task["request"] = json.loads(task.pop("request_json"))
     raw_result = task.pop("result_json")
     task["result"] = json.loads(raw_result) if raw_result else None
     return task
+
+
+def record_report_view(task_id: str) -> None:
+    with _connect() as connection:
+        connection.execute("UPDATE audit_tasks SET last_viewed_at = ? WHERE task_id = ? AND status = 'done'", (_now(), task_id))
 
 
 def get_statistics() -> dict[str, int]:
@@ -398,7 +450,7 @@ def list_audit_tasks(limit: int = 50, user_id: str | None = None) -> list[dict[s
         rows = connection.execute(
             f"""
             SELECT task_id, user_id, status, current_step, progress, request_json,
-                   result_json, error_message, created_at, updated_at
+                   result_json, error_message, created_at, updated_at, completed_at, archived_at, last_viewed_at
             FROM audit_tasks
             {where_clause}
             ORDER BY created_at DESC
@@ -418,6 +470,7 @@ def list_audit_tasks(limit: int = 50, user_id: str | None = None) -> list[dict[s
                 "currentStep": row["current_step"],
                 "progress": row["progress"],
                 "brandName": request.get("brandName", ""),
+                "englishName": request.get("englishName", ""),
                 "niceClass": request.get("niceClass", ""),
                 "targetCountries": request.get("targetCountries") or request.get("targetMarkets", []),
                 "riskLevel": result.get("riskLevel") if result else "",
@@ -425,6 +478,10 @@ def list_audit_tasks(limit: int = 50, user_id: str | None = None) -> list[dict[s
                 "manualReviewRequired": bool(result.get("manualReviewRequired")) if result else False,
                 "createdAt": row["created_at"],
                 "updatedAt": row["updated_at"],
+                "completedAt": row["completed_at"],
+                "archivedAt": row["archived_at"],
+                "lastViewedAt": row["last_viewed_at"],
+                "assessmentStatus": result.get("assessmentStatus", "pending_verification") if result else "pending_verification",
                 "errorMessage": row["error_message"] or "",
             }
         )
@@ -487,10 +544,32 @@ def get_system_status() -> dict[str, Any]:
             "SELECT status, COUNT(*) AS total FROM audit_tasks GROUP BY status"
         ).fetchall()
         session_count = connection.execute("SELECT COUNT(*) FROM user_sessions").fetchone()[0]
+        legal_source_counts = {
+            row["approval_status"]: int(row["total"])
+            for row in connection.execute(
+                "SELECT approval_status, COUNT(*) AS total FROM legal_sources GROUP BY approval_status"
+            ).fetchall()
+        }
+        approved_passages = connection.execute(
+            "SELECT COUNT(*) FROM legal_passages WHERE approval_status = 'approved'"
+        ).fetchone()[0]
+    approved_sources = legal_source_counts.get("approved", 0)
     return {
         "database": "online",
         "activeSessions": int(session_count),
         "taskStatus": {row["status"]: int(row["total"]) for row in task_counts},
+        "ai": {
+            "configured": bool(settings.model_api_key),
+            "provider": settings.model_provider,
+            "model": settings.model_name if settings.model_api_key else "",
+        },
+        "legalKnowledge": {
+            "draftSources": legal_source_counts.get("draft", 0),
+            "approvedSources": approved_sources,
+            "retiredSources": legal_source_counts.get("retired", 0),
+            "approvedPassages": int(approved_passages),
+            "ragReady": bool(settings.model_api_key and approved_sources and approved_passages),
+        },
         "checkedAt": _now(),
     }
 

@@ -51,6 +51,18 @@ export interface AdminSystemStatus {
   database: 'online'
   activeSessions: number
   taskStatus: Record<string, number>
+  ai: {
+    configured: boolean
+    provider: string
+    model: string
+  }
+  legalKnowledge: {
+    draftSources: number
+    approvedSources: number
+    retiredSources: number
+    approvedPassages: number
+    ragReady: boolean
+  }
   checkedAt: string
 }
 

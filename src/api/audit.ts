@@ -26,6 +26,27 @@ export async function getAuditResult(taskId: string): Promise<AuditResult> {
   return normalizeAuditResult(res.data)
 }
 
+export async function downloadAuditPdf(taskId: string): Promise<void> {
+  const blob = (await request.get(`/audit/report/${taskId}/pdf`, {
+    responseType: 'blob',
+  })) as unknown as Blob
+  if (!(blob instanceof Blob) || blob.size === 0) {
+    throw new Error('PDF 下载失败：服务器返回了空文件，请稍后重试。')
+  }
+  const signature = await blob.slice(0, 5).text()
+  if (signature !== '%PDF-') {
+    throw new Error('PDF 下载失败：返回内容不是有效的 PDF 文件，请重新生成报告。')
+  }
+  const url = window.URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `outbound-guard-${taskId}.pdf`
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  window.setTimeout(() => window.URL.revokeObjectURL(url), 1000)
+}
+
 type RawHitRule = Partial<HitRule>
 
 type RawReference = Partial<LegalReference>
@@ -100,6 +121,8 @@ function normalizeAuditResult(raw: RawAuditResult | null | undefined): AuditResu
     monitoring: [],
   }
   const normalizedHitRules = hitRules.map((rule): HitRule => ({
+    ruleId: rule.ruleId,
+    ruleName: rule.ruleName,
     ruleType: rule.ruleType ?? 'absolute',
     article: rule.article ?? '未命名法条',
     content: rule.content ?? '',
@@ -109,6 +132,7 @@ function normalizeAuditResult(raw: RawAuditResult | null | undefined): AuditResu
     note: rule.note ?? '',
   }))
   const normalizedReferences = references.map((reference): LegalReference => ({
+    ...reference,
     refType: reference.refType ?? 'law',
     title: reference.title ?? '未命名依据',
     source: reference.source ?? '',
@@ -131,6 +155,7 @@ function normalizeAuditResult(raw: RawAuditResult | null | undefined): AuditResu
     riskScore,
     overallResult,
     manualReviewRequired: Boolean(safeRaw.manualReviewRequired),
+    assessmentStatus: safeRaw.assessmentStatus ?? 'pending_verification',
     hitRules: normalizedHitRules,
     references: normalizedReferences,
     summary: safeRaw.summary ?? {

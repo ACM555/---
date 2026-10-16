@@ -1,10 +1,14 @@
 import asyncio
+import tempfile
 import unittest
+from pathlib import Path
 
+from app.core.config import settings
 from app.database import init_database
 from app.models.assistant import AssistantChatRequest
 from app.services.assistant_orchestrator import AssistantOrchestrator
 from app.services.legal_seed import seed_legal_sources
+from app.services.legal_repository import LegalRepository
 
 
 class RecordingModel:
@@ -19,8 +23,23 @@ class RecordingModel:
 class P2EndToEndTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        cls.original_database_path = settings.DATABASE_PATH
+        cls.temporary_directory = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+        settings.DATABASE_PATH = str(Path(cls.temporary_directory.name) / "p2.sqlite3")
         init_database()
         seed_legal_sources()
+        repository = LegalRepository()
+        for source_id in (
+            "vn-m2-commercial-law-index-2026",
+            "th-m4-labour-protection-2026",
+            "sg-m5-ip-legislation-2026",
+        ):
+            repository.set_approval_status(source_id, "approved")
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        settings.DATABASE_PATH = cls.original_database_path
+        cls.temporary_directory.cleanup()
 
     def setUp(self) -> None:
         self.model = RecordingModel()

@@ -64,7 +64,7 @@
       "expected_overall_risk": "low",
       "required_wording": "当前有限范围内未命中明显风险",
       "forbidden_wording": "没有冲突，可以放心使用",
-      "manual_review_required": false
+      "manual_review_required": true
     },
     {
       "case_id": "D3-008",

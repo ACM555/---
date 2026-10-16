@@ -20,7 +20,7 @@ class AuditEngineTest(unittest.TestCase):
         logo = make_plain_logo_base64()
         result = run_audit(
             {
-                "brandName": "茉莉奶白",
+                "brandName": "星岚原创",
                 "englishName": "",
                 "niceClass": "第43类-餐饮服务",
                 "goodsServices": "新茶饮品牌，主营奶茶饮品，目标市场越南",
@@ -50,7 +50,7 @@ class AuditEngineTest(unittest.TestCase):
         self.assertTrue(any("重要冲突线索" in rule["note"] for rule in result["hitRules"]))
         self.assertFalse(any("已经构成侵权" in rule["note"] for rule in result["hitRules"]))
         self.assertIn("# M5 商标与技术出海风险提示清单", result["documentPreview"])
-        self.assertIn("风险线索等级**：high", result["documentPreview"])
+        self.assertIn("核验状态**：待核验", result["documentPreview"])
         self.assertIn("## 使用边界", result["documentPreview"])
         self.assertNotIn("可以提交注册", result["documentPreview"])
         self.assertIn("# 商标注册申请书", result["applicationDocumentPreview"])
@@ -76,7 +76,7 @@ class AuditEngineTest(unittest.TestCase):
         self.assertEqual(result["riskLevel"], "low")
         self.assertIn("当前有限范围内未命中明显风险", result["overallResult"])
         self.assertNotIn("放心使用", result["overallResult"])
-        self.assertIn("风险线索等级**：low", result["documentPreview"])
+        self.assertIn("核验状态**：待核验", result["documentPreview"])
         self.assertIn("不构成律师法律意见", result["documentPreview"])
         self.assertNotIn("可以提交注册", result["documentPreview"])
 
@@ -95,7 +95,7 @@ class AuditEngineTest(unittest.TestCase):
         self.assertEqual(result["riskLevel"], "medium")
         self.assertTrue(any("不能提供注册成功率" in rule["note"] for rule in result["hitRules"]))
         self.assertFalse(any("预计成功率" in rule["note"] for rule in result["hitRules"]))
-        self.assertIn("风险线索等级**：medium", result["documentPreview"])
+        self.assertIn("核验状态**：待核验", result["documentPreview"])
         self.assertIn("不能判断商标是否可注册", result["documentPreview"])
 
 

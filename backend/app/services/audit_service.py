@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -384,7 +384,7 @@ def process_audit_task(task_id: str, image_path: Path) -> None:
             for conflict in conflicts
             if conflict["similarityType"].startswith("图形")
         ]
-        submit_time = datetime.now(UTC).isoformat()
+        submit_time = datetime.now(timezone.utc).isoformat()
         result = {
             "taskId": task_id,
             "status": "done",

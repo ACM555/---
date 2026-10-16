@@ -1,6 +1,9 @@
 from __future__ import annotations
+from app.services.official_monitoring import official_legal_pointers
 
 from datetime import date
+import json
+from pathlib import Path
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -20,6 +23,18 @@ from app.services.legal_repository import LegalRepository
 
 router = APIRouter(prefix="/legal", tags=["法律资料"])
 repository = LegalRepository()
+
+
+@router.get("/scenario-checklists")
+def scenario_checklists(country_code: str | None = None, legal_module: str | None = None, _: dict = Depends(current_user)) -> list[dict]:
+    package_path = Path(__file__).resolve().parents[2] / "data" / "sg_m5_filing_checklist.json"
+    package = json.loads(package_path.read_text(encoding="utf-8"))
+    return [package] if (not country_code or package["countryCode"] == country_code) and (not legal_module or package["legalModule"] == legal_module) else []
+
+
+@router.get("/official-pointers")
+def list_official_pointers(country_code: str | None = None, legal_module: str | None = None, _: dict = Depends(current_user)) -> list[dict]:
+    return [item for item in official_legal_pointers() if (not country_code or item["countryCode"] == country_code) and (not legal_module or item["legalModule"] == legal_module)]
 
 
 @router.get("/sources", response_model=list[LegalSourceRecord])

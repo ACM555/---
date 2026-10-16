@@ -1,14 +1,39 @@
+import tempfile
 import unittest
+from pathlib import Path
 
+from app.core.config import settings
 from app.database import init_database
+from app.services.legal_repository import LegalRepository
 from app.services.rag_retrieval_service import RetrievalService
 from app.services.legal_seed import seed_legal_sources
 
 
 class P5RetrievalScenarioTests(unittest.TestCase):
-    def setUp(self) -> None:
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.original_database_path = settings.DATABASE_PATH
+        cls.temporary_directory = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+        settings.DATABASE_PATH = str(Path(cls.temporary_directory.name) / "p5.sqlite3")
         init_database()
         seed_legal_sources()
+        repository = LegalRepository()
+        for source_id in (
+            "vn-m2-commercial-law-index-2026",
+            "vn-m3-import-procedure-2026",
+            "th-m1-foreign-business-act-2026",
+            "th-m4-labour-protection-2026",
+            "th-m6-arbitration-act-2026",
+            "sg-m5-ip-legislation-2026",
+        ):
+            repository.set_approval_status(source_id, "approved")
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        settings.DATABASE_PATH = cls.original_database_path
+        cls.temporary_directory.cleanup()
+
+    def setUp(self) -> None:
         self.service = RetrievalService()
 
     def test_trade_contract_and_transport_are_country_module_isolated(self) -> None:

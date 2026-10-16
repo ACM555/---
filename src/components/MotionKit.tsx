@@ -36,7 +36,7 @@ export function PageTransition({ children, className = '' }: { children: ReactNo
     <motion.div
       animate="visible"
       className={className}
-      initial="hidden"
+      initial={false}
       variants={pageVariants}
     >
       {children}
@@ -46,7 +46,7 @@ export function PageTransition({ children, className = '' }: { children: ReactNo
 
 export function StaggerGroup({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <motion.div animate="visible" className={className} initial="hidden" variants={staggerVariants}>
+    <motion.div animate="visible" className={className} initial={false} variants={staggerVariants}>
       {children}
     </motion.div>
   )
@@ -72,4 +72,3 @@ export function HoverLift({ children, className = '' }: { children: ReactNode; c
     </motion.div>
   )
 }
-

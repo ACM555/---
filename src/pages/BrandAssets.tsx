@@ -5,7 +5,7 @@ import {
   ExclamationCircleOutlined,
   SafetyCertificateOutlined,
 } from '@ant-design/icons'
-import { Button, Card, Col, Empty, Progress, Row, Skeleton, Space, Table, Tag, Typography } from 'antd'
+import { Alert, Button, Card, Col, Empty, Progress, Row, Skeleton, Space, Table, Tag, Typography } from 'antd'
 import type { TableColumnsType } from 'antd'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -38,6 +38,7 @@ function BrandAssets() {
       .then((data) => {
         if (mounted) setAssets(data)
       })
+      .catch(() => undefined)
       .finally(() => {
         if (mounted) setLoading(false)
       })
@@ -54,6 +55,7 @@ function BrandAssets() {
       render: (_, record) => (
         <Space direction="vertical" size={2}>
           <Text strong>{record.name}</Text>
+          <Tag color={record.isDemo ? 'default' : 'blue'}>{record.isDemo ? '演示样例' : '我的审查'}</Tag>
           <Text type="secondary">{record.englishName} · {record.owner}</Text>
         </Space>
       ),
@@ -81,8 +83,8 @@ function BrandAssets() {
       sorter: (a, b) => a.riskScore - b.riskScore,
       render: (value: number, record) => (
         <Space direction="vertical" size={2} style={{ minWidth: 160 }}>
-          <Tag color={riskColor[record.riskLevel]}>{riskLabel[record.riskLevel]}</Tag>
-          <Progress percent={value} size="small" />
+          <Tag color={record.assessmentStatus === 'pending_verification' ? 'orange' : riskColor[record.riskLevel]}>{record.assessmentStatus === 'pending_verification' ? '待核验' : riskLabel[record.riskLevel]}</Tag>
+          {record.assessmentStatus !== 'pending_verification' && <Progress percent={value} size="small" />}
         </Space>
       ),
     },
@@ -97,6 +99,13 @@ function BrandAssets() {
       dataIndex: 'nextAction',
       key: 'nextAction',
       render: (value: string) => <Text type="secondary">{value}</Text>,
+    },
+    {
+      title: '报告',
+      key: 'report',
+      render: (_, record) => record.taskId ? (
+        <Button size="small" onClick={() => navigate(`/report/${record.taskId}`)}>查看报告</Button>
+      ) : <Text type="secondary">演示样例</Text>,
     },
   ]
 
@@ -114,6 +123,8 @@ function BrandAssets() {
           新增审查
         </Button>
       </div>
+
+      <Alert type="info" showIcon message="已完成的审查会自动收录，仅当前用户可见；演示样例已单独标注，不代表真实客户或注册结果。" />
 
       <StaggerGroup>
       <Row gutter={[16, 16]}>
@@ -137,7 +148,7 @@ function BrandAssets() {
           <MotionItem><HoverLift><Card className="metric-card neon-card">
             <Space>
               <CheckCircleOutlined className="metric-icon success" />
-              <StatisticBlock label="可直接推进" value={`${assets.filter((item) => item.portfolioStatus === '可提交').length} 组`} />
+          <StatisticBlock label="有限范围低风险" value={`${assets.filter((item) => item.riskLevel === 'low').length} 组`} />
             </Space>
           </Card></HoverLift></MotionItem>
         </Col>
@@ -152,11 +163,12 @@ function BrandAssets() {
                 <Space direction="vertical" size={12} style={{ width: '100%' }}>
                   <Space style={{ justifyContent: 'space-between', width: '100%' }}>
                     <Text strong>{item.name}</Text>
-                    <Tag color={riskColor[item.riskLevel]}>{riskLabel[item.riskLevel]}</Tag>
+                    <Tag color={item.assessmentStatus === 'pending_verification' ? 'orange' : riskColor[item.riskLevel]}>{item.assessmentStatus === 'pending_verification' ? '待核验' : riskLabel[item.riskLevel]}</Tag>
                   </Space>
+                  <Tag color={item.isDemo ? 'default' : 'blue'}>{item.isDemo ? '演示样例' : '我的审查'}</Tag>
                   <div className="asset-orbit">
                     <span />
-                    <strong>{item.riskScore}</strong>
+                    <strong>{item.assessmentStatus === 'pending_verification' ? '待核验' : item.riskScore}</strong>
                   </div>
                   <Text type="secondary">{item.englishName}</Text>
                   <Text>{item.nextAction}</Text>

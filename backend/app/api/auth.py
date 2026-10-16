@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 
 from app.database import (
     authenticate_user,
+    create_guest_session,
     create_session,
     create_user,
     delete_session,
@@ -77,6 +78,12 @@ def login(payload: LoginRequest) -> dict:
         "createdAt": row["created_at"],
     }
     return _success({"token": token, "user": user}, "登录成功")
+
+
+@router.post("/guest")
+def guest_login() -> dict:
+    token, user = create_guest_session()
+    return _success({"token": token, "user": user}, "已进入游客评审模式")
 
 
 @router.get("/me")

@@ -33,7 +33,7 @@ def request_for_case(case_id: str) -> dict[str, str]:
     visual_logo = make_logo_base64("visual")
     cases = {
         "D3-001": {
-            "brandName": "茉莉奶白",
+            "brandName": "星岚原创",
             "englishName": "",
             "niceClass": "第43类-餐饮服务",
             "goodsServices": "新茶饮品牌，主营奶茶饮品，目标市场越南",

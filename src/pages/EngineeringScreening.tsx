@@ -1,8 +1,11 @@
 import { FileSearchOutlined } from '@ant-design/icons'
 import { Alert, Button, Card, Form, Input, Result, Select, Space, Tag, Typography } from 'antd'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { askAssistant, type AssistantReply } from '@/api/assistant'
-import { getLegalSources, type LegalSource } from '@/api/legal'
+import { getLegalSources, getOfficialPointers, getScenarioChecklists, type LegalSource, type OfficialLegalPointer, type ScenarioChecklist } from '@/api/legal'
+import ScenarioChecklistCard from '@/components/ScenarioChecklistCard'
+import { createClientId } from '@/utils/clientId'
 
 const countries = [
   ['BN', '文莱'], ['KH', '柬埔寨'], ['ID', '印尼'], ['LA', '老挝'], ['MY', '马来西亚'],
@@ -48,38 +51,84 @@ function StructuredAnswer({ answer }: { answer: string }) {
 }
 
 export default function EngineeringScreening() {
+  const [searchParams] = useSearchParams()
+  const requestedModule = searchParams.get('module')
+  const initialModule = requestedModule && /^M[1-6]$/.test(requestedModule) ? requestedModule : undefined
+  return <EngineeringScreeningForm key={initialModule ?? 'unselected'} initialModule={initialModule} />
+}
+
+function EngineeringScreeningForm({ initialModule }: { initialModule?: string }) {
   const [sources, setSources] = useState<LegalSource[] | null>(null)
   const [reply, setReply] = useState<AssistantReply | null>(null)
   const [submitted, setSubmitted] = useState<ScreeningValues | null>(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [inputChanged, setInputChanged] = useState(false)
+  const [pointers, setPointers] = useState<OfficialLegalPointer[]>([])
+  const [checklists, setChecklists] = useState<ScenarioChecklist[]>([])
   const [form] = Form.useForm<ScreeningValues>()
-  const submit = async () => {
-    const values = await form.validateFields()
+  const requestGeneration = useRef(0)
+  useEffect(() => () => { requestGeneration.current += 1 }, [])
+  const submit = async (values: ScreeningValues) => {
+    const generation = ++requestGeneration.current
     setSubmitted(values)
     setSources(null)
     setReply(null)
     setLoading(true)
+    setError('')
+    setInputChanged(false)
+    setPointers([])
+    setChecklists([])
     try {
       const sourceRows = await getLegalSources({ country_code: values.country, legal_module: values.legalModule })
+      if (generation !== requestGeneration.current) return
       setSources(sourceRows)
+      const officialPointers = await getOfficialPointers({ country_code: values.country, legal_module: values.legalModule })
+      if (generation !== requestGeneration.current) return
+      setPointers(officialPointers)
+      const scenarioRows = await getScenarioChecklists({ country_code: values.country, legal_module: values.legalModule })
+      if (generation !== requestGeneration.current) return
+      setChecklists(scenarioRows)
       const countryLabel = countries.find(item => item.value === values.country)?.label ?? values.country
       const moduleLabel = modules.find(item => item.value === values.legalModule)?.label ?? values.legalModule
-      const question = `${countryLabel}${moduleLabel}。业务场景：${values.scenario}。已知事实：${values.facts?.trim() || '尚未提供'}。请仅基于已审核资料列出核验事项、事实缺口和人工复核原因。`
-      const assistantReply = await askAssistant(question, '/engineering-screening', crypto.randomUUID())
+      const question = `${values.legalModule} 模块：${countryLabel}${moduleLabel}。业务场景：${values.scenario}。已知事实：${values.facts?.trim() || '尚未提供'}。请仅基于已审核资料列出核验事项、事实缺口和人工复核原因。`
+      const assistantReply = await askAssistant(question, '/engineering-screening', createClientId())
+      if (generation !== requestGeneration.current) return
       setReply(assistantReply)
-    } finally { setLoading(false) }
+    } catch (reason) {
+      if (generation === requestGeneration.current) setError(reason instanceof Error ? reason.message : '筛查服务暂时不可用')
+    } finally { if (generation === requestGeneration.current) setLoading(false) }
   }
   const items = submitted ? followUps[submitted.legalModule] ?? [] : []
   return <Space direction="vertical" size={24} style={{ display: 'flex' }}>
     <div className="page-heading"><Tag icon={<FileSearchOutlined />} color="cyan">M1 · M2 · M3 · M4 · M5 · M6</Tag><Typography.Title level={2}>跨境商事基础合规筛查</Typography.Title><Typography.Paragraph type="secondary">系统只输出来源、风险提示和待补事实；不判断是否违法、不承诺许可、胜诉、执行或回款结果。</Typography.Paragraph></div>
-    <Card><Form form={form} layout="vertical" onFinish={submit}>
-      <Form.Item name="country" label="目标国家" rules={[{ required: true, message: '请选择目标国家' }]}><Select options={countries} /></Form.Item>
-      <Form.Item name="legalModule" label="业务模块" rules={[{ required: true, message: '请选择业务模块' }]}><Select options={modules} /></Form.Item>
+    <Card><Form form={form} layout="vertical" onFinish={submit} initialValues={{ legalModule: initialModule }} onValuesChange={() => {
+      requestGeneration.current += 1
+      if (submitted) setInputChanged(true)
+      setSubmitted(null)
+      setSources(null)
+      setReply(null)
+      setError('')
+      setLoading(false)
+      setPointers([])
+      setChecklists([])
+    }}>
+      <Form.Item name="country" label="目标国家" rules={[{ required: true, message: '请选择目标国家' }]}><Select showSearch optionFilterProp="label" options={countries} /></Form.Item>
+      <Form.Item name="legalModule" label="业务模块" rules={[{ required: true, message: '请选择业务模块' }]}><Select showSearch optionFilterProp="label" options={modules} /></Form.Item>
       <Form.Item name="scenario" label="业务场景与当前阶段" rules={[{ required: true, message: '请填写业务场景' }]}><Input placeholder="例如：向当地经销商销售设备；已签约待发货" /></Form.Item>
       <Form.Item name="facts" label="已知事实与待核对材料"><Input.TextArea placeholder="合同、货物、投资结构、人员、知识产权或争议事实；资料不足将提示人工复核" /></Form.Item>
-      <Button type="primary" htmlType="submit" loading={loading}>生成核验清单</Button>
+      <Button type="primary" htmlType="submit" aria-label="生成核验清单" aria-busy={loading} loading={loading}>生成核验清单</Button>
     </Form></Card>
+    {inputChanged && <Alert showIcon type="warning" message="输入已修改，原筛查结果已清除，请重新生成核验清单。" />}
+    {checklists.map(checklist => <ScenarioChecklistCard key={checklist.id} checklist={checklist} />)}
+    {pointers.length > 0 && <Card title="可验证的官方原文入口（不代替法律内容审核）"><Space direction="vertical" size={12} style={{ display: 'flex' }}>{pointers.map(pointer => <div key={pointer.id}>
+      <a href={pointer.sourceUrl} target="_blank" rel="noreferrer">{pointer.title}</a>
+      <Typography.Paragraph>{pointer.scope}</Typography.Paragraph>
+      <Typography.Text type="secondary">索引回查时间：{pointer.lastCheckedAt}；法规版本以原文显示为准。</Typography.Text>
+      <Typography.Paragraph>适用条件：{pointer.prerequisites.join('；')}</Typography.Paragraph>
+    </div>)}</Space></Card>}
     {loading && <Alert showIcon type="info" message="正在检索已审核资料并生成受控风险提示" description="复杂场景通常需要 20–40 秒。请勿重复点击；系统不会在无来源或高风险事实下生成确定性结论。" />}
+    {error && <Alert showIcon type="error" message="筛查未完成，请重试" description={error} action={<Button onClick={() => form.submit()}>重新生成核验清单</Button>} />}
     {sources !== null && <Card title="筛查结果：来源、待补事实与人工复核">
       <Alert type="warning" showIcon message="初步风险提示，不构成律师法律意见或主管机关决定。关键事实、版本和适用条件须人工复核。" />
       <Typography.Title level={4}>必须进一步确认</Typography.Title>

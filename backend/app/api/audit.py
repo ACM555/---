@@ -1,18 +1,31 @@
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from uuid import uuid4
 
-from fastapi import APIRouter, Depends, HTTPException
+import base64
+import binascii
+
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import Response
 
 from app.api.auth import current_user
-from app.database import create_task, get_task, update_task
+from app.core.config import settings
+from app.database import create_task, get_task, list_audit_tasks, record_report_view, update_task
 from app.models.audit import AuditRequest, AuditResponse, AuditResult, UnifiedResponse
 from app.services.audit_engine import run_audit
+from app.services.audit_result import build_complete_audit_result
+from app.services.pdf_service import build_audit_pdf
 
 router = APIRouter(prefix="/audit", tags=["商标审查"])
+
+
+@router.get("/tasks")
+def audit_tasks(user: dict = Depends(current_user)) -> dict:
+    return {"code": 0, "message": "success", "data": list_audit_tasks(limit=200, user_id=user["userId"])}
 
 @router.post(
     "",
     response_model=UnifiedResponse,
+    status_code=status.HTTP_202_ACCEPTED,
     summary="提交商标审查",
     description="""
 接收品牌信息与 Logo 图片，创建审查任务。
@@ -47,6 +60,16 @@ router = APIRouter(prefix="/audit", tags=["商标审查"])
 )
 async def submit_audit(req: AuditRequest, user: dict = Depends(current_user)) -> UnifiedResponse:
     """提交商标审查任务，并返回用于轮询的 taskId。"""
+
+    logo_payload = req.logo.split(",", 1)[1] if "," in req.logo and "base64" in req.logo[:50] else req.logo
+    try:
+        logo_bytes = base64.b64decode(logo_payload, validate=True)
+    except (binascii.Error, ValueError) as error:
+        raise HTTPException(status_code=422, detail="Logo 不是有效的 Base64 图片") from error
+    if len(logo_bytes) > settings.MAX_IMAGE_SIZE_MB * 1024 * 1024:
+        raise HTTPException(status_code=413, detail=f"Logo 图片不能超过 {settings.MAX_IMAGE_SIZE_MB} MB")
+    if not (logo_bytes.startswith(b"\x89PNG\r\n\x1a\n") or logo_bytes.startswith(b"\xff\xd8\xff")):
+        raise HTTPException(status_code=422, detail="Logo 仅支持 PNG 或 JPEG 图片")
 
     task_id = str(uuid4())
     create_task(task_id, user["userId"], req.model_dump())
@@ -141,14 +164,33 @@ async def get_audit_result(taskId: str, user: dict = Depends(current_user)) -> U
 
     task = get_task(taskId)
     if not task:
-        return UnifiedResponse(code=404, message="任务不存在", data=None)
+        raise HTTPException(status_code=404, detail="任务不存在")
     if task["userId"] != user["userId"] and user.get("role") != "superadmin":
         raise HTTPException(status_code=404, detail="任务不存在")
 
-    created_at = datetime.fromisoformat(task["createdAt"])
-    elapsed = (datetime.now(UTC) - created_at.astimezone(UTC)).total_seconds()
+    if task["status"] == "done" and task["result"] and task["result"].get("reportSchemaVersion") != 2:
+        raw_result = run_audit(task["request"]) if task["request"].get("logo") else task["result"]
+        migrated_result = build_complete_audit_result(taskId, task["request"], raw_result)
+        migrated_result["summary"]["submitTime"] = task["createdAt"]
+        update_task(
+            taskId,
+            status="done",
+            current_step=2,
+            progress=100,
+            result=migrated_result,
+            error_message="",
+            touch_updated=False,
+        )
+        task = get_task(taskId)
+        if task is None:
+            raise HTTPException(status_code=404, detail="任务不存在")
 
-    if elapsed < 1:
+    created_at = datetime.fromisoformat(task["createdAt"])
+    elapsed = (datetime.now(timezone.utc) - created_at.astimezone(timezone.utc)).total_seconds()
+
+    if task["status"] in {"done", "error"}:
+        pass
+    elif elapsed < 1:
         update_task(taskId, status="pending", current_step=0, progress=10)
     elif elapsed < 2:
         update_task(taskId, status="processing", current_step=0, progress=33)
@@ -159,16 +201,18 @@ async def get_audit_result(taskId: str, user: dict = Depends(current_user)) -> U
     else:
         if task["result"] is None:
             try:
-                result = run_audit(task["request"])
+                raw_result = run_audit(task["request"])
+                result = build_complete_audit_result(taskId, task["request"], raw_result)
+                result["summary"]["submitTime"] = task["createdAt"]
                 update_task(taskId, status="done", current_step=2, progress=100, result=result, error_message="")
             except Exception as error:
                 update_task(taskId, status="error", current_step=2, progress=100, error_message=str(error)[:500])
-        elif task["status"] != "error":
+        elif task["status"] not in {"done", "error"}:
             update_task(taskId, status="done", current_step=2, progress=100)
 
     task = get_task(taskId)
     if task is None:
-        return UnifiedResponse(code=404, message="任务不存在", data=None)
+        raise HTTPException(status_code=404, detail="任务不存在")
 
     result = {
         "taskId": taskId,
@@ -178,6 +222,54 @@ async def get_audit_result(taskId: str, user: dict = Depends(current_user)) -> U
     }
     if task["status"] == "done" and task["result"]:
         result.update(task["result"])
+        record_report_view(taskId)
+        result["createdAt"] = task["createdAt"]
+        result["completedAt"] = task["completedAt"]
 
     AuditResult.model_validate(result)
     return UnifiedResponse(code=0, message="success", data=result)
+
+
+@router.get(
+    "/report/{taskId}/pdf",
+    summary="下载审查报告 PDF",
+    description="仅任务创建者或超级管理员可以下载已完成任务的 PDF 报告。",
+)
+async def download_audit_report(taskId: str, user: dict = Depends(current_user)) -> Response:
+    task = get_task(taskId)
+    if task is None or (
+        task["userId"] != user["userId"] and user.get("role") != "superadmin"
+    ):
+        raise HTTPException(status_code=404, detail="任务不存在")
+    if task["status"] != "done" or not task["result"]:
+        raise HTTPException(status_code=409, detail="报告尚未生成完成")
+
+    if task["result"].get("reportSchemaVersion") != 2:
+        raw_result = run_audit(task["request"]) if task["request"].get("logo") else task["result"]
+        migrated_result = build_complete_audit_result(taskId, task["request"], raw_result)
+        migrated_result["summary"]["submitTime"] = task["createdAt"]
+        update_task(
+            taskId,
+            status="done",
+            current_step=2,
+            progress=100,
+            result=migrated_result,
+            error_message="",
+            touch_updated=False,
+        )
+        task = get_task(taskId)
+        if task is None or not task["result"]:
+            raise HTTPException(status_code=404, detail="任务不存在")
+
+    pdf_bytes = build_audit_pdf(task["result"])
+    if not pdf_bytes or not pdf_bytes.startswith(b"%PDF-"):
+        raise HTTPException(status_code=503, detail="报告文件生成失败，请稍后重试")
+    filename = f"outbound-guard-{taskId}.pdf"
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"',
+            "Cache-Control": "private, no-store",
+        },
+    )

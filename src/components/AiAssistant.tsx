@@ -3,6 +3,7 @@ import { RobotOutlined, SendOutlined, CloseOutlined, FileTextOutlined, PaperClip
 import { Button, Input, Spin, Tag, Typography } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { askAssistant, type AssistantReply } from '@/api/assistant'
+import { createClientId } from '@/utils/clientId'
 
 interface ChatMessage {
   role: 'assistant' | 'user'
@@ -66,7 +67,7 @@ export default function AiAssistant() {
   const [question, setQuestion] = useState('')
   const [loading, setLoading] = useState(false)
   const [imageDataUrl, setImageDataUrl] = useState<string>()
-  const [sessionId] = useState(() => crypto.randomUUID())
+  const [sessionId] = useState(createClientId)
   const [position, setPosition] = useState<AssistantPosition>(() => clampPosition(getInitialPosition()))
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'assistant', text: '我是合规引导助手。可以协助你准备材料、理解风险和定位系统规则。' },

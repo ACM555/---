@@ -4,8 +4,12 @@ pydantic==2.9.0
 python-dotenv==1.0.1
 python-multipart==0.0.9
 httpx==0.27.0
+cryptography==46.0.7
 opencv-python-headless==4.10.0.84
 numpy==1.26.4
+Pillow==10.4.0
+pytest==8.3.5
+reportlab==4.2.5
 # The following dependencies are reserved for later model integrations.
 # openai==1.40.0
 # google-generativeai==0.7.2

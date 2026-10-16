@@ -26,7 +26,7 @@ async def chat(payload: AssistantChatRequest, user: dict = Depends(current_user)
     except BailianConfigurationError as error:
         raise HTTPException(status_code=503, detail=str(error)) from error
     except BailianServiceError as error:
-        logger.exception("AI 助手调用百炼服务失败")
+        logger.exception("AI 助手调用模型服务失败")
         raise HTTPException(status_code=503, detail=str(error)) from error
 
 
@@ -40,7 +40,7 @@ async def chat_stream(payload: AssistantChatRequest, user: dict = Depends(curren
         except BailianConfigurationError as error:
             yield f"data: {json.dumps({'error': str(error)}, ensure_ascii=False)}\n\n"
         except BailianServiceError as error:
-            logger.exception("AI 助手流式调用百炼服务失败")
+            logger.exception("AI 助手流式调用模型服务失败")
             yield f"data: {json.dumps({'error': str(error)}, ensure_ascii=False)}\n\n"
         except Exception:
             logger.exception("AI 助手发生未处理异常")
@@ -64,4 +64,4 @@ async def upload_knowledge(file: UploadFile = File(...), user: dict = Depends(cu
     if not text.strip():
         raise HTTPException(status_code=422, detail="资料内容不能为空。")
     document_id = orchestrator.store_text_document(user["userId"], filename, text)
-    return AssistantUploadResponse(document_id=document_id, filename=filename, indexed=True, message="资料已入库，将仅用于当前用户的检索。")
+    return AssistantUploadResponse(document_id=document_id, filename=filename, indexed=True, message="资料已按用户隔离保存；未经审核的内容不会作为法律结论依据。")

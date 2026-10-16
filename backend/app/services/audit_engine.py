@@ -45,6 +45,8 @@ def _estimate_score(hit_rules: list[dict[str, Any]]) -> int:
     for hit_rule in hit_rules:
         if not hit_rule.get("applicable"):
             continue
+        if hit_rule.get("ruleId") == "VN-INFO-004":
+            continue
         article = str(hit_rule.get("article") or "")
         content = str(hit_rule.get("content") or "")
         if "公共标志" in content or "重大法律风险" in content:
@@ -69,13 +71,13 @@ def _estimate_score(hit_rules: list[dict[str, Any]]) -> int:
 def _build_overall_result(risk_level: str, score: int, hit_rules: list[dict[str, Any]]) -> str:
     triggered = [rule for rule in hit_rules if rule.get("applicable")]
     if not triggered:
-        return "当前有限范围内未命中明显风险；仍建议在正式提交前由越南代理人进行数据库复核。"
+        return "当前有限范围内未命中明显风险线索，但这不代表低法律风险。核验状态为待核验；正式提交前仍须完成目标国家官方检索及专业复核。"
 
     if risk_level == "high":
-        return f"发现高风险审查线索，综合风险分值 {score}/100。建议暂缓直接提交，先完成法律人工复核和标识调整。"
+        return "本地规则检出需优先核对的资料线索；尚未完成正式在先权利检索，不作法律风险评级。核验状态为待核验，请完成官方检索及人工复核。"
     if risk_level == "medium":
-        return f"发现需关注的审查线索，综合风险分值 {score}/100。建议补充材料并进行人工复核后再提交。"
-    return f"当前仅发现低风险或信息性提示，综合风险分值 {score}/100。可进入下一轮人工确认。"
+        return "发现需进一步核对的规则或资料线索。核验状态为待核验，不作法律风险评级；请补充材料并进行人工复核。"
+    return "当前仅发现信息性提示。核验状态为待核验，不作法律风险评级；图形特征不能代替真实在先权利检索。"
 
 
 def _build_suggestions(hit_rules: list[dict[str, Any]], score: int) -> list[dict[str, str]]:
@@ -167,17 +169,15 @@ def _build_legal_basis_section(
         title = str(reference.get("title") or "越南《知识产权法》相关条款")
         summary = str(reference.get("summary") or reference.get("relevance") or "需结合法条原文进行人工复核。")
         source = str(reference.get("source") or "本地法条知识库")
-        lines.append(f"**{title}**（来源：{source}）")
-        lines.append(f"> \"{summary}\"")
+        label = "内部规则，不是正式法源" if reference.get("sourceKind") == "internal_rule" else "资料线索，适用性待核验"
+        lines.append(f"**{title}**（{label}；来源：{source}）")
+        lines.append(summary)
+        if reference.get("sourceUrl"):
+            lines.append(f"官方原文入口：{reference['sourceUrl']}")
         lines.append("")
 
     if not lines:
-        if risk_level == "low":
-            lines.append("越南《知识产权法》第72条可作为核验标识区分性要件的条文线索；当前资料不足以判断可注册性：")
-            lines.append("> \"商标应包含足以将其所有者的商品或服务与他人的商品或服务区分开的特征\"")
-        else:
-            lines.append("**越南《知识产权法》第73、74条相关审查规则**")
-            lines.append("> \"商标不得包含法律禁止使用的标志，且应具备足以区分商品或服务来源的显著性。\"")
+        lines.append("当前没有已审核并适用于本场景的条款摘录，不生成或引用拟制法条。请回查官方原文并补充适用事实。")
         lines.append("")
 
     trademark_refs = [reference for reference in references if reference.get("refType") == "trademark"]
@@ -230,7 +230,7 @@ def _build_document_preview(
 
     return f"""# M5 商标与技术出海风险提示清单（内测）
 **生成时间**：{generated_at}
-**风险线索等级**：{risk_level}
+**核验状态**：待核验，不作法律风险评级
 
 ## 已提供事实
 - 标识/名称：{brand_name or '待补充'}
@@ -862,7 +862,7 @@ def run_audit(req: dict[str, Any]) -> dict[str, Any]:
     score = _estimate_score(hit_rules)
     risk_level = _risk_level(score)
     overall = _build_overall_result(risk_level, score, hit_rules)
-    manual_review_required = bool([rule for rule in hit_rules if rule.get("applicable")]) or score >= 40
+    manual_review_required = True
 
     suggestions = _build_suggestions(hit_rules, score)
 
@@ -877,6 +877,7 @@ def run_audit(req: dict[str, Any]) -> dict[str, Any]:
         "references": references,
         "suggestions": suggestions,
         "manualReviewRequired": manual_review_required,
+        "assessmentStatus": "pending_verification",
         "radarData": vision.get("radarData", []),
         "matchedBrands": vision.get("matchedBrands", []),
         "documentPreview": _build_document_preview(req, risk_level, score, overall, hit_rules, references, suggestions),

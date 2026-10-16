@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import secrets
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from app.database import _connect, _now
 
@@ -30,7 +30,7 @@ class AssistantSessionMemory:
         self, user_id: str, session_id: str, confirmed_facts: dict[str, str],
         country_code: str | None, legal_module: str | None, source_ids: list[str],
     ) -> None:
-        expires_at = (datetime.now(UTC) + timedelta(hours=8)).isoformat()
+        expires_at = (datetime.now(timezone.utc) + timedelta(hours=8)).isoformat()
         with _connect() as connection:
             connection.execute(
                 """

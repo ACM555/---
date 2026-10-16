@@ -10,8 +10,18 @@ backend/server.log
 backend/**/__pycache__
 backend/data/runtime
 backend/data/trademark_images
-backend/data/*.sqlite3
-backend/data/*.sqlite3-*
+# 数据库文件：原规则 backend/data/*.sqlite3 里的 * 不跨 /，
+# 会漏掉 backend/data/backups/*.sqlite3 和 data/*.sqlite3，导致真实数据被提交到公开仓库
+**/*.sqlite3
+**/*.sqlite3-shm
+**/*.sqlite3-wal
+**/*.sqlite3-*
 backend/tests/.runtime
+.pytest_cache/
+backend/data/backups/
+.release-*/
 playwright-report
 test-results
+
+__pycache__/
+*.pyc

@@ -8,11 +8,13 @@ import {
   SafetyCertificateOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { App as AntdApp, Button, Card, Form, Input, Space, Tag, Typography } from 'antd'
+import { App as AntdApp, Button, Card, Divider, Form, Input, Space, Tag, Typography } from 'antd'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
+import { assetPath } from '@/utils/assetPath'
+import ExperienceQr from '@/components/ExperienceQr'
 
 const { Paragraph, Text, Title } = Typography
 
@@ -49,16 +51,17 @@ const trustMetrics = [
   { label: '能力模块', suffix: '大', value: '6' },
   { label: '数据源', suffix: '路', value: '4' },
   { label: '报告生成', suffix: 'PDF', value: '1' },
-  { label: '监控链路', suffix: '闭环', value: '7×24' },
+  { label: '预警队列', suffix: '演示', value: '样例' },
 ]
 
 function Auth({ mode }: AuthProps) {
   const [form] = Form.useForm<AuthFormValues>()
   const [submitting, setSubmitting] = useState(false)
+  const [guestSubmitting, setGuestSubmitting] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
   const { message } = AntdApp.useApp()
-  const { login, register } = useAuth()
+  const { login, loginAsGuest, register } = useAuth()
   const isRegister = mode === 'register'
 
   const handleFinish = async (values: AuthFormValues) => {
@@ -83,6 +86,20 @@ function Auth({ mode }: AuthProps) {
     }
   }
 
+  const handleGuestLogin = async () => {
+    setGuestSubmitting(true)
+    try {
+      await loginAsGuest()
+      message.success('已进入游客评审模式')
+      const from = new URLSearchParams(location.search).get('from')
+      navigate(from || '/', { replace: true })
+    } catch {
+      // Request interceptor already shows the backend validation message.
+    } finally {
+      setGuestSubmitting(false)
+    }
+  }
+
   return (
     <div className="auth-shell auth-shell-pro">
       <div className="auth-photo-layer" aria-hidden="true" />
@@ -93,11 +110,11 @@ function Auth({ mode }: AuthProps) {
       <motion.section
         animate={{ opacity: 1, y: 0 }}
         className="auth-intro auth-intro-pro"
-        initial={{ opacity: 0, y: 24 }}
+        initial={false}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="auth-brand-row">
-          <img alt="Outbound Guard" src="/assets/brand/outbound-guard-mark.svg" />
+          <img alt="Outbound Guard" src={assetPath('/assets/brand/outbound-guard-mark.svg')} />
           <div>
             <Text className="auth-kicker">Outbound Guard · ASEAN Legal AI Assistant</Text>
             <Text>面向中国企业进入东盟市场的跨境商事法律 AI 助手</Text>
@@ -105,12 +122,10 @@ function Auth({ mode }: AuthProps) {
         </div>
 
         <Title>企业出海跨境商事合规入口</Title>
-        <div className="auth-team-roles" aria-label="项目成员分工">
-          <p><strong>潘金沐</strong> | 负责 FastAPI 后端开发，完成接口设计、业务逻辑实现、AI 服务集成、报告生成及系统部署。</p>
-          <p><strong>赵英凯</strong> | 负责 Web 前端开发，完成品牌资产、智能审查、报告中心、监控预警等页面开发，实现前端交互与可视化展示。</p>
-          <p><strong>黄一</strong> | 负责产品规划、需求分析、业务流程设计、法律规则设计、Knowledge Hub 建设、文书模板设计、项目统筹及参赛材料编写。</p>
-          <p><strong>李国奡</strong> | 负责商标数据库、法律规则库、案例库及文书模板库建设，整理公开数据资源，支撑 AI 智能审查与知识检索。</p>
-          <p><strong>汪科帆</strong> | 负责 AI 算法与模型开发，完成多模态模型接入、RAG 检索增强、智能体协同及商标风险分析能力优化。</p>
+        <div className="auth-team-roles" aria-label="产品能力说明">
+          <p>
+            把注册前预检、跨类保护、公告期监控和报告归档整合为一套可上线的企业级法律科技 SaaS。
+          </p>
         </div>
 
         <div className="auth-value-list">
@@ -138,7 +153,7 @@ function Auth({ mode }: AuthProps) {
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           className="auth-command-card"
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           transition={{ delay: 0.16, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="command-card-head">
@@ -150,7 +165,7 @@ function Auth({ mode }: AuthProps) {
           </div>
           <div className="command-card-body">
             <div className="security-thumb">
-              <img alt="数据安全风控界面" src="/assets/photos/auth-data-security.webp" />
+              <img alt="数据安全风控界面" src={assetPath('/assets/photos/auth-data-security.webp')} />
               <div className="security-scan" />
             </div>
             <div className="risk-lines">
@@ -168,7 +183,7 @@ function Auth({ mode }: AuthProps) {
       <motion.div
         animate={{ opacity: 1, x: 0 }}
         className="auth-form-panel"
-        initial={{ opacity: 0, x: 28 }}
+        initial={false}
         transition={{ delay: 0.08, duration: 0.46, ease: [0.22, 1, 0.36, 1] }}
       >
         <Card className="auth-card auth-card-pro">
@@ -218,10 +233,36 @@ function Auth({ mode }: AuthProps) {
                 </Form.Item>
               </>
             ) : null}
-            <Button block htmlType="submit" loading={submitting} size="large" type="primary">
+            <Button
+              block
+              disabled={guestSubmitting}
+              htmlType="submit"
+              loading={submitting}
+              size="large"
+              type="primary"
+            >
               {isRegister ? '注册并进入系统' : '登录'}
             </Button>
           </Form>
+
+          {!isRegister ? (
+            <>
+              <Divider plain>评委快速体验</Divider>
+              <Button
+                block
+                disabled={submitting}
+                loading={guestSubmitting}
+                onClick={handleGuestLogin}
+                size="large"
+              >
+                游客访问（无需注册）
+              </Button>
+              <Text className="guest-access-hint" type="secondary">
+                一键进入评审环境，可体验风险工作台、智能审查、报告、监控与规则库。
+              </Text>
+              <ExperienceQr />
+            </>
+          ) : null}
 
           <div className="auth-card-footer">
             <Space size={8}>
@@ -244,7 +285,7 @@ function Auth({ mode }: AuthProps) {
         </Card>
 
         <div className="auth-side-card">
-          <img alt="企业合规办公场景" src="/assets/photos/auth-corporate-legal.webp" />
+          <img alt="企业合规办公场景" src={assetPath('/assets/photos/auth-corporate-legal.webp')} />
           <div>
             <FileDoneOutlined />
             <Text>证据链报告 · 中英越文档 · PDF 归档</Text>

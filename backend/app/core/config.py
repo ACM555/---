@@ -48,6 +48,17 @@ class Settings:
     LLM_MODEL: str = os.getenv("LLM_MODEL", "gpt-4o")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
 
+    GLM_API_KEY: str = os.getenv("GLM_API_KEY", "")
+    GLM_BASE_URL: str = os.getenv("GLM_BASE_URL", "https://open.bigmodel.cn/api/paas/v4")
+    GLM_MODEL: str = os.getenv("GLM_MODEL", "glm-4-flash")
+    MODEL_PROVIDER: str = os.getenv("MODEL_PROVIDER", "").strip().lower()
+    DEEPSEEK_API_KEY: str = os.getenv("DEEPSEEK_API_KEY", "")
+    DEEPSEEK_BASE_URL: str = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+    DEEPSEEK_MODEL: str = os.getenv("DEEPSEEK_MODEL", "deepseek-flash")
+    MONITORING_ENABLED: bool = _get_bool("MONITORING_ENABLED", False)
+    MONITORING_INTERVAL_SECONDS: int = _get_int("MONITORING_INTERVAL_SECONDS", 21600)
+    PUBLIC_DATA_API_KEY: str = os.getenv("PUBLIC_DATA_API_KEY", "")
+
     IFLYTEK_API_PASSWORD: str = os.getenv("IFLYTEK_API_PASSWORD", "")
     IFLYTEK_BASE_URL: str = os.getenv("IFLYTEK_BASE_URL", "https://spark-api-open.xf-yun.com/x2")
     IFLYTEK_MODEL: str = os.getenv("IFLYTEK_MODEL", "spark-x")
@@ -70,7 +81,7 @@ class Settings:
         return self.APP_ENV.strip().lower() == "production"
 
     def validate(self) -> None:
-        """启动时校验配置；模拟阶段不强制要求模型 API Key。"""
+        """启动时校验配置；开发环境允许在未配置模型时启动。"""
 
         errors: list[str] = []
         if not self.APP_NAME:
@@ -89,6 +100,12 @@ class Settings:
             errors.append("必须通过 SUPERADMIN_PASSWORD 配置超级管理员密码")
         if self.ASSISTANT_MAX_FILE_MB <= 0:
             errors.append("ASSISTANT_MAX_FILE_MB 必须大于 0")
+        if self.MODEL_PROVIDER and self.MODEL_PROVIDER not in {"glm", "deepseek", "iflytek", "openai-compatible"}:
+            errors.append("MODEL_PROVIDER 不是支持的模型提供方")
+        if self.MODEL_PROVIDER and not self.model_api_key:
+            errors.append("选定的模型提供方尚未配置 API Key")
+        if self.MONITORING_INTERVAL_SECONDS < 3600:
+            errors.append("MONITORING_INTERVAL_SECONDS 不能小于 3600 秒")
 
         required_dirs = {
             "UPLOAD_DIR": self.UPLOAD_DIR,
@@ -100,8 +117,8 @@ class Settings:
             if not value:
                 errors.append(f"{name} 未设置")
 
-        if self.is_production and self.IFLYTEK_API_PASSWORD in {"", "your-iflytek-api-password-here"}:
-            errors.append("生产环境必须配置 IFLYTEK_API_PASSWORD")
+        if self.is_production and not self.model_api_key:
+            errors.append("生产环境必须配置 GLM_API_KEY、DEEPSEEK_API_KEY、IFLYTEK_API_PASSWORD 或 LLM_API_KEY")
 
         if errors:
             raise RuntimeError("配置校验失败:\n" + "\n".join(f"  - {error}" for error in errors))
@@ -125,6 +142,46 @@ class Settings:
     @property
     def iflytek_base_url(self) -> str:
         return self.IFLYTEK_BASE_URL.rstrip("/")
+
+    @property
+    def model_provider(self) -> str:
+        if self.MODEL_PROVIDER:
+            return self.MODEL_PROVIDER
+        if self.GLM_API_KEY:
+            return "glm"
+        if self.IFLYTEK_API_PASSWORD:
+            return "iflytek"
+        if self.LLM_API_KEY:
+            return "openai-compatible"
+        if self.DEEPSEEK_API_KEY:
+            return "deepseek"
+        return "unconfigured"
+
+    @property
+    def model_api_key(self) -> str:
+        return {"glm": self.GLM_API_KEY, "deepseek": self.DEEPSEEK_API_KEY, "iflytek": self.IFLYTEK_API_PASSWORD, "openai-compatible": self.LLM_API_KEY}.get(self.model_provider, "")
+
+    @property
+    def model_base_url(self) -> str:
+        return {"glm": self.GLM_BASE_URL, "deepseek": self.DEEPSEEK_BASE_URL, "iflytek": self.IFLYTEK_BASE_URL, "openai-compatible": self.LLM_BASE_URL}.get(self.model_provider, self.LLM_BASE_URL).rstrip("/")
+
+    @property
+    def model_name(self) -> str:
+        return {"glm": self.GLM_MODEL, "deepseek": self.DEEPSEEK_MODEL, "iflytek": self.IFLYTEK_MODEL, "openai-compatible": self.LLM_MODEL}.get(self.model_provider, self.LLM_MODEL)
+
+    def model_config(self, provider: str) -> tuple[str, str, str]:
+        configurations = {
+            "glm": (self.GLM_API_KEY, self.GLM_BASE_URL, self.GLM_MODEL),
+            "deepseek": (self.DEEPSEEK_API_KEY, self.DEEPSEEK_BASE_URL, self.DEEPSEEK_MODEL),
+            "iflytek": (self.IFLYTEK_API_PASSWORD, self.IFLYTEK_BASE_URL, self.IFLYTEK_MODEL),
+            "openai-compatible": (self.LLM_API_KEY, self.LLM_BASE_URL, self.LLM_MODEL),
+        }
+        return configurations.get(provider, ("", "", ""))
+
+    @property
+    def public_data_providers(self) -> list[str]:
+        providers = ["deepseek", "glm"] if self.DEEPSEEK_API_KEY else [self.model_provider]
+        return [provider for provider in providers if self.model_config(provider)[0]]
 
 
 settings = Settings()

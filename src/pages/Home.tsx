@@ -30,6 +30,8 @@ import {
 } from 'antd'
 import { useEffect, useMemo, useState, type KeyboardEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '@/context/AuthContext'
+import { assetPath } from '@/utils/assetPath'
 import { HoverLift, MotionItem, StaggerGroup } from '@/components/MotionKit'
 import ProductEmpty from '@/components/ProductEmpty'
 import { getPlatformOverview, type PlatformOverview } from '@/api/platform'
@@ -64,7 +66,7 @@ const moduleIcons = [
   <FileTextOutlined />,
 ]
 
-const quickActions = [
+const primaryQuickActions = [
   {
     desc: '按国家、模块、场景和事实生成受控核验清单',
     icon: <SendOutlined />,
@@ -78,16 +80,10 @@ const quickActions = [
     title: '品牌资产库',
   },
   {
-    desc: '订阅公告期异议、抢注与法规变更信号',
+    desc: '查看演示预警队列与风险处理建议',
     icon: <MonitorOutlined />,
     path: '/monitoring',
     title: '监控预警',
-  },
-  {
-    desc: '进入运营后台，查看任务和系统运行状态',
-    icon: <BankOutlined />,
-    path: '/admin',
-    title: '后台管理',
   },
 ]
 
@@ -100,7 +96,7 @@ const portalNews = [
   {
     date: '07-18',
     tag: '能力升级',
-    title: 'M2 驰名/跨类保护模型加入权利族聚类，提升国际品牌冲突识别能力',
+    title: 'M5 商标资料核验演示：整理权属、相似标识与人工复核事项',
   },
   {
     date: '07-18',
@@ -116,22 +112,22 @@ const portalNews = [
 
 const strategyCards = [
   {
-    cover: '/assets/photos/china-business-meeting.webp',
-    kicker: '媒体东大式栏目',
+    cover: assetPath('/assets/photos/china-business-meeting.webp'),
+    kicker: '报告归档',
     path: '/reports',
     title: '报告中心',
     text: '沉淀可复用、可归档、可交付的中英越文审查报告与代理人协作清单。',
   },
   {
-    cover: '/assets/photos/china-city-data.webp',
-    kicker: '学术东大式栏目',
+    cover: assetPath('/assets/photos/china-city-data.webp'),
+    kicker: '规则资料',
     path: '/rules',
     title: '国家规则库',
     text: '按越南、泰国、印尼、马来西亚等市场组织禁用条款、周期和提交策略。',
   },
   {
-    cover: '/assets/photos/china-court-office.webp',
-    kicker: '活力东大式栏目',
+    cover: assetPath('/assets/photos/china-court-office.webp'),
+    kicker: '品牌监控',
     path: '/assets',
     title: '品牌运营视图',
     text: '把品牌资产、监控事件和注册阶段打通，给评委看到完整业务闭环。',
@@ -151,6 +147,7 @@ function handleCardKey(event: KeyboardEvent<HTMLElement>, action: () => void) {
 
 function Home() {
   const navigate = useNavigate()
+  const { isAdmin } = useAuth()
   const [overview, setOverview] = useState<PlatformOverview>(fallbackOverview)
   const [assets, setAssets] = useState<BrandAsset[]>([])
   const [alerts, setAlerts] = useState<MonitoringAlert[]>([])
@@ -196,6 +193,25 @@ function Home() {
   const highAlerts = alerts.filter((item) => item.severity === 'high').length
   const featuredAlert = alerts[0]
   const moduleRows = useMemo(() => overview.modules.slice(0, 6), [overview.modules])
+  const quickActions = useMemo(
+    () => [
+      ...primaryQuickActions,
+      isAdmin
+        ? {
+            desc: '查看任务、用户、资料审核和系统运行状态',
+            icon: <BankOutlined />,
+            path: '/admin',
+            title: '运营后台',
+          }
+        : {
+            desc: '集中查看已完成的风险报告与归档材料',
+            icon: <FileTextOutlined />,
+            path: '/reports',
+            title: '报告归档',
+          },
+    ],
+    [isAdmin],
+  )
 
   return (
     <Space direction="vertical" size={30} style={{ display: 'flex' }}>
@@ -226,9 +242,9 @@ function Home() {
         </div>
 
         <div className="seu-hero-board">
-          <Text className="board-kicker">LIVE RISK INDEX</Text>
+          <Text className="board-kicker">DEMO OVERVIEW</Text>
           <strong>{overview.healthScore ?? 86}</strong>
-          <span>平台健康度</span>
+          <span>演示运行指标</span>
           <Divider />
           <Space direction="vertical" size={8}>
             <Text>NOIP / WIPO / TMview 与本地资料核验入口</Text>
@@ -275,8 +291,8 @@ function Home() {
       <section className="seu-news-section">
         <div className="section-titlebar seu-titlebar">
           <div>
-            <Text className="section-kicker">Risk Headlines</Text>
-            <Title level={2}>风控要闻</Title>
+            <Text className="section-kicker">演示动态 · 非实时监控</Text>
+            <Title level={2}>风险队列样例</Title>
           </div>
           <Button type="link" onClick={() => navigate('/monitoring')}>
             更多预警
@@ -320,7 +336,7 @@ function Home() {
       <section className="portal-section seu-capability-section">
         <div className="section-titlebar seu-titlebar">
           <div>
-            <Text className="section-kicker">Capability Columns</Text>
+            <Text className="section-kicker">核心能力</Text>
             <Title level={2}>M1-M6 能力栏目</Title>
           </div>
           <Tag color="green">六大模块已接入演示链路</Tag>
@@ -334,7 +350,13 @@ function Home() {
             {moduleRows.map((item, index) => (
               <Col key={item.key} xs={24} md={12} xl={8}>
                 <HoverLift>
-                  <Card className="seu-channel-card">
+                  <Card
+                    className="seu-channel-card"
+                    onClick={() => navigate(`/engineering-screening?module=${item.key}`)}
+                    onKeyDown={(event) => handleCardKey(event, () => navigate(`/engineering-screening?module=${item.key}`))}
+                    role="button"
+                    tabIndex={0}
+                  >
                     <div className="channel-index">{String(index + 1).padStart(2, '0')}</div>
                     <div className="channel-icon">{moduleIcons[index] ?? <CheckCircleOutlined />}</div>
                     <Text className="channel-key">{item.key}</Text>
@@ -376,9 +398,9 @@ function Home() {
 
       <section className="seu-data-band">
         <div>
-          <Text className="section-kicker">Digital Platform</Text>
-          <Title level={2}>数字平台</Title>
-          <Paragraph>把规则、审查、报告、预警和后台运营集中到一套可展示、可测试、可上线的比赛产品里。</Paragraph>
+          <Text className="section-kicker">平台运行概览</Text>
+          <Title level={2}>企业级法律科技 SaaS</Title>
+          <Paragraph>把注册前预检、跨类保护、公告期监控和报告归档整合为一套可测试、可交付、可持续运营的产品。</Paragraph>
         </div>
         <Row gutter={[18, 18]}>
           <Col xs={12} lg={6}>

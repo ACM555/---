@@ -22,6 +22,8 @@ export interface AuditResponse {
 }
 
 export interface HitRule {
+  ruleId?: string
+  ruleName?: string
   ruleType: 'absolute' | 'relative'
   article: string
   content: string
@@ -39,6 +41,13 @@ export interface LegalReference {
   registrationNo: string
   summary: string
   relevance: string
+  sourceKind?: 'internal_rule' | 'official_law' | 'official_pointer' | 'local_record'
+  sourceUrl?: string
+  version?: string
+  approvalStatus?: string
+  locator?: string
+  originalText?: string
+  prerequisites?: string[]
 }
 
 export interface AuditResult {
@@ -54,6 +63,7 @@ export interface AuditResult {
   riskScore: number
   overallResult: string
   manualReviewRequired: boolean
+  assessmentStatus?: 'pending_verification' | 'source_backed'
   hitRules: HitRule[]
   references: LegalReference[]
   summary: {

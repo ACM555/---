@@ -6,51 +6,51 @@ from typing import Any
 MODULES: list[dict[str, Any]] = [
     {
         "key": "M1",
-        "name": "注册前智能预检",
-        "status": "online",
-        "coverage": 92,
-        "features": ["文字近似", "图形近似", "尼斯类别推荐", "驳回前科识别"],
-        "output": "生成红黄绿风险结论与可执行改稿建议",
+        "name": "外商投资准入与公司设立",
+        "status": "demo",
+        "coverage": 0,
+        "features": ["主体类型", "行业准入", "股权控制", "许可登记"],
+        "output": "核验投资结构与适用前提，列出待补事实与人工复核事项",
     },
     {
         "key": "M2",
-        "name": "驰名/跨类权利护城河",
-        "status": "online",
-        "coverage": 88,
-        "features": ["权利族聚类", "跨类驰护", "公共纹样边界", "恶意抢注线索"],
-        "output": "识别单一类别以外的高压权利冲突",
+        "name": "跨境商事合同审查与违约风险防控",
+        "status": "demo",
+        "coverage": 0,
+        "features": ["合同主体", "交付付款", "适用法", "违约证据"],
+        "output": "依据已审核资料提示合同核验事项，不保证履约或回款",
     },
     {
         "key": "M3",
-        "name": "东盟文化禁忌审查",
-        "status": "online",
-        "coverage": 81,
-        "features": ["纯汉字显著性", "宗教符号", "国家标识", "公序良俗"],
-        "output": "输出目标国文化/公共秩序风险说明",
+        "name": "跨境货物运输与贸易合规",
+        "status": "demo",
+        "coverage": 0,
+        "features": ["货物与路线", "贸易术语", "原产地单证", "清关主体"],
+        "output": "形成贸易与运输资料核验清单，提示许可与责任事实缺口",
     },
     {
         "key": "M4",
-        "name": "跨境注册路径规划",
-        "status": "online",
-        "coverage": 84,
-        "features": ["单国申请", "马德里路线", "分阶段布局", "费用周期估算"],
-        "output": "给出注册路线、材料清单与时间轴",
+        "name": "东盟劳动用工与签证合规",
+        "status": "demo",
+        "coverage": 0,
+        "features": ["雇主与岗位", "人员国籍", "工作地点", "签证材料"],
+        "output": "核验用工与工作许可的适用事实，不承诺许可或办理期限",
     },
     {
         "key": "M5",
-        "name": "注册后监控预警",
-        "status": "online",
-        "coverage": 76,
-        "features": ["公告异议窗口", "抢注预警", "法规变更", "竞品监控"],
-        "output": "形成可订阅的品牌风险雷达",
+        "name": "知识产权布局与技术出海保护",
+        "status": "demo",
+        "coverage": 0,
+        "features": ["商标资料", "权属证据", "技术保护", "审查报告"],
+        "output": "提供有限范围的商标资料核验、风险提示与 PDF 报告",
     },
     {
         "key": "M6",
-        "name": "合规报告与文书生成",
-        "status": "online",
-        "coverage": 86,
-        "features": ["PDF 报告", "证据链清单", "代理人协作", "中英越文案"],
-        "output": "沉淀可复用、可归档、可转交的审查报告",
+        "name": "跨境争议解决与货款追偿",
+        "status": "demo",
+        "coverage": 0,
+        "features": ["争议事实", "通知证据", "管辖约定", "人工复核"],
+        "output": "列出争议程序与证据核验事项，不保证胜诉、执行或回款",
     },
 ]
 
@@ -248,8 +248,8 @@ DATA_SOURCE_STATUS: list[dict[str, Any]] = [
 
 def get_platform_overview() -> dict[str, Any]:
     return {
-        "positioning": "面向中国企业赴越南与东盟市场的商标合规智能体",
-        "slogan": "注册前预检、注册中导航、注册后风控",
+        "positioning": "面向中国企业进入东盟市场的跨境商事法律 AI 助手",
+        "slogan": "投资、合同、贸易、用工、知识产权与争议六模块资料核验",
         "healthScore": 86,
         "riskTrend": [
             {"date": "07-13", "high": 3, "medium": 8, "low": 18},
@@ -280,8 +280,34 @@ def get_country_rules() -> list[dict[str, Any]]:
     return COUNTRY_RULES
 
 
-def get_brand_assets() -> list[dict[str, Any]]:
-    return BRAND_ASSETS
+def get_brand_assets(
+    tasks: list[dict[str, Any]] | None = None, owner: str = "当前用户"
+) -> list[dict[str, Any]]:
+    assets = []
+    for task in tasks or []:
+        if task["status"] != "done":
+            continue
+        risk_level = task["riskLevel"] or "low"
+        review_required = task["manualReviewRequired"] or risk_level != "low"
+        assets.append(
+            {
+                "brandId": f"BR-{task['taskId']}",
+                "taskId": task["taskId"],
+                "name": task["brandName"] or "未命名品牌",
+                "englishName": task.get("englishName", ""),
+                "owner": owner,
+                "niceClasses": [task["niceClass"]] if task["niceClass"] else [],
+                "targetCountries": task["targetCountries"],
+                "portfolioStatus": "人工复核" if review_required else "待核验",
+                "riskLevel": risk_level,
+                "riskScore": task["riskScore"] or 0,
+                "assessmentStatus": task.get("assessmentStatus", "pending_verification"),
+                "lastAuditAt": task["updatedAt"],
+                "nextAction": "查看审查报告，核对资料适用前提并完成必要的人工复核。",
+                "isDemo": False,
+            }
+        )
+    return assets + [{**asset, "isDemo": True} for asset in BRAND_ASSETS]
 
 
 def get_monitoring_alerts() -> list[dict[str, Any]]:
@@ -289,7 +315,16 @@ def get_monitoring_alerts() -> list[dict[str, Any]]:
 
 
 def get_data_source_status() -> list[dict[str, Any]]:
-    return DATA_SOURCE_STATUS
+    return [
+        {
+            **source,
+            "status": "scheduled",
+            "freshness": "演示数据",
+            "lastSync": "未接入实时同步",
+            "note": f"演示状态，不代表外部服务实时可用或已同步。{source['note']}",
+        }
+        for source in DATA_SOURCE_STATUS
+    ]
 
 
 def build_report_center(tasks: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -309,6 +344,10 @@ def build_report_center(tasks: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "manualReviewRequired": task["manualReviewRequired"],
                 "createdAt": task["createdAt"],
                 "updatedAt": task["updatedAt"],
+                "completedAt": task.get("completedAt"),
+                "archivedAt": task.get("archivedAt"),
+                "lastViewedAt": task.get("lastViewedAt"),
+                "assessmentStatus": task.get("assessmentStatus", "pending_verification"),
                 "owner": "当前团队",
                 "status": "已归档",
                 "summary": "包含文字近似、图形近似、绝对理由、跨类驰护、文化禁忌和注册路径建议。",

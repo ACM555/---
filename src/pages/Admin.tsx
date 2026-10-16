@@ -280,6 +280,46 @@ function Admin() {
       </Card>
 
       <Card
+        title="AI / RAG 就绪状态"
+        style={{ marginTop: 24 }}
+        extra={
+          <Tag color={systemStatus?.legalKnowledge.ragReady ? 'green' : 'orange'}>
+            {systemStatus?.legalKnowledge.ragReady ? 'RAG 已就绪' : 'RAG 待完成资料审核'}
+          </Tag>
+        }
+      >
+        <Row gutter={[16, 16]}>
+          <Col xs={24} md={6}>
+            <Statistic
+              title="模型服务"
+              value={systemStatus?.ai.configured ? '已配置' : '未配置'}
+              prefix={<CloudServerOutlined />}
+            />
+            <Text type="secondary">
+              {systemStatus?.ai.configured
+                ? `${systemStatus.ai.provider} · ${systemStatus.ai.model}`
+                : '请配置 backend/.env'}
+            </Text>
+          </Col>
+          <Col xs={12} md={6}>
+            <Statistic title="待审核资料" value={systemStatus?.legalKnowledge.draftSources ?? 0} />
+          </Col>
+          <Col xs={12} md={6}>
+            <Statistic title="已审核资料" value={systemStatus?.legalKnowledge.approvedSources ?? 0} />
+          </Col>
+          <Col xs={12} md={6}>
+            <Statistic title="已审核原文摘录" value={systemStatus?.legalKnowledge.approvedPassages ?? 0} />
+          </Col>
+        </Row>
+        {!systemStatus?.legalKnowledge.ragReady ? (
+          <Paragraph type="warning" style={{ margin: '16px 0 0' }}>
+            模型密钥与法律资料审核是两道独立门槛。只有资料及原文摘录经管理员确认后，
+            才会进入受控 RAG；未审核资料不会被模型引用。
+          </Paragraph>
+        ) : null}
+      </Card>
+
+      <Card
         title="审查任务管理"
         style={{ marginTop: 24 }}
         extra={<Text type="secondary">共 {tasks.length} 条</Text>}

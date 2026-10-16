@@ -4,10 +4,11 @@ import {
   LoadingOutlined,
   SafetyOutlined,
 } from '@ant-design/icons'
-import { Button, Card, Progress, Result, Space, Spin, Steps, Typography } from 'antd'
+import { Alert, Button, Card, Empty, Progress, Result, Skeleton, Space, Spin, Steps, Table, Tag, Typography } from 'antd'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { getAuditResult } from '@/api/audit'
+import { getAuditTasks, type AuditTaskRecord } from '@/api/saas'
 
 const { Paragraph, Text, Title } = Typography
 
@@ -40,10 +41,43 @@ const reviewSteps = [
   },
 ]
 
-function Reviewing() {
+function ReviewingTaskList() {
   const navigate = useNavigate()
+  const [tasks, setTasks] = useState<AuditTaskRecord[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  useEffect(() => {
+    let active = true
+    getAuditTasks().then(items => { if (active) setTasks(items) })
+      .catch(() => { if (active) setError('审查任务加载失败，请刷新重试。') })
+      .finally(() => { if (active) setLoading(false) })
+    return () => { active = false }
+  }, [])
+  return <Space direction="vertical" size={24} style={{ display: 'flex' }}>
+    <div className="page-heading"><Title level={2}>审查任务</Title><Button type="primary" onClick={() => navigate('/submit')}>新建审查</Button></div>
+    {error && <Alert showIcon type="error" message={error} />}
+    <Card title="当前账号的审查进度">
+      {loading ? <Skeleton active /> : tasks.length ? <Table<AuditTaskRecord> rowKey="taskId" dataSource={tasks} pagination={{ pageSize: 10 }} scroll={{ x: 720 }} columns={[
+        { title: '品牌', dataIndex: 'brandName' },
+        { title: '类别', dataIndex: 'niceClass' },
+        { title: '状态', dataIndex: 'status', render: (value: AuditTaskRecord['status']) => <Tag color={value === 'error' ? 'red' : value === 'done' ? 'green' : 'blue'}>{{ pending: '等待中', processing: '审查中', done: '已完成', error: '失败' }[value]}</Tag> },
+        { title: '进度', dataIndex: 'progress', render: (value: number) => <Progress percent={value} size="small" /> },
+        { title: '提交时间', dataIndex: 'createdAt' },
+        { title: '操作', render: (_, task) => <Button onClick={() => navigate(`/reviewing?taskId=${encodeURIComponent(task.taskId)}`)}>查看进度</Button> },
+      ]} /> : <Empty description="暂无审查任务，请先新建审查。" />}
+    </Card>
+  </Space>
+}
+
+function Reviewing() {
   const location = useLocation()
-  const taskId = (location.state as ReviewingRouteState | null)?.taskId
+  const [searchParams] = useSearchParams()
+  const taskId = searchParams.get('taskId') || (location.state as ReviewingRouteState | null)?.taskId
+  return taskId ? <ReviewingProgress key={taskId} taskId={taskId} /> : <ReviewingTaskList />
+}
+
+function ReviewingProgress({ taskId }: { taskId: string }) {
+  const navigate = useNavigate()
   const [currentStep, setCurrentStep] = useState(0)
   const [status, setStatus] = useState<ReviewingStatus>('loading')
   const [errorMsg, setErrorMsg] = useState('')

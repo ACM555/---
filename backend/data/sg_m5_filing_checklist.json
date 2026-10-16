@@ -1,0 +1,23 @@
+{
+  "id": "sg-m5-national-trademark-prefiling",
+  "title": "新加坡 M5 · 普通商标本国申请资料核对",
+  "countryCode": "SG",
+  "legalModule": "M5",
+  "approvalStatus": "draft",
+  "checkedAt": "2026-10-15",
+  "sourceVersion": "IPOS 指南页面标注更新日期：2026-09-03；不是商标法的生效日期",
+  "sourceUrl": "https://www.ipos.gov.sg/about-ip/trade-marks/how-to-register/",
+  "publisher": "新加坡知识产权局 IPOS",
+  "lawUrl": "https://sso.agc.gov.sg/Act/TMA1998",
+  "lawVersion": "官方法令入口已确认；本次条文页面返回 HTTP 403，现行条文版本尚未核实",
+  "prerequisites": ["目标国家为新加坡", "准备通过 TM4 进行本国普通商标申请", "不是马德里国际申请、集体商标或证明商标", "申请主体、图样及商品或服务须进一步核对"],
+  "checks": [
+    {"locator": "Step 3 / TM4 application contents", "item": "核对申请人的名称与地址", "output": "待补：申请主体身份及地址材料"},
+    {"locator": "Step 3 / TM4 application contents", "item": "准备清晰可辨识的商标图样", "output": "待补：最终图样文件；不能从复杂度推断侵权或近似"},
+    {"locator": "Step 1(c) and Step 3", "item": "核对商品或服务清单、类别及描述", "output": "待补：具体商品或服务说明及分类核对记录"},
+    {"locator": "Step 3 / TM4 application contents", "item": "核对使用或拟使用商标的声明及申请规费", "output": "待补：声明材料；规费以提交当日官方页面为准"},
+    {"locator": "Step 1(b)", "item": "在官方入口开展近似商标检索，并保留检索记录", "output": "待补：检索日期、类别、命中权利原文及人工复核记录"}
+  ],
+  "limitations": ["这是基于官方指南的资料核对演示，不是已经批准的法律条文 RAG", "不得据此判断可注册性、侵权、异议期限或注册成功率", "须由项目审核人员复核法条原文、版本和摘录后才能启用正式法源引用"],
+  "searchUrl": "https://digitalhub.ipos.gov.sg/FAMN/eservice/IP4SG/MN_TmSimilarMarkSearch"
+}

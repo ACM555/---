@@ -4,13 +4,14 @@ import Reviewing from '@/pages/Reviewing'
 import { renderWithProviders } from '@/test/render'
 
 vi.mock('@/api/audit', () => ({ getAuditResult: vi.fn() }))
+vi.mock('@/api/saas', () => ({ getAuditTasks: vi.fn().mockResolvedValue([]) }))
 
 describe('Reviewing', () => {
-  it('缺少任务 ID 时提供可恢复的错误提示', async () => {
+  it('没有任务 ID 时展示任务列表而不是错误', async () => {
     renderWithProviders(<Reviewing />, '/reviewing')
 
-    expect(await screen.findByText('审查失败')).toBeInTheDocument()
-    expect(screen.getByText('缺少任务ID，请从提交页重新进入')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: '重新审查' })).toBeDisabled()
+    expect(await screen.findByText('暂无审查任务，请先新建审查。')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '审查任务' })).toBeInTheDocument()
+    expect(screen.queryByText('缺少任务ID，请从提交页重新进入')).not.toBeInTheDocument()
   })
 })

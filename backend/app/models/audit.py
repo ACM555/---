@@ -1,6 +1,6 @@
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class AuditRequest(BaseModel):
@@ -29,20 +29,24 @@ class AuditResponse(BaseModel):
 class HitRule(BaseModel):
     """命中规则条目。"""
 
+    ruleId: str = Field("", description="内部筛查规则编号，用于溯源，不是法条编号")
+    ruleName: str = Field("", description="内部筛查规则名称")
     ruleType: Literal["absolute", "relative"] = Field(
         ...,
         description="规则线索类型：absolute=标识/公共规则线索，relative=在先权利或相似线索",
     )
-    article: str = Field(..., description="法条编号，如'越南《工业产权法》第74.2(a)条'")
-    content: str = Field("", description="法条内容摘要")
+    article: str = Field(..., description="内部规则或资料定位标签，不能作为官方法条引用")
+    content: str = Field("", description="内部规则提示摘要，不是正式法律原文")
     applicable: bool = Field(..., description="是否适用/触发")
     similarityType: str = Field("", description="相似类型，如'图形相似-四叶花卉几何结构'")
-    similarityScore: int = Field(0, description="相似度评分 0-100", ge=0, le=100)
+    similarityScore: int = Field(0, description="技术特征或本地匹配信号，不代表法律风险或结果概率", ge=0, le=100)
     note: str = Field("", description="审查说明")
 
 
 class Reference(BaseModel):
     """引用依据条目。"""
+
+    model_config = ConfigDict(extra="allow")
 
     refType: Literal["law", "case", "trademark"] = Field(
         ...,
@@ -110,6 +114,8 @@ class RegistrationStrategy(BaseModel):
 
 class AuditResult(BaseModel):
     """GET /api/audit/result/{taskId} response body."""
+
+    model_config = ConfigDict(extra="allow")
 
     taskId: str = Field(..., description="审查任务ID")
     status: Literal["pending", "processing", "done", "error"] = Field(..., description="审查状态")

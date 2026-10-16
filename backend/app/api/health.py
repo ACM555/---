@@ -21,10 +21,20 @@ router = APIRouter(tags=["系统"])
         },
     },
 )
-async def health_check() -> dict[str, str]:
+async def health_check() -> dict[str, object]:
     """返回服务健康状态和当前 API 版本。"""
 
-    return {"status": "ok", "version": settings.APP_VERSION}
+    return {
+        "status": "ok",
+        "version": settings.APP_VERSION,
+        "aiStatus": "configured" if settings.model_api_key else "unconfigured",
+        "aiProvider": settings.model_provider,
+        "aiModel": settings.model_name if settings.model_api_key else "",
+        "aiTasks": {
+            "legalAssistant": {"provider": settings.model_provider, "model": settings.model_name if settings.model_api_key else "", "configured": bool(settings.model_api_key)},
+            "publicDataTranslation": {"provider": settings.public_data_providers[0] if settings.public_data_providers else "unconfigured", "model": settings.model_config(settings.public_data_providers[0])[2] if settings.public_data_providers else "", "fallback": settings.public_data_providers[1:]},
+        },
+    }
 
 
 @router.get(

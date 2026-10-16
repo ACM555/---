@@ -24,6 +24,6 @@ describe('Home', () => {
     renderWithProviders(<Home />)
 
     expect(await screen.findByText(/测试定位/)).toBeInTheDocument()
-    expect(screen.getAllByRole('button', { name: /发起智能审查/ }).length).toBeGreaterThan(0)
+    expect(screen.getAllByRole('button', { name: /发起合规筛查/ }).length).toBeGreaterThan(0)
   })
 })

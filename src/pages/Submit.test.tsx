@@ -12,7 +12,7 @@ describe('Submit', () => {
     const user = userEvent.setup()
     renderWithProviders(<Submit />, '/submit')
 
-    await user.click(screen.getByRole('button', { name: '提交审查' }))
+    await user.click(screen.getByRole('button', { name: '提交资料核验' }))
 
     expect(await screen.findByText('请输入品牌名称')).toBeInTheDocument()
     expect(screen.getByText('请选择尼斯分类')).toBeInTheDocument()

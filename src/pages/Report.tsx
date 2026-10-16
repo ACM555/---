@@ -8,6 +8,7 @@ import {
   Empty,
   Image,
   List,
+  message,
   Progress,
   Result,
   Row,
@@ -32,7 +33,7 @@ import {
   RadarChart,
   ResponsiveContainer,
 } from 'recharts'
-import { getAuditResult } from '@/api/audit'
+import { downloadAuditPdf, getAuditResult } from '@/api/audit'
 import HitRuleList from '@/components/HitRuleList'
 import LegalReferenceCollapse from '@/components/LegalReferenceCollapse'
 import RiskSummaryCard from '@/components/RiskSummaryCard'
@@ -82,6 +83,7 @@ function Report() {
   const taskId = params.taskId ?? (location.state as ReportRouteState | null)?.taskId
   const [result, setResult] = useState<AuditResult | null>(null)
   const [loading, setLoading] = useState(true)
+  const [pdfDownloading, setPdfDownloading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const timerRef = useRef<number | null>(null)
 
@@ -190,14 +192,14 @@ function Report() {
       <Row gutter={[24, 24]}>
         <Col xs={24} lg={10}>
           <Card title="规则风险信号（非结果概率）" style={{ height: '100%' }}>
-            <div style={{ paddingTop: 24, textAlign: 'center' }}>
+            {result.assessmentStatus === 'pending_verification' ? <Alert type="info" showIcon message="待核验，不展示驳回概率或法律风险分值" description="内部规则命中仅用于提示需要补充的材料和人工核对事项。" /> : <div style={{ paddingTop: 24, textAlign: 'center' }}>
               <Progress
                 type="dashboard"
                 percent={absolute.rejectionProbability}
                 strokeColor={absolute.hasRisk ? '#faad14' : '#52c41a'}
                 format={(percent) => `${percent}%`}
               />
-            </div>
+            </div>}
           </Card>
         </Col>
       </Row>
@@ -253,7 +255,8 @@ function Report() {
       {visual.radarData.length > 0 ? (
         <Row gutter={[24, 24]}>
           <Col xs={24} lg={14}>
-            <Card title="视觉特征雷达比对">
+            <Card title="上传图样的视觉特征（不是法律风险）">
+              <Alert showIcon type="info" message="复杂度、对称性等仅描述图像；未接入真实在先商标图样比对，不显示虚构对标品牌。" />
               <ResponsiveContainer width="100%" height={320}>
                 <RadarChart data={visual.radarData} outerRadius="68%">
                   <PolarGrid />
@@ -266,22 +269,22 @@ function Report() {
                     fillOpacity={0.3}
                     isAnimationActive={false}
                   />
-                  <Radar
+                  {result.assessmentStatus !== 'pending_verification' && <Radar
                     dataKey="benchmark"
                     name="对标品牌"
                     stroke="#ff4d4f"
                     fill="#ff4d4f"
                     fillOpacity={0.3}
                     isAnimationActive={false}
-                  />
+                  />}
                   <Legend />
                 </RadarChart>
               </ResponsiveContainer>
             </Card>
           </Col>
           <Col xs={24} lg={10}>
-            <Card title="相似品牌对标" style={{ height: '100%' }}>
-              {visual.matchedBrands.length > 0 ? (
+            <Card title="在先权利图样比对" style={{ height: '100%' }}>
+              {result.assessmentStatus === 'pending_verification' ? <Empty description="尚未接入真实在先商标图样，不展示虚构品牌或匹配分值" /> : visual.matchedBrands.length > 0 ? (
                 <List
                   dataSource={visual.matchedBrands}
                   renderItem={(brand) => (
@@ -339,9 +342,16 @@ function Report() {
             <Button
               disabled={!advice.documentDownloadUrl}
               icon={<DownloadOutlined />}
-              onClick={() => {
-                if (advice.documentDownloadUrl) {
-                  window.open(advice.documentDownloadUrl, '_blank', 'noopener,noreferrer')
+              loading={pdfDownloading}
+              onClick={async () => {
+                if (!taskId || !advice.documentDownloadUrl) return
+                setPdfDownloading(true)
+                try {
+                  await downloadAuditPdf(taskId)
+                } catch (reason) {
+                  message.error(reason instanceof Error ? reason.message : 'PDF 下载失败，请重试。')
+                } finally {
+                  setPdfDownloading(false)
                 }
               }}
             >
@@ -376,10 +386,10 @@ function Report() {
               </Tag>
             }
           >
-            <Progress
+            {result.assessmentStatus !== 'pending_verification' && <Progress
               percent={intelligence.crossClassShield.score}
               status={intelligence.crossClassShield.triggered ? 'exception' : 'normal'}
-            />
+            />}
             <Paragraph>{intelligence.crossClassShield.explanation}</Paragraph>
             <List
               size="small"
@@ -509,6 +519,7 @@ function Report() {
       </Title>
       <RiskSummaryCard data={result} />
       <Tabs
+        className="report-tabs"
         items={[
           { key: 'intelligence', label: '参赛亮点', children: intelligenceTab },
           { key: 'rules', label: '规则命中', children: absoluteTab },

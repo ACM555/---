@@ -1,7 +1,8 @@
 import type { AuditRequest } from '@/types/audit'
+import { deploymentStorageKey } from '@/utils/deploymentPath'
 
-const HISTORY_KEY = 'outbound_guard_audit_history'
-const CURRENT_TASK_KEY = 'outbound_guard_current_task_id'
+const HISTORY_KEY = deploymentStorageKey('outbound_guard_audit_history')
+const CURRENT_TASK_KEY = deploymentStorageKey('outbound_guard_current_task_id')
 const MAX_HISTORY = 20
 
 export interface AuditHistoryItem {

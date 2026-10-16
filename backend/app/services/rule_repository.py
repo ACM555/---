@@ -107,7 +107,11 @@ def build_law_reference(rule: dict[str, Any], relevance: str) -> dict[str, Any]:
     return {
         "refType": "law",
         "title": f"{rule.get('rule_id')} · {rule.get('rule_name')}",
-        "source": "法学规则库 rules_v1.json / legal_basis.md",
+        "source": "内部筛查规则（不是正式法源）",
+        "sourceKind": "internal_rule",
+        "sourceUrl": "",
+        "version": str(load_ruleset().get("version") or "待确认"),
+        "approvalStatus": "draft",
         "date": "",
         "registrationNo": "",
         "summary": str(rule.get("system_message", "")),

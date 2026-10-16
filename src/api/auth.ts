@@ -31,6 +31,11 @@ export async function login(payload: LoginPayload): Promise<AuthResult> {
   return res.data
 }
 
+export async function guestLogin(): Promise<AuthResult> {
+  const res = (await request.post('/auth/guest')) as UnifiedResponse<AuthResult>
+  return res.data
+}
+
 export async function register(payload: RegisterPayload): Promise<AuthResult> {
   const res = (await request.post('/auth/register', payload)) as UnifiedResponse<AuthResult>
   return res.data

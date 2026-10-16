@@ -84,8 +84,8 @@ def build_audit_pdf(result: dict) -> bytes:
     summary_rows = [
         ["品牌名称", _text(summary.get("brandName"))],
         ["尼斯分类", _text(summary.get("niceClass"))],
-        ["风险等级", _text(summary.get("riskLevel", "").upper())],
-        ["风险分值", f"{summary.get('riskScore', 0)}/100"],
+        ["核验状态", "待核验" if result.get("assessmentStatus") == "pending_verification" else _text(summary.get("riskLevel", "").upper())],
+        ["评分边界", "不作法律风险评分；图像特征仅供人工复核" if result.get("assessmentStatus") == "pending_verification" else f"{summary.get('riskScore', 0)}/100"],
         ["审查时间", _text(summary.get("submitTime"))],
     ]
     summary_table = Table(summary_rows, colWidths=[34 * mm, 122 * mm])
@@ -218,6 +218,8 @@ def build_audit_pdf(result: dict) -> bytes:
                 small,
             )
         )
+        if reference.get("sourceUrl"):
+            story.append(Paragraph(f"官方原文：<link href='{_text(reference['sourceUrl'])}'>{_text(reference['sourceUrl'])}</link>", small))
     story.extend(
         [
             Spacer(1, 8 * mm),

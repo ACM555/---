@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { message } from 'antd'
+import { apiBasePath, deploymentStorageKey } from '@/utils/deploymentPath'
 
 const request = axios.create({
-  baseURL: '/api',
+  baseURL: apiBasePath(),
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
@@ -11,7 +12,7 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-    const token = window.localStorage.getItem('outbound_guard_token')
+    const token = window.localStorage.getItem(deploymentStorageKey('outbound_guard_token'))
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -22,6 +23,10 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
+    if (response.config.responseType === 'blob') {
+      return response.data
+    }
+
     const res = response.data
 
     if (res?.code !== undefined && res.code !== 0) {

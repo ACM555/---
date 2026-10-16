@@ -1,8 +1,9 @@
 import { DownloadOutlined, FileTextOutlined, SearchOutlined } from '@ant-design/icons'
-import { Button, Card, Col, Input, Progress, Row, Skeleton, Space, Table, Tag, Typography } from 'antd'
+import { Button, Card, Col, Input, message, Progress, Row, Skeleton, Space, Table, Tag, Typography } from 'antd'
 import type { TableColumnsType } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { downloadAuditPdf } from '@/api/audit'
 import { HoverLift } from '@/components/MotionKit'
 import ProductEmpty from '@/components/ProductEmpty'
 import { getReports, type ReportRecord, type RiskLevel } from '@/api/saas'
@@ -20,6 +21,7 @@ function Reports() {
   const [reports, setReports] = useState<ReportRecord[]>([])
   const [keyword, setKeyword] = useState('')
   const [loading, setLoading] = useState(true)
+  const [downloadingTaskId, setDownloadingTaskId] = useState<string | null>(null)
 
   useEffect(() => {
     let mounted = true
@@ -70,8 +72,8 @@ function Reports() {
       sorter: (a, b) => a.riskScore - b.riskScore,
       render: (value: number, record) => (
         <Space direction="vertical" size={2} style={{ minWidth: 150 }}>
-          <Tag color={riskColor[record.riskLevel]}>{record.riskLevel.toUpperCase()}</Tag>
-          <Progress percent={value} size="small" />
+          <Tag color={record.assessmentStatus === 'pending_verification' ? 'orange' : riskColor[record.riskLevel]}>{record.assessmentStatus === 'pending_verification' ? '待核验' : record.riskLevel.toUpperCase()}</Tag>
+          {record.assessmentStatus !== 'pending_verification' && <Progress percent={value} size="small" />}
         </Space>
       ),
     },
@@ -82,10 +84,14 @@ function Reports() {
       render: (value: string) => <Text type="secondary">{value}</Text>,
     },
     {
-      title: '归档时间',
-      dataIndex: 'updatedAt',
-      key: 'updatedAt',
-      render: (value: string) => <Text>{value}</Text>,
+      title: '报告时间记录',
+      key: 'timestamps',
+      render: (_, record) => <Space direction="vertical" size={2}>
+        <Text>生成：{record.completedAt || record.createdAt}</Text>
+        <Text type="secondary">归档：{record.archivedAt || record.completedAt || record.createdAt}</Text>
+        <Text type="secondary">修改：{record.updatedAt}</Text>
+        <Text type="secondary">最近查看：{record.lastViewedAt || '尚未查看'}</Text>
+      </Space>,
     },
     {
       title: '操作',
@@ -95,7 +101,23 @@ function Reports() {
           <Button disabled={!record.taskId} onClick={() => navigate(`/report/${record.taskId}`)} size="small">
             查看
           </Button>
-          <Button disabled={!record.taskId} href={record.taskId ? `/api/audit/report/${record.taskId}/pdf` : undefined} icon={<DownloadOutlined />} size="small">
+          <Button
+            disabled={!record.taskId}
+            icon={<DownloadOutlined />}
+            loading={downloadingTaskId === record.taskId}
+            onClick={async () => {
+              if (!record.taskId) return
+              setDownloadingTaskId(record.taskId)
+              try {
+                await downloadAuditPdf(record.taskId)
+              } catch (reason) {
+                message.error(reason instanceof Error ? reason.message : 'PDF 下载失败，请重试。')
+              } finally {
+                setDownloadingTaskId(null)
+              }
+            }}
+            size="small"
+          >
             PDF
           </Button>
         </Space>
@@ -130,12 +152,12 @@ function Reports() {
               <Card className={`report-cover-card risk-${item.riskLevel}`}>
                 <Space direction="vertical" size={12} style={{ width: '100%' }}>
                   <Space style={{ justifyContent: 'space-between', width: '100%' }}>
-                    <Tag color={riskColor[item.riskLevel]}>{item.riskLevel.toUpperCase()}</Tag>
+                    <Tag color={item.assessmentStatus === 'pending_verification' ? 'orange' : riskColor[item.riskLevel]}>{item.assessmentStatus === 'pending_verification' ? '待核验' : item.riskLevel.toUpperCase()}</Tag>
                     <Text type="secondary">{item.status}</Text>
                   </Space>
                   <Title level={4}>{item.brandName}</Title>
                   <Paragraph type="secondary">{item.summary}</Paragraph>
-                  <Progress percent={item.riskScore} size="small" />
+                  {item.assessmentStatus !== 'pending_verification' && <Progress percent={item.riskScore} size="small" />}
                   <Button disabled={!item.taskId} onClick={() => navigate(`/report/${item.taskId}`)} type="primary">
                     打开报告
                   </Button>

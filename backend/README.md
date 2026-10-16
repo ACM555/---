@@ -25,7 +25,20 @@ uvicorn main:app --reload --port 8000
 
 After startup, open http://localhost:8000/docs to view Swagger UI.
 
-真实 `IFLYTEK_API_PASSWORD` 只能通过本机 `.env` 提供，禁止写入源码、前端、文档或交付包。X2 HTTP 使用 `IFLYTEK_BASE_URL=https://spark-api-open.xf-yun.com/x2` 和 `IFLYTEK_MODEL=spark-x`。
+AI/RAG 模型配置位于 `backend/.env`。系统按以下优先级选择模型：
+
+1. `GLM_API_KEY` + `GLM_BASE_URL` + `GLM_MODEL`（推荐，智谱 OpenAI 兼容接口）
+2. `IFLYTEK_API_PASSWORD` + `IFLYTEK_BASE_URL` + `IFLYTEK_MODEL`
+3. `LLM_API_KEY` + `LLM_BASE_URL` + `LLM_MODEL`（其他 OpenAI 兼容服务）
+
+真实密钥只能保存在服务器本机的 `backend/.env`，禁止写入源码、前端、文档或交付包。修改后执行：
+
+```bash
+sudo systemctl restart chuhai-weishi.service
+curl http://127.0.0.1:39013/api/health
+```
+
+健康检查只返回 `aiStatus`、`aiProvider` 和 `aiModel`，不会返回密钥。
 
 ## Directory Layout
 

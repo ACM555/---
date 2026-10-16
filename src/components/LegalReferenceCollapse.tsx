@@ -3,7 +3,7 @@ import {
   FileTextOutlined,
   SolutionOutlined,
 } from '@ant-design/icons'
-import { Alert, Badge, Card, Collapse, Empty, Space, Typography } from 'antd'
+import { Alert, Badge, Card, Collapse, Empty, Space, Tag, Typography } from 'antd'
 import type { CollapseProps } from 'antd'
 import type { ReactNode } from 'react'
 import type { LegalReference } from '@/types/audit'
@@ -23,7 +23,7 @@ interface RefTypeConfig {
 }
 
 const refTypeConfig: Record<RefType, RefTypeConfig> = {
-  law: { icon: <FileTextOutlined />, label: '法条依据', color: '#1677ff' },
+  law: { icon: <FileTextOutlined />, label: '来源与规则说明', color: '#1677ff' },
   case: { icon: <SolutionOutlined />, label: '判例引用', color: '#722ed1' },
   trademark: { icon: <BankOutlined />, label: '商标记录', color: '#fa8c16' },
 }
@@ -35,9 +35,10 @@ function ReferenceCard({ reference }: { reference: LegalReference }) {
     <Card size="small" style={{ marginBottom: 8 }}>
       <Space direction="vertical" size={6} style={{ display: 'flex' }}>
         <Text strong>{reference.title || '未命名依据'}</Text>
+        <Tag color={reference.sourceKind === 'official_law' ? 'green' : 'orange'}>{reference.sourceKind === 'internal_rule' || reference.source.includes('rules_v1.json') ? '内部规则 · 不是正式法源' : reference.sourceKind === 'official_law' ? '已核验官方法源' : '资料线索 · 待核验'}</Tag>
         <Space size={16} wrap>
           <Text style={{ fontSize: 13 }} type="secondary">
-            {reference.date || '未知日期'}
+            {reference.date ? `资料核验日期：${reference.date}` : '法源版本与日期尚未核验'}
           </Text>
           {reference.registrationNo && (
             <Text style={{ fontSize: 13 }} type="secondary">
@@ -48,6 +49,11 @@ function ReferenceCard({ reference }: { reference: LegalReference }) {
             来源：{reference.source || '未知来源'}
           </Text>
         </Space>
+        {reference.version && <Text type="secondary">版本：{reference.version}</Text>}
+        {reference.sourceUrl && /^https?:\/\//.test(reference.sourceUrl) && <a href={reference.sourceUrl} target="_blank" rel="noreferrer">查看官方原文</a>}
+        {reference.locator && <Text>章节：{reference.locator}</Text>}
+        {reference.originalText && <Paragraph>原文摘录：{reference.originalText}</Paragraph>}
+        {reference.prerequisites?.length ? <Paragraph>适用条件：{reference.prerequisites.join('；')}</Paragraph> : null}
         <Paragraph ellipsis={{ rows: 3, expandable: true }} style={{ margin: 0 }}>
           {reference.summary || '暂无摘要'}
         </Paragraph>

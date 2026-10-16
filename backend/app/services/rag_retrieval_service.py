@@ -20,7 +20,11 @@ class RetrievedKnowledge:
 def _tokens(value: str) -> set[str]:
     latin = re.findall(r"[a-z0-9_]{2,}", value.lower())
     chinese = re.findall(r"[\u4e00-\u9fff]{2,}", value)
-    return set(latin + chinese)
+    return set(latin + chinese) | {
+        fragment[index:index + 2]
+        for fragment in chinese
+        for index in range(len(fragment) - 1)
+    }
 
 
 def _excerpt(value: str) -> str:
@@ -30,6 +34,20 @@ def _excerpt(value: str) -> str:
 
 class RetrievalService:
     """Tenant-scoped lexical retrieval with a seam for future embeddings."""
+
+    COUNTRY_ALIASES = {
+        "BN": ("文莱", "brunei"),
+        "KH": ("柬埔寨", "cambodia"),
+        "ID": ("印尼", "印度尼西亚", "indonesia"),
+        "LA": ("老挝", "laos"),
+        "MY": ("马来西亚", "malaysia"),
+        "MM": ("缅甸", "myanmar"),
+        "PH": ("菲律宾", "philippines"),
+        "SG": ("新加坡", "singapore"),
+        "TH": ("泰国", "thailand"),
+        "TL": ("东帝汶", "timor-leste", "timor leste"),
+        "VN": ("越南", "vietnam"),
+    }
 
     def __init__(self) -> None:
         self._legal_repository = LegalRepository()
@@ -61,6 +79,22 @@ class RetrievalService:
 
     def retrieve_legal(self, question: str, limit: int = 5) -> list[RetrievedKnowledge]:
         return self._legal_documents(question, limit)
+
+    def retrieve_user_context(self, question: str, user_id: str, limit: int = 3) -> list[RetrievedKnowledge]:
+        query_tokens = _tokens(question)
+        ranked = [
+            (len(query_tokens & _tokens(f"{document.title} {document.content}")), document)
+            for document in self._tenant_documents(user_id)
+        ]
+        ranked.sort(key=lambda item: item[0], reverse=True)
+        return [
+            RetrievedKnowledge(
+                source=AssistantSource(id=document.id, title=document.title, excerpt=_excerpt(document.content)),
+                content=document.content,
+            )
+            for score, document in ranked[:limit]
+            if score
+        ]
 
     def _legal_documents(self, question: str, limit: int) -> list[RetrievedKnowledge]:
         country_code = self._detect_country(question)
@@ -121,48 +155,48 @@ class RetrievalService:
         ]
 
     @staticmethod
-    def _detect_country(question: str) -> str | None:
+    def _detect_countries(question: str) -> set[str]:
         normalized = question.lower()
-        aliases = {
-            "BN": ("文莱", "brunei"),
-            "KH": ("柬埔寨", "cambodia"),
-            "ID": ("印尼", "印度尼西亚", "indonesia"),
-            "LA": ("老挝", "laos"),
-            "MY": ("马来西亚", "malaysia"),
-            "MM": ("缅甸", "myanmar"),
-            "PH": ("菲律宾", "philippines"),
-            "SG": ("新加坡", "singapore"),
-            "TH": ("泰国", "thailand"),
-            "TL": ("东帝汶", "timor-leste", "timor leste"),
-            "VN": ("越南", "vietnam"),
-        }
-        matches = [
+        return {
             country_code
-            for country_code, country_aliases in aliases.items()
-            if any(alias in question or alias in normalized for alias in country_aliases)
-        ]
-        # A single retrieval must never silently apply one country's materials to
-        # a multi-country question. The orchestrator turns an empty result into
-        # an explicit "需人工复核" response.
-        if len(matches) != 1:
-            return None
-        return matches[0]
+            for country_code, country_aliases in RetrievalService.COUNTRY_ALIASES.items()
+            if any(alias in normalized for alias in country_aliases)
+        }
+
+    @staticmethod
+    def _detect_country(question: str) -> str | None:
+        matches = RetrievalService._detect_countries(question)
+        return next(iter(matches)) if len(matches) == 1 else None
+
+    @staticmethod
+    def _detect_modules(question: str) -> set[str]:
+        explicit_modules = set(re.findall(r"(?<![A-Z0-9_])M[1-6](?![A-Z0-9_])", question.upper()))
+        if explicit_modules:
+            return explicit_modules
+        normalized = question.lower()
+        keywords_by_module = {
+            "M1": ("投资", "设立", "成立公司", "注册公司", "开公司", "准入", "持股", "承接工程"),
+            "M2": ("合同", "违约", "条款", "分销", "买卖协议"),
+            "M3": ("运输", "贸易", "出口", "进口", "报关", "海关", "incoterms"),
+            "M4": ("工作许可", "签证", "派驻", "劳动", "雇员", "员工", "用工", "雇佣", "聘用"),
+            "M5": ("商标", "专利", "著作权", "版权", "知识产权", "技术保护", "pct"),
+            "M6": ("仲裁", "争议", "货款", "追偿", "执行", "判决", "裁决"),
+        }
+        modules = set()
+        for module, keywords in keywords_by_module.items():
+            text = normalized
+            if module == "M2":
+                text = re.sub(r"(?:劳动|雇佣|用工|聘用)合同", "", text)
+            if any(keyword in text for keyword in keywords):
+                modules.add(module)
+        if "M6" in modules and not re.search(r"分别|各自|比较|对比|以及", normalized):
+            return {"M6"}
+        return modules
 
     @staticmethod
     def _detect_module(question: str) -> str | None:
-        if any(keyword in question for keyword in ("投资", "设立", "公司", "准入", "持股", "承接工程")):
-            return "M1"
-        if any(keyword in question for keyword in ("合同", "违约", "条款", "分销", "买卖协议")):
-            return "M2"
-        if any(keyword in question for keyword in ("运输", "贸易", "出口", "进口", "报关", "Incoterms")):
-            return "M3"
-        if any(keyword in question for keyword in ("工作许可", "签证", "派驻", "劳动", "雇员", "员工")):
-            return "M4"
-        if any(keyword in question for keyword in ("商标", "专利", "著作权", "知识产权", "技术保护", "PCT")):
-            return "M5"
-        if any(keyword in question for keyword in ("仲裁", "争议", "货款", "追偿", "执行", "判决", "裁决")):
-            return "M6"
-        return None
+        modules = RetrievalService._detect_modules(question)
+        return next(iter(modules)) if len(modules) == 1 else None
 
     def store_text_document(self, user_id: str, filename: str, content: str) -> str:
         safe_name = re.sub(r"[^a-zA-Z0-9._-]", "_", filename) or "document.txt"
@@ -176,7 +210,9 @@ class RetrievalService:
         if not directory.exists():
             return []
         documents: list[KnowledgeDocument] = []
-        for path in directory.glob("*.txt"):
+        for path in directory.iterdir():
+            if not path.is_file() or path.suffix.lower() not in {".txt", ".md"}:
+                continue
             try:
                 content = path.read_text(encoding="utf-8")
             except UnicodeDecodeError:

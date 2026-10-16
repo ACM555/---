@@ -29,7 +29,8 @@ function RiskSummaryCard({ data, loading = false }: RiskSummaryCardProps) {
   const riskLevel = data.riskLevel || data.summary.riskLevel || 'low'
   const riskScore = data.riskScore ?? data.summary.riskScore ?? 0
   const overallResult = data.overallResult || data.summary.overallResult || '暂无审查结论'
-  const cfg = riskConfig[riskLevel]
+  const pending = data.assessmentStatus === 'pending_verification'
+  const cfg = pending ? { ...riskConfig.medium, label: '待核验' } : riskConfig[riskLevel]
 
   return (
     <Card
@@ -56,14 +57,14 @@ function RiskSummaryCard({ data, loading = false }: RiskSummaryCardProps) {
         <Col>
           <div style={{ textAlign: 'center' }}>
             <Text style={{ display: 'block', fontSize: 12 }} type="secondary">
-              风险等级
+              {pending ? '核验状态' : '风险等级'}
             </Text>
             <Tag color={cfg.color} style={{ fontSize: 16, marginTop: 6, padding: '4px 16px' }}>
-              {cfg.label}
+              {pending ? '待核验' : cfg.label}
             </Tag>
           </div>
         </Col>
-        <Col>
+        {!pending && <Col>
           <div aria-label={`风险分值 ${riskScore}，风险等级${cfg.label}`} style={{ textAlign: 'center' }}>
             <Text style={{ display: 'block', fontSize: 12 }} type="secondary">
               风险分值
@@ -75,9 +76,9 @@ function RiskSummaryCard({ data, loading = false }: RiskSummaryCardProps) {
               /100
             </Text>
           </div>
-        </Col>
+        </Col>}
         <Col>
-          {data.manualReviewRequired ? (
+          {data.manualReviewRequired || pending ? (
             <Badge status="warning" text="建议人工复核" />
           ) : (
             <Badge status="success" text="无需人工复核" />
@@ -86,7 +87,8 @@ function RiskSummaryCard({ data, loading = false }: RiskSummaryCardProps) {
       </Row>
 
       <Divider style={{ margin: '16px 0' }} />
-      <Alert message={overallResult} showIcon type={cfg.alertType} />
+      {pending && <Alert message="缺少已核验的目标国家权利状态与真实在先标识比对，不显示法律风险评分；图像复杂度、对称性只用于辅助复核。" showIcon type="warning" style={{ marginBottom: 12 }} />}
+      <Alert message={overallResult} showIcon type={pending ? 'info' : cfg.alertType} />
     </Card>
   )
 }

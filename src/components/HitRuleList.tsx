@@ -35,6 +35,7 @@ function RuleCard({ rule, showSimilarity = false }: RuleCardProps) {
       <Space direction="vertical" size={8} style={{ display: 'flex' }}>
         <Space wrap>
           <Text strong>{rule.article}</Text>
+          <Tag color="orange">内部筛查规则 · 待核验{rule.ruleId ? ` · ${rule.ruleId}` : ''}</Tag>
           <Tag color={rule.applicable ? 'red' : 'green'}>
             {rule.applicable ? '触发' : '未触发'}
           </Tag>
