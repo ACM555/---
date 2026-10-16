@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from typing import Any
 
+from app.database import _connect
+from app.services.official_monitoring import official_source_status
+
 
 MODULES: list[dict[str, Any]] = [
     {
@@ -163,104 +166,32 @@ BRAND_ASSETS: list[dict[str, Any]] = [
 ]
 
 
-MONITORING_ALERTS: list[dict[str, Any]] = [
-    {
-        "alertId": "AL-7001",
-        "title": "越南公告期出现近似“MO LAN”餐饮服务申请",
-        "severity": "high",
-        "country": "越南",
-        "brandName": "墨兰奶白",
-        "source": "NOIP Official Gazette",
-        "window": "剩余 23 天",
-        "status": "需处理",
-        "owner": "法务负责人",
-        "createdAt": "2026-07-18 09:30",
-        "recommendation": "准备异议材料，重点证明在先使用与消费者混淆可能。",
-    },
-    {
-        "alertId": "AL-7002",
-        "title": "印尼食品饮料类新增宗教敏感词审查提示",
-        "severity": "medium",
-        "country": "印尼",
-        "brandName": "蓝莲供应链",
-        "source": "Local Counsel Bulletin",
-        "window": "规则更新",
-        "status": "跟进中",
-        "owner": "区域代理人",
-        "createdAt": "2026-07-17 14:05",
-        "recommendation": "涉及食品类延伸申请时，增加清真语境人工复核。",
-    },
-    {
-        "alertId": "AL-7003",
-        "title": "新加坡第42类近似英文组合低风险观察",
-        "severity": "low",
-        "country": "新加坡",
-        "brandName": "云杉出海",
-        "source": "IPOS Search",
-        "window": "持续监控",
-        "status": "观察",
-        "owner": "系统自动",
-        "createdAt": "2026-07-16 18:42",
-        "recommendation": "保持周报推送，无需立即发起异议。",
-    },
-]
-
-
-DATA_SOURCE_STATUS: list[dict[str, Any]] = [
-    {
-        "name": "NOIP 越南商标检索",
-        "type": "官方检索",
-        "status": "online",
-        "coverage": 91,
-        "freshness": "T+1",
-        "lastSync": "2026-07-18 23:10",
-        "note": "覆盖文字商标、申请人、公告期状态与基础类别。",
-    },
-    {
-        "name": "WIPO Madrid Monitor",
-        "type": "国际注册",
-        "status": "online",
-        "coverage": 88,
-        "freshness": "T+1",
-        "lastSync": "2026-07-18 22:35",
-        "note": "用于马德里路线与国际指定国状态核验。",
-    },
-    {
-        "name": "TMview / EUIPO 聚合库",
-        "type": "聚合检索",
-        "status": "online",
-        "coverage": 84,
-        "freshness": "T+2",
-        "lastSync": "2026-07-17 21:10",
-        "note": "用于跨区域近似与权利族线索补强。",
-    },
-    {
-        "name": "本地案例与法律规则库",
-        "type": "规则引擎",
-        "status": "online",
-        "coverage": 79,
-        "freshness": "实时",
-        "lastSync": "2026-07-19 08:00",
-        "note": "沉淀比赛文档规则、示例案例和禁忌审查策略。",
-    },
-]
+def _approved_legal_counts() -> dict[str, int]:
+    """Real counts of project-lead-approved legal content backing M1–M6 answers."""
+    with _connect() as connection:
+        sources = connection.execute(
+            "SELECT COUNT(*) FROM legal_sources WHERE approval_status = 'approved'"
+        ).fetchone()[0]
+        passages = connection.execute(
+            "SELECT COUNT(*) FROM legal_passages WHERE approval_status = 'approved'"
+        ).fetchone()[0]
+        countries = connection.execute(
+            "SELECT COUNT(DISTINCT country_code) FROM legal_sources "
+            "WHERE approval_status = 'approved' AND country_code <> 'INT'"
+        ).fetchone()[0]
+    return {"sources": sources, "passages": passages, "countries": countries}
 
 
 def get_platform_overview() -> dict[str, Any]:
+    counts = _approved_legal_counts()
     return {
         "positioning": "面向中国企业进入东盟市场的跨境商事法律 AI 助手",
         "slogan": "投资、合同、贸易、用工、知识产权与争议六模块资料核验",
-        "healthScore": 86,
-        "riskTrend": [
-            {"date": "07-13", "high": 3, "medium": 8, "low": 18},
-            {"date": "07-14", "high": 5, "medium": 6, "low": 22},
-            {"date": "07-15", "high": 4, "medium": 11, "low": 19},
-            {"date": "07-16", "high": 6, "medium": 10, "low": 24},
-            {"date": "07-17", "high": 8, "medium": 13, "low": 28},
-            {"date": "07-18", "high": 7, "medium": 16, "low": 31},
-        ],
+        "approvedSourceCount": counts["sources"],
+        "approvedPassageCount": counts["passages"],
+        "coveredCountryCount": counts["countries"],
         "modules": MODULES,
-        "dataSources": [item["name"] for item in DATA_SOURCE_STATUS],
+        "dataSources": [item["name"] for item in official_source_status()],
         "sla": [
             {"name": "文本近似检索", "target": "<200ms", "status": "production-ready"},
             {"name": "图形粗筛 + 精排", "target": "<2s", "status": "demo-ready"},
@@ -308,23 +239,6 @@ def get_brand_assets(
             }
         )
     return assets + [{**asset, "isDemo": True} for asset in BRAND_ASSETS]
-
-
-def get_monitoring_alerts() -> list[dict[str, Any]]:
-    return MONITORING_ALERTS
-
-
-def get_data_source_status() -> list[dict[str, Any]]:
-    return [
-        {
-            **source,
-            "status": "scheduled",
-            "freshness": "演示数据",
-            "lastSync": "未接入实时同步",
-            "note": f"演示状态，不代表外部服务实时可用或已同步。{source['note']}",
-        }
-        for source in DATA_SOURCE_STATUS
-    ]
 
 
 def build_report_center(tasks: list[dict[str, Any]]) -> list[dict[str, Any]]:

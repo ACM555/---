@@ -43,19 +43,11 @@ const { Paragraph, Text, Title } = Typography
 const fallbackOverview: PlatformOverview = {
   positioning: '面向中国企业进入东盟市场的跨境商事法律 AI 助手',
   slogan: '六模块风险筛查、可回查资料与人工复核闭环',
-  healthScore: 86,
-  riskTrend: [],
   modules: [],
   dataSources: [],
   sla: [],
   businessModel: [],
 }
-
-const riskColor = {
-  high: 'red',
-  medium: 'orange',
-  low: 'green',
-} as const
 
 const moduleIcons = [
   <AuditOutlined />,
@@ -89,24 +81,24 @@ const primaryQuickActions = [
 
 const portalNews = [
   {
-    date: '07-19',
-    tag: '规则动态',
-    title: '越南公告期异议窗口进入高发周期，茶饮与餐饮服务建议提前准备证据链',
+    date: '数据源',
+    tag: '开放数据',
+    title: '监控数据来自 IPOS 在 data.gov.sg 发布的商标申请开放数据（Singapore Open Data Licence）',
   },
   {
-    date: '07-18',
-    tag: '能力升级',
-    title: 'M5 商标资料核验演示：整理权属、相似标识与人工复核事项',
+    date: '法源',
+    tag: '官方入口',
+    title: '新加坡商标法及实施规则官方入口已采集；正文版本与摘录仍按项目审核门槛管理',
   },
   {
-    date: '07-18',
-    tag: '数据源',
-    title: 'WIPO、TMview、NOIP 与本地规则库完成统一健康度监控',
+    date: '边界',
+    tag: '回答口径',
+    title: 'M1–M6 正式回答只使用已审核法源，候选资料不能自动成为法律回答依据',
   },
   {
-    date: '07-17',
-    tag: '实务策略',
-    title: '三国以上市场推荐“基础标 + 单国/马德里混合路径”降低申请成本',
+    date: '复核',
+    tag: '人工复核',
+    title: '无真实在先权利证据时报告标注“待核验”，不输出可注册性或侵权结论',
   },
 ]
 
@@ -242,12 +234,12 @@ function Home() {
         </div>
 
         <div className="seu-hero-board">
-          <Text className="board-kicker">DEMO OVERVIEW</Text>
-          <strong>{overview.healthScore ?? 86}</strong>
-          <span>演示运行指标</span>
+          <Text className="board-kicker">已审核法律来源</Text>
+          <strong>{overview.approvedSourceCount ?? 0}</strong>
+          <span>条 · 覆盖 {overview.coveredCountryCount ?? 0} 个法域</span>
           <Divider />
           <Space direction="vertical" size={8}>
-            <Text>NOIP / WIPO / TMview 与本地资料核验入口</Text>
+            <Text>官方数据接口：IPOS 商标开放数据（data.gov.sg）</Text>
             <Text>高风险预警 {highAlerts} 条 · 资产库 {assets.length} 组</Text>
           </Space>
         </div>
@@ -291,8 +283,8 @@ function Home() {
       <section className="seu-news-section">
         <div className="section-titlebar seu-titlebar">
           <div>
-            <Text className="section-kicker">演示动态 · 非实时监控</Text>
-            <Title level={2}>风险队列样例</Title>
+            <Text className="section-kicker">数据来源 · 非实时监控</Text>
+            <Title level={2}>来源与能力边界</Title>
           </div>
           <Button type="link" onClick={() => navigate('/monitoring')}>
             更多预警
@@ -302,12 +294,12 @@ function Home() {
         <Row gutter={[20, 20]}>
           <Col xs={24} xl={11}>
             <Card className="seu-feature-news">
-              <Tag color={featuredAlert ? riskColor[featuredAlert.severity] : 'red'}>重点预警</Tag>
-              <Title level={3}>{featuredAlert?.title ?? '越南公告期近似商标风险持续升温'}</Title>
+              <Tag color="blue">最新公开记录</Tag>
+              <Title level={3}>{featuredAlert?.title ?? '暂无已采集的官方公开记录'}</Title>
               <Paragraph>
                 {featuredAlert
-                  ? `${formatAlertMeta(featuredAlert)}。建议立即完成证据链归档、图形改稿和代理人协作准备。`
-                  : '系统会把公告期抢注、异议窗口和国际权利族信号整理为可执行动作，适合比赛现场演示。'}
+                  ? `${formatAlertMeta(featuredAlert)}。${featuredAlert.recommendation || '打开官方原文核对发布日期、适用事项与最新版本；采集时间不是官方发布时间，不据此判断侵权、异议或注册结果。'}`
+                  : '监控数据来自 IPOS 在 data.gov.sg 发布的商标申请开放数据；首次收录不是新申请，采集时间不是官方发布时间，也不代表商标冲突结论。'}
               </Paragraph>
               <Button ghost onClick={() => navigate('/monitoring')}>
                 查看处置建议

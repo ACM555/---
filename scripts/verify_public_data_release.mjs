@@ -80,6 +80,9 @@ try {
   const alerts = (await api('monitoring/alerts')).data
   expect(alerts.length).toBeGreaterThan(0)
   expect(alerts.every(alert => !alert.isDemo && alert.source === 'IPOS / data.gov.sg 开放数据')).toBeTruthy()
+  // “查看官方原文”必须指向可阅读的官方页面，不能是 datastore_search 原始接口（浏览器打开只有 JSON）。
+  expect(alerts.every(alert => alert.sourceUrl.startsWith('https://') && !alert.sourceUrl.includes('/api/'))).toBeTruthy()
+  expect(alerts.every(alert => alert.sourceUrl.includes('/datasets/'))).toBeTruthy()
   report.checks.alerts = alerts.length
   expect(errors).toHaveLength(0)
   report.success = true

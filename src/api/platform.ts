@@ -13,13 +13,9 @@ export interface PlatformModule {
 export interface PlatformOverview {
   positioning: string
   slogan: string
-  healthScore?: number
-  riskTrend?: Array<{
-    date: string
-    high: number
-    medium: number
-    low: number
-  }>
+  approvedSourceCount?: number
+  approvedPassageCount?: number
+  coveredCountryCount?: number
   modules: PlatformModule[]
   dataSources: string[]
   sla: Array<{

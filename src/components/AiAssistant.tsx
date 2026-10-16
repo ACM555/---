@@ -47,6 +47,14 @@ function clampPosition(position: AssistantPosition): AssistantPosition {
   }
 }
 
+const answerStatusTags: Record<string, { color: string; label: string }> = {
+  source_backed: { color: 'green', label: '已审来源参考' },
+  guidance: { color: 'blue', label: '使用引导' },
+  out_of_scope: { color: 'default', label: '不在服务范围' },
+}
+
+const answerStatusTag = (status: string) => answerStatusTags[status] ?? { color: 'orange', label: '需人工复核' }
+
 const pageActions: Record<string, string> = {
   '新建智能审查': '/submit',
   '查看品牌资产': '/assets',
@@ -189,7 +197,7 @@ export default function AiAssistant() {
             )}
             {reply && (
               <div className="ai-assistant__evidence">
-                <Tag color={reply.answer_status === 'source_backed' ? 'green' : 'orange'}>{reply.answer_status === 'source_backed' ? '已审来源参考' : '需人工复核'}</Tag>
+                <Tag color={answerStatusTag(reply.answer_status).color}>{answerStatusTag(reply.answer_status).label}</Tag>
                 {reply.sources.map((source) => (
                   <div key={source.id}>
                     {source.source_url ? <a href={source.source_url} target="_blank" rel="noreferrer"><Tag icon={<FileTextOutlined />}>{source.country_code} · {source.legal_module} · {source.title}</Tag></a> : <Tag icon={<FileTextOutlined />}>{source.title}</Tag>}

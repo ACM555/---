@@ -10,6 +10,16 @@ from app.database import _connect, _now
 class AssistantSessionMemory:
     """Stores only user-confirmed facts, isolated by both user and session."""
 
+    def recent_questions(self, user_id: str, session_id: str, limit: int = 8) -> list[str]:
+        """本会话最近几轮用户原话（新→旧），用于把「只补一个空位」的回答接回原话题。"""
+        with _connect() as connection:
+            rows = connection.execute(
+                "SELECT question FROM legal_answer_audits "
+                "WHERE user_id = ? AND session_id = ? ORDER BY created_at DESC, rowid DESC LIMIT ?",
+                (user_id, session_id, limit),
+            ).fetchall()
+        return [row["question"] for row in rows]
+
     def load(self, user_id: str, session_id: str) -> dict[str, object] | None:
         with _connect() as connection:
             connection.execute("DELETE FROM assistant_session_memory WHERE expires_at <= ?", (_now(),))

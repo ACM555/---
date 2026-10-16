@@ -113,7 +113,9 @@ def test_deepseek_selection_and_compatible_api_payload(monkeypatch):
     assert str(seen[0].url) == 'https://api.deepseek.com/chat/completions'
     assert seen[0].headers['Authorization'] == 'Bearer test-deepseek-only'
     assert json.loads(seen[0].content)['model'] == 'deepseek-flash'
-    assert 'thinking' not in json.loads(seen[0].content)
+    # deepseek-flash 是推理模型：实测不关闭思考时会把 max_tokens 全部消耗在 reasoning 上，
+    # 返回的 content 为空并触发“未返回可用回答”。必须显式关闭思考。
+    assert json.loads(seen[0].content)['thinking'] == {'type': 'disabled'}
 
 
 def test_official_parser_rejects_external_links_and_deduplicates():

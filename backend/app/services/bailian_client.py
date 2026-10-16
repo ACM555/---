@@ -58,7 +58,9 @@ class ModelClient:
             "max_tokens": 2048,
             "temperature": 0.2,
         }
-        if self.provider == "iflytek":
+        # 推理型模型（讯飞、deepseek-flash）会先把 max_tokens 全部烧在 reasoning 上，
+        # 导致 content 为空并触发“未返回可用回答”。关闭思考后才会直接产出正文。
+        if self.provider in {"iflytek", "deepseek"}:
             payload["thinking"] = {"type": "disabled"}
         return payload
 

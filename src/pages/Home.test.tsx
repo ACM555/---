@@ -14,7 +14,7 @@ vi.mock('@/api/saas', () => ({
 
 describe('Home', () => {
   beforeEach(() => {
-    vi.mocked(getPlatformOverview).mockResolvedValue({ positioning: '测试定位', slogan: '测试口号', healthScore: 90, modules: [], dataSources: [], sla: [], businessModel: [] })
+    vi.mocked(getPlatformOverview).mockResolvedValue({ positioning: '测试定位', slogan: '测试口号', approvedSourceCount: 67, approvedPassageCount: 68, coveredCountryCount: 11, modules: [], dataSources: [], sla: [], businessModel: [] })
     vi.mocked(getBrandAssets).mockResolvedValue([])
     vi.mocked(getMonitoringAlerts).mockResolvedValue([])
     vi.mocked(getDataSourceStatus).mockResolvedValue([])

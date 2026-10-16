@@ -6,6 +6,7 @@
 
 - 东盟体验入口：<http://154.40.45.149/asean-legal/#/experience>，使用标准 HTTP 80 端口，点击“开始体验”创建独立的普通游客会话，无需注册，不授予管理员权限。
 - 二维码图片：<http://154.40.45.149/asean-legal/teacher-experience-qr.png>，登录页支持扫码、直接打开和下载二维码。
+- 演示账号：在 `backend/.env` 配置 `DEMO_MODE=true`、`DEMO_USERNAME`、`DEMO_PASSWORD` 后，后端启动时自动创建该账号（普通用户权限，不是管理员，不覆盖同名账号）。账号名与密码仅保存在本机 `.env`，不写入源码、文档或交付包。`DEMO_MODE` 开启但用户名或密码缺失时启动即报错，避免配置了却登录不上。
 - 只保留上述标准端口入口，旧 `39013` 公网入口已停用。后端仅监听 `127.0.0.1:39013`，供本机反向代理使用。子路径部署的 API 自动使用 `/asean-legal/api`，登录状态与本地审查记录按部署前缀隔离，不与越南商标项目混用。
 - 重新生成并校验二维码：`backend/.venv/bin/python scripts/generate_teacher_qr.py`。更换部署地址时同步更新脚本中的 `EXPERIENCE_URL`，再构建前端。
 - 页面打不开但健康接口正常时，访问 <http://154.40.45.149/asean-legal/connection-check.html>。诊断在当前浏览器检查脚本、样式、本地存储与实际页面启动，不创建游客账号、不上传检查结果。启动失败时页面也提供诊断链接与错误提示。

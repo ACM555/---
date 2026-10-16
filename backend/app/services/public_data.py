@@ -270,5 +270,7 @@ def public_trademark_alerts(user_id: str | None = None) -> list[dict]:
     for row in rows:
         record = json.loads(row["current_json"])
         event_type = "数据变更（待核对）" if row["event_type"] == "changed" else "首次收录（非新申请）"
-        alerts.append({"alertId": "SG-" + row["event_id"][:12], "title": f"{record['markName']} · {record['applicationNumber']}", "severity": "low", "country": "新加坡", "brandName": "公共申请记录（未判定品牌冲突）", "source": "IPOS / data.gov.sg 开放数据", "sourceUrl": record["sourceUrl"], "window": "未核算法定期限", "status": event_type + " · " + record["status"], "owner": "待人工复核", "createdAt": row["observed_at"], "lastCheckedAt": record["fetchedAt"], "isDemo": False, "recommendation": BOUNDARY, "licenceUrl": LICENCE_URL, "attribution": ATTRIBUTION, "publicationDate": record["publicationDate"]})
+        # 记录里的 sourceUrl 是 datastore_search 原始接口，浏览器打开只会看到 JSON；
+        # 官方原文入口应指向数据集页面（与检索结果、数据源状态保持一致）。
+        alerts.append({"alertId": "SG-" + row["event_id"][:12], "title": f"{record['markName']} · {record['applicationNumber']}", "severity": "low", "country": "新加坡", "brandName": "公共申请记录（未判定品牌冲突）", "source": "IPOS / data.gov.sg 开放数据", "sourceUrl": record.get("datasetUrl") or DATASET_URL, "dataApiUrl": record.get("sourceUrl") or "", "window": "未核算法定期限", "status": event_type + " · " + record["status"], "owner": "待人工复核", "createdAt": row["observed_at"], "lastCheckedAt": record["fetchedAt"], "isDemo": False, "recommendation": BOUNDARY, "licenceUrl": LICENCE_URL, "attribution": ATTRIBUTION, "publicationDate": record["publicationDate"]})
     return alerts

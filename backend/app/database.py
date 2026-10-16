@@ -98,6 +98,24 @@ def init_database() -> None:
             WHERE user_id IS NULL
             """
         )
+        if settings.demo_account_enabled and not connection.execute(
+            "SELECT 1 FROM users WHERE username = ?", (settings.DEMO_USERNAME,)
+        ).fetchone():
+            # 演示账号：普通用户权限，仅创建一次，不会覆盖同名账号或管理员。
+            connection.execute(
+                """
+                INSERT INTO users (
+                    user_id, username, password_hash, role, company, created_at
+                ) VALUES (?, ?, ?, 'user', ?, ?)
+                """,
+                (
+                    secrets.token_hex(16),
+                    settings.DEMO_USERNAME,
+                    _hash_password(settings.DEMO_PASSWORD),
+                    settings.DEMO_COMPANY or "演示账号",
+                    _now(),
+                ),
+            )
         connection.execute(
             "CREATE INDEX IF NOT EXISTS idx_audit_tasks_user_created ON audit_tasks(user_id, created_at DESC)"
         )

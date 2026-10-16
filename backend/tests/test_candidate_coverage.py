@@ -17,6 +17,13 @@ class CandidateCoverageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.items = json.loads(SEED_PATH.read_text(encoding="utf-8"))
+        # 与 seeder 保持一致：参考资料同时来自基础种子和候选包两份文件，
+        # 条款摘录只要挂在其中任一登记来源上即视为可溯源。
+        cls.registered_source_ids = {
+            item["source_id"]
+            for source_path in sorted(DATA_DIRECTORY.glob("legal_sources*_seed.json"))
+            for item in json.loads(source_path.read_text(encoding="utf-8"))
+        }
         cls.passages = []
         for passage_path in sorted(DATA_DIRECTORY.glob("legal_passages*_seed.json")):
             cls.passages.extend(json.loads(passage_path.read_text(encoding="utf-8")))
@@ -37,8 +44,7 @@ class CandidateCoverageTests(unittest.TestCase):
         expected = {(country, module) for country in COUNTRIES for module in MODULES}
         self.assertTrue(expected - legacy_approved <= pairs)
 
-    def test_singapore_first_batch_passages_are_traceable_drafts(self) -> None:
-        source_ids = {item["source_id"] for item in self.items}
+    def test_first_batch_and_completion_passages_are_traceable_drafts(self) -> None:
         passage_pairs = {(item["source_id"], item["passage_key"]) for item in self.passages}
         expected_sources = {
             "sg-m1-companies-act-2026",
@@ -51,7 +57,7 @@ class CandidateCoverageTests(unittest.TestCase):
         self.assertTrue(expected_sources <= {source_id for source_id, _ in passage_pairs})
         for passage in self.passages:
             with self.subTest(source_id=passage["source_id"]):
-                self.assertIn(passage["source_id"], source_ids)
+                self.assertIn(passage["source_id"], self.registered_source_ids)
                 self.assertTrue(passage["locator"].strip())
                 self.assertTrue(passage["original_text"].strip())
                 self.assertTrue(passage["prerequisites"])

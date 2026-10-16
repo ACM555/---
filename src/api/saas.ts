@@ -33,6 +33,8 @@ export interface MonitoringAlert {
   createdAt: string
   recommendation: string
   sourceUrl?: string
+  // 原始开放数据接口地址，仅作溯源；页面上的“查看官方原文”使用 sourceUrl（官方页面）。
+  dataApiUrl?: string
   lastCheckedAt?: string
   isDemo?: boolean
   publicationDate?: string

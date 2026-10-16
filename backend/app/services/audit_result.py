@@ -35,16 +35,23 @@ def build_complete_audit_result(
     countries = _target_countries(request)
     country_codes = {"越南": "VN", "新加坡": "SG", "泰国": "TH", "印尼": "ID", "马来西亚": "MY"}
     selected_codes = {country_codes.get(country, country) for country in countries}
-    for source in LegalRepository().list_sources_for_review():
-        if source.country_code in selected_codes and source.legal_module == "M5":
-            references.append({"refType": "law", "title": source.title, "source": "官方法源回查入口（法律内容待审核）", "sourceKind": "official_pointer", "sourceUrl": str(source.source_url), "date": source.verified_at.isoformat(), "version": "现行法规版本须在官方原文核验", "approvalStatus": "draft", "summary": source.supported_fact, "relevance": "只提供原文回查线索，不作为可注册性或侵权结论的依据。", "prerequisites": source.prerequisites, "registrationNo": ""})
+    repository = LegalRepository()
+    official_sources = repository.list_sources_for_review("approved") + repository.list_sources_for_review("draft")
+    seen_source_ids: set[str] = set()
+    for source in official_sources:
+        if source.country_code not in selected_codes or source.legal_module != "M5" or source.source_id in seen_source_ids:
+            continue
+        seen_source_ids.add(source.source_id)
+        approved = source.approval_status == "approved"
+        references.append({"refType": "law", "title": source.title, "source": "官方法源入口（已审核资料）" if approved else "官方候选入口（法律内容待审核）", "sourceKind": "official_pointer", "sourceUrl": str(source.source_url), "date": source.verified_at.isoformat(), "version": "现行法规版本须在官方原文核验", "approvalStatus": source.approval_status, "summary": source.supported_fact, "relevance": "只提供原文回查线索，不作为可注册性或侵权结论的依据。", "prerequisites": source.prerequisites, "registrationNo": ""})
 
     document_preview = str(raw.get("documentPreview") or "")
     official_references = [item for item in references if item.get("sourceKind") == "official_pointer"]
     if official_references:
-        document_preview += "\n\n## 官方原文回查入口（法律内容待审核）\n\n内部筛查规则不是正式法源。以下入口不代替现行版本、具体条文及适用条件审核。\n"
+        document_preview += "\n\n## 官方原文回查入口\n\n内部筛查规则不是正式法源。以下入口不代替现行版本、具体条文及适用条件审核；标记为“待审核”的入口尚未通过项目法源审核。\n"
         for reference in official_references:
-            document_preview += f"\n- {reference['title']}\n  原文：{reference['sourceUrl']}\n  入口核对日期：{reference['date']}（不是法规生效日期）\n  版本：{reference['version']}\n  适用前提：{'；'.join(reference.get('prerequisites') or [])}\n"
+            status_label = "已审核资料" if reference.get("approvalStatus") == "approved" else "法律内容待审核"
+            document_preview += f"\n- {reference['title']}（{status_label}）\n  原文：{reference['sourceUrl']}\n  入口核对日期：{reference['date']}（不是法规生效日期）\n  版本：{reference['version']}\n  适用前提：{'；'.join(reference.get('prerequisites') or [])}\n"
 
     relative_score = max(
         [int(rule.get("similarityScore") or 0) for rule in applicable_relative] + [0]

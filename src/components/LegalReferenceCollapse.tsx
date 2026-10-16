@@ -30,12 +30,18 @@ const refTypeConfig: Record<RefType, RefTypeConfig> = {
 
 const refTypeOrder: RefType[] = ['law', 'case', 'trademark']
 
+// 已通过项目法源审核的官方入口：official_law，或 approvalStatus 为 approved 的 official_pointer。
+function isReviewedSource(reference: LegalReference): boolean {
+  if (reference.sourceKind === 'official_law') return true
+  return reference.sourceKind === 'official_pointer' && reference.approvalStatus === 'approved'
+}
+
 function ReferenceCard({ reference }: { reference: LegalReference }) {
   return (
     <Card size="small" style={{ marginBottom: 8 }}>
       <Space direction="vertical" size={6} style={{ display: 'flex' }}>
         <Text strong>{reference.title || '未命名依据'}</Text>
-        <Tag color={reference.sourceKind === 'official_law' ? 'green' : 'orange'}>{reference.sourceKind === 'internal_rule' || reference.source.includes('rules_v1.json') ? '内部规则 · 不是正式法源' : reference.sourceKind === 'official_law' ? '已核验官方法源' : '资料线索 · 待核验'}</Tag>
+        <Tag color={isReviewedSource(reference) ? 'green' : 'orange'}>{reference.sourceKind === 'internal_rule' || reference.source.includes('rules_v1.json') ? '内部规则 · 不是正式法源' : isReviewedSource(reference) ? '已审核官方法源入口' : '资料线索 · 待核验'}</Tag>
         <Space size={16} wrap>
           <Text style={{ fontSize: 13 }} type="secondary">
             {reference.date ? `资料核验日期：${reference.date}` : '法源版本与日期尚未核验'}
